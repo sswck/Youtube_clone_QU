@@ -4,49 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .homepage-container {
+        padding: 20px;
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      p {
+        line-height: 1.6;
+      }
+    </style>
   </head>
   <body>
-    <!-- top-bar 영역 -->
-    <header class="top-bar">
-      <div class="left-section">
-        <button class="menu-button">
-          <img src="images/hamburger.svg" alt="hamburger" />
-        </button>
-        <a href="/" class="logo" data-link>
-          <img src="images/Youtube-logo.png" alt="Youtube logo" />
-          YOUTUBE
-        </a>
-      </div>
-      <div class="middle-section">
-        <div class="search-bar">
-          <input type="text" placeholder="검색" />
-          <button class="search-button">
-            <img src="/images/search.png" alt="search" />
-          </button>
-          <button class="voice-search-button">
-            <img src="/images/mic-icon.png" alt="mic" />
-          </button>
-        </div>
-      </div>
-      <div class="right-section">
-        <button class="upload-button">
-          <img src="/images/Create.png" alt="Create" />
-        </button>
-        <button class="apps-button">
-          <img src="/images/Apps.png" alt="Apps" />
-        </button>
-        <button class="notifications-button">
-          <img src="/images/Notifications.png" alt="Notifications" />
-        </button>
-        <button class="profile-button">
-          <img src="/images/User-Avatar.png" alt="Avatar" />
-        </button>
-      </div>
-    </header>
+    <div id="top-bar-container"></div>
 
-    <div class="content"></div>
     <!-- 동적 로드 영역 -->
+    <div class="content">
+      <div class="homepage-container">
+        <h1>테스트 홈페이지</h1>
+        <p>이 페이지는 index.html의 기본 콘텐츠입니다.</p>
+        <p>
+          상단의 YouTube 로고를 클릭하거나, 우측 상단의 프로필 아바타를 클릭하여
+          페이지 이동을 테스트해보세요.
+        </p>
+      </div>
+    </div>
 
-    <script scr="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
