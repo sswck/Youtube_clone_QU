@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const topBarContainer = document.getElementById("top-bar-container");
+  const sideBarContainer = document.getElementById("side-bar-container");
   const contentDiv = document.querySelector(".content");
   const navLinks = document.querySelectorAll("[data-link]");
 
@@ -12,6 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
         // 상단 바가 로드된 후 data-link 속성을 가진 요소에 이벤트 리스너를 다시 등록
         const topBarLinks = topBarContainer.querySelectorAll("[data-link]");
         topBarLinks.forEach((link) => {
+          link.addEventListener("click", handleLinkClick);
+        });
+      });
+  }
+
+  // 사이드 바 로드 함수
+  function loadSideBar() {
+    fetch("side-bar.html")
+      .then((response) => response.text())
+      .then((html) => {
+        sideBarContainer.innerHTML = html;
+        // 사이드 바가 로드된 후 data-link 속성을 가진 요소에 이벤트 리스너를 다시 등록
+        const sideBarLinks = sideBarContainer.querySelectorAll("[data-link]");
+        sideBarLinks.forEach((link) => {
           link.addEventListener("click", handleLinkClick);
         });
       });
@@ -61,6 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 초기 상단 바 로드
   loadTopBar();
+  // 초기 사이드 바 로드
+  loadSideBar();
   // 초기 콘텐츠 로드
   loadInitialContent();
 
