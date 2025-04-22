@@ -1,0 +1,34 @@
+aside {
+  max-width: 240px;
+  background-color: #212121;
+  color: #fff;
+}
+.sidebar-item,
+.subscribed-channel {
+  display: flex;
+  align-items: center;
+  padding: 8px 24px;
+
+  gap: 24px;
+  cursor: pointer;
+}
+
+.item-thumbnail {
+  width: 24px;
+  height: 24px;
+}
+
+.item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sidebar-title {
+  padding: 8px 24px;
+  color: #aaaaaa;
+  font-weight: bold;
+}
+.divider {
+  height: 1px;
+  background-color: #303030;
+}
