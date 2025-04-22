@@ -4,42 +4,181 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #fff;
+      }
+
+      /* 상단바 전체 */
+      header.top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 0 16px;
+        height: 56px;
+        background: #212121;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      /* 왼쪽 섹션 (햄버거 + 로고) */
+      .top-bar .left-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .left-section .menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+
+      .left-section .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 14px 18px 16px;
+      }
+
+      .menu-button {
+        width: 40px;
+        height: 40px;
+        background: #212121;
+        border: none;
+        cursor: pointer;
+      }
+      .menu-button img {
+        width: 24px;
+        height: 24px;
+      }
+      .logo img {
+        height: 24px;
+      }
+
+      /* 가운데 검색 섹션 */
+      .top-bar .middle-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+      .search-bar {
+        display: flex;
+        width: 60%;
+        max-width: 470px;
+      }
+      .search-bar input {
+        flex: 1;
+        height: 40px;
+        background: #121212;
+        border: 1px solid #444;
+        color: #fff;
+        padding: 6px 2px 6px 12px;
+        border-radius: 15px 0 0 15px;
+        font-size: 14px;
+      }
+      .search-bar .search-button {
+        width: 60px;
+        height: 40px;
+        background: #303030;
+        border: none;
+        border-radius: 0 15px 15px 0;
+        cursor: pointer;
+        padding: 2px 7px 2px 7px;
+      }
+
+      .search-bar .voice-search-button {
+        width: 40px;
+        height: 40px;
+        margin-left: 8px;
+        background: #000;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .voice-search-button img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* 오른쪽 섹션 (아이콘들) */
+      .top-bar .right-section {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-right: 10px;
+      }
+      .right-section button {
+        width: 40px;
+        height: 40px;
+        background: #212121;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .right-section button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    </style>
   </head>
   <body>
     <!-- top-bar 영역 -->
     <header class="top-bar">
       <div class="left-section">
         <button class="menu-button">
-          <img src="images/hamburger.svg" alt="hamburger" />
+          <img src="/Youtube_clone_QU/images/hamburger.svg" alt="hamburger" />
         </button>
         <a href="/" class="logo" data-link>
-          <img src="images/Youtube-logo.png" alt="Youtube logo" />
-          YOUTUBE
+          <img
+            src="/Youtube_clone_QU/images/Youtube-Logo.svg"
+            alt="Youtube logo"
+          />
         </a>
       </div>
       <div class="middle-section">
         <div class="search-bar">
           <input type="text" placeholder="검색" />
           <button class="search-button">
-            <img src="/images/search.png" alt="search" />
+            <img src="/Youtube_clone_QU/images/search.png" alt="search" />
           </button>
           <button class="voice-search-button">
-            <img src="/images/mic-icon.png" alt="mic" />
+            <img src="/Youtube_clone_QU/images/mic-icon.png" alt="mic" />
           </button>
         </div>
       </div>
       <div class="right-section">
         <button class="upload-button">
-          <img src="/images/Create.png" alt="Create" />
+          <img src="/Youtube_clone_QU/images/Create.png" alt="Create" />
         </button>
         <button class="apps-button">
-          <img src="/images/Apps.png" alt="Apps" />
+          <img src="/Youtube_clone_QU/images/Apps.png" alt="Apps" />
         </button>
         <button class="notifications-button">
-          <img src="/images/Notifications.png" alt="Notifications" />
+          <img
+            src="/Youtube_clone_QU/images/Notifications.png"
+            alt="Notifications"
+          />
         </button>
         <button class="profile-button">
-          <img src="/images/User-Avatar.png" alt="Avatar" />
+          <img src="/Youtube_clone_QU/images/User-Avatar.png" alt="Avatar" />
         </button>
       </div>
     </header>
