@@ -5,5 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div id="aside"></div>
+    본문입니다
+    <script>
+      fetch("components/sidebar.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("aside").innerHTML = html;
+        });
+    </script>
+  </body>
 </html>
