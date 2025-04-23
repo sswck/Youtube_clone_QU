@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 상단 바 로드 함수
   function loadTopBar() {
-    fetch("top-bar.html")
+    fetch("/components/top-bar.html")
       .then((response) => response.text())
       .then((html) => {
         topBarContainer.innerHTML = html;
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 사이드 바 로드 함수
   function loadSideBar() {
-    fetch("side-bar.html")
+    fetch("/components/side-bar.html")
       .then((response) => response.text())
       .then((html) => {
         sideBarContainer.innerHTML = html;
