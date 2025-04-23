@@ -1,0 +1,230 @@
+/* 전체 채널 페이지 컨테이너 */
+.channel-page {
+  background-color: #0f0f0f; /* 이미지 배경색과 유사하게 */
+  color: #fff;
+  font-family: "Roboto", sans-serif; /* 유튜브 기본 폰트와 유사하게 */
+}
+
+/* 채널 헤더 */
+.channel-header {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.channel-banner {
+  width: 100%;
+  height: 200px; /* 이미지 배너 높이에 맞춰 조절 */
+}
+
+.channel-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.channel-profile {
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.channel-avatar {
+  width: 72px; /* 이미지 아바타 크기에 맞춰 조절 */
+  height: 72px;
+  border-radius: 50%;
+  border: 4px solid #0f0f0f; /* 아바타 주변 테두리 */
+  margin-right: 16px;
+}
+
+.channel-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.subscriber-count {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.subscribe-btn {
+  background-color: #cc0000; /* 구독 버튼 색상 */
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto; /* 오른쪽 정렬 */
+  margin-right: 24px;
+}
+
+/* 채널 내비게이션 바 */
+.channel-nav {
+  background-color: #181818; /* 네비 바 배경색 */
+  overflow-x: auto;
+  border-bottom: 1px solid #333;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  padding-left: 24px;
+  margin: 0;
+}
+
+.nav-item {
+  margin-right: 24px;
+}
+
+.nav-item a {
+  display: block;
+  color: #aaa;
+  text-decoration: none;
+  padding: 14px 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.nav-item a.active,
+.nav-item a:hover {
+  color: #fff;
+}
+
+.nav-extra {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 16px;
+}
+
+.nav-extra button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-extra img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+/* 채널 콘텐츠 (비디오 섹션) */
+.channel-content {
+  padding: 24px;
+}
+
+.video-section {
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  margin-right: 16px;
+}
+
+.playall-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 카드 최소 너비 조절 */
+  gap: 16px;
+}
+
+/* 비디오 카드 (기존 card.css 스타일 활용 가능) */
+.video-card {
+  background-color: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-thumbnail {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9; /* 썸네일 비율 유지 */
+  object-fit: cover;
+}
+
+.card-data {
+  padding: 12px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card-channel {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.card-stats {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* 필터 바 (채널 콘텐츠 내에 위치) */
+.channel-content .filter-bar {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 16px 0; /* 상하 패딩 조정 */
+  margin-bottom: 24px; /* 비디오 섹션과의 간격 */
+}
+
+.channel-content .filter-bar button {
+  padding: 8px 16px;
+  background: #272727; /* 필터 버튼 배경색 */
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.channel-content .filter-bar button:hover {
+  background-color: #3a3a3a;
+}
+
+.channel-content .filter-bar button.active {
+  background-color: #fff;
+  color: #0f0f0f;
+  font-weight: bold;
+}
