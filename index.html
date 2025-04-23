@@ -4,16 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .homepage-container {
+        padding: 20px;
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      p {
+        line-height: 1.6;
+      }
+    </style>
+    <link rel="stylesheet" href="styles/topbar.css" />
+    <link rel="stylesheet" href="styles/sidebar.css" />
+    <script src="scripts/sidebar.js"></script>
   </head>
   <body>
-    <div id="aside"></div>
-    본문입니다
-    <script>
-      fetch("components/sidebar.html")
-        .then((res) => res.text())
-        .then((html) => {
-          document.getElementById("aside").innerHTML = html;
-        });
-    </script>
+    <div id="top-bar-container"></div>
+    <div id="side-bar-container" style="height: 20px"></div>
+
+    <!-- 동적 로드 영역 -->
+    <div class="content">
+      <div class="homepage-container">
+        <h1>테스트 홈페이지</h1>
+        <p>이 페이지는 index.html의 기본 콘텐츠입니다.</p>
+        <p>상단의 YouTube 로고를 클릭하거나, 우측 상단의 프로필 아바타를 클릭하여 페이지 이동을 테스트해보세요.</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

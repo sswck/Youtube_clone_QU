@@ -17,6 +17,6 @@
 
 ### Github Repository
 
-- [https://github.com/sswck/Youtube_clone](https://github.com/sswck/Youtube_clone)
+- [https://github.com/sswck/Youtube_clone_QU](https://github.com/sswck/Youtube_clone_QU)
 
 ---
