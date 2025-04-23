@@ -1,3 +1,7 @@
+.content {
+  overflow-x: auto;
+}
+
 /* 필터 버튼 바 */
 .filter-bar {
   display: flex;
