@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 초기 콘텐츠 로드 함수
   function loadInitialContent() {
-    fetch("/") // 또는 초기 페이지의 실제 경로 (상단 바 제외)
+    fetch("/components/home.html")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
