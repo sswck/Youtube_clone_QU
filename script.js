@@ -50,6 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
+  function loadInitalCardUI() {
+    fetch("/components/CardUI.html")
+      .then((res) => res.text())
+      .then((html) => {
+        document.getElementById("card-ui").innerHTML = html;
+      });
+  }
+
   function handleLinkClick(event) {
     event.preventDefault();
     const path = this.getAttribute("href");
@@ -80,6 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSideBar();
   // 초기 콘텐츠 로드
   loadInitialContent();
+
+  // cardUI 로드
+  loadInitalCardUI();
 
   window.onpopstate = function (event) {
     loadContent(window.location.pathname);
