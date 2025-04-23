@@ -8,6 +8,7 @@ body {
   display: flex;
   margin: 0;
   padding: 24px 0 0 24px;
+  gap: 24px;
 }
 .divider {
   width: 100%;
@@ -15,6 +16,17 @@ body {
   background-color: #303030;
   margin: 20px 0;
 }
+
+/* 비디오 플레이어 */
+.video-player {
+  width: 100%;
+}
+.video-player img {
+  width: 100%;
+  height: auto;
+}
+
+/* 비디오 정보 */
 .video-info {
   padding: 20px 0 8px 0;
 }
@@ -34,8 +46,23 @@ body {
 }
 .video-buttons {
   display: flex;
-  margin-top: 16px;
+  gap: 8px;
 }
+.video-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+}
+.video-button img {
+  padding: 6px;
+}
+.video-button span {
+  padding: 10px 6px 10px 0;
+  font-size: 14px;
+}
+
+/* 채널 정보 */
 .channel-title {
   display: flex;
 }
