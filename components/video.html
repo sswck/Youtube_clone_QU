@@ -1,0 +1,179 @@
+<link rel="stylesheet" href="/styles/video.css" />
+<body>
+  <div class="video-page">
+    <div class="video-container">
+      <div class="video-player">
+        <!-- 비디오 플레이어 구현 전 임시 이미지 -->
+        <img src="/assets/images/Youtube player.png" alt="임시" />
+      </div>
+      <div class="video-info">
+        <div class="video-title">Video Title Goes Here</div>
+        <div class="info">
+          <div class="video-stats">15K views · 1 week ago</div>
+          <div class="video-buttons">
+            <div class="video-button" id="buttonLike">
+              <img class="button-icon" src="/assets/icons/video/Liked.svg" alt="Like" />
+              <span class="button-text">1.2K</span>
+            </div>
+            <div class="video-button" id="buttonDislike">
+              <img class="button-icon" src="/assets/icons/video/DisLiked.svg" alt="Dislike" />
+              <span class="button-text">654</span>
+            </div>
+            <div class="video-button" id="buttonShare">
+              <img class="button-icon" src="/assets/icons/video/Share.svg" alt="Share" />
+              <span class="button-text">SHARE</span>
+            </div>
+            <div class="video-button" id="buttonSave">
+              <img class="button-icon" src="/assets/icons/video/Save.svg" alt="Save" />
+              <span class="button-text">SAVE</span>
+            </div>
+            <div class="video-button" id="buttonMore">
+              <img class="button-icon" src="/assets/icons/video/More.svg" alt="More" />
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+      </div>
+      <div class="video-description">
+        <div class="channel-title">
+          <img class="channel-avatar" src="/assets/images/User-Avatar48.png" alt="Channel Avatar" class="channel-avatar" />
+          <div class="channel-info">
+            <div class="channel-name">Channel Name</div>
+            <div class="subscribers">1M subscribers</div>
+          </div>
+          <span class="subscribe-button"> SUBSCRIBES </span>
+        </div>
+        <div class="description-text">
+          Chris Fisher, also known as the Blind Woodturner, learned his craft by listening to hundreds of hours of YouTube videos and experimenting in his
+          workshop. Now he’s a YouTube creator himself, sells his products worldwide, and does demonstrations all around the country.
+        </div>
+        <div class="show-more">SHOW MORE</div>
+        <div class="divider"></div>
+      </div>
+      <div class="comment-section">
+        <div class="comment-title">
+          <div class="comment-count"><span class="count">1111</span> <span>comments</span></div>
+          <div class="sort-by">
+            <img src="/assets/icons/video/Dropdown.svg" alt="sort by" />
+            <span class="sort-text">SORT BY</span>
+          </div>
+        </div>
+        <div class="comment-field">
+          <img src="/assets/images/User-comment.png" alt="user avatar" class="user-avatar" />
+          <input type="text" placeholder="Add a comment..." />
+        </div>
+        <div class="comments-list">
+          <div class="comment">
+            <img src="/assets/images/User-Avatar1.png" alt="user avatar" class="user-avatar" />
+            <div class="comment-box">
+              <div class="comment-header">
+                <span class="comment-name">Comment Name</span>
+                <span class="comment-time">8 hours ago</span>
+              </div>
+              <span class="comment-text"
+                >Lorem ipsum, dolor sit amet consectetur adipisicing elit. A nostrum tenetur fuga modi consequuntur enim dolores ex laudantium quia rem facere
+                necessitatibus eaque, mollitia vel aspernatur, animi, dignissimos ipsum velit.</span
+              >
+              <div class="comment-toolbar">
+                <div class="comment-like"><img src="/assets/icons/video/Liked.svg" alt="like-this-comment" /><span class="comment-like-count">3</span></div>
+                <div class="comment-dislike"><img src="/assets/icons/video/DisLiked.svg" alt="dislike-this-comment" /></div>
+                <div class="comment-reply"><span>REPLY</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-sidebar">
+      <div class="sidebar-top-menu">
+        <button class="sidebar-button">All</button>
+        <button class="sidebar-button">Item</button>
+        <button class="sidebar-button">Item</button>
+        <button class="sidebar-button">Item</button>
+      </div>
+      <div class="sidebar-list">
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        v
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+        <div class="sidebar-video">
+          <div class="sidebar-thumbnail"><span class="sidebar-videoTime">23:45</span></div>
+          <div class="sidebar-video-text">
+            <span class="sidebar-video-title">Video Title Video Title Video Title Video Title </span>
+            <span class="sidebar-video-channel">Channel Name Channel Name Channel Name Channel Name </span>
+            <span class="sidebar-video-info">1M views 3years ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
