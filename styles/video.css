@@ -332,3 +332,15 @@ body {
   color: #aaaaaa;
   line-height: 18px;
 }
+
+/*  반응형 미디어쿼리*/
+@media (max-width: 768px) {
+  .video-page {
+    flex-direction: column;
+    padding: 12px;
+  }
+  .video-container,
+  .video-sidebar {
+    flex: 0 1 100%;
+  }
+}
