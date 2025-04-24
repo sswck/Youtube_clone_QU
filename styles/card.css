@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.card:hover {
+  transform: translateY(-4px);
+}
+
 .card-thumbnail {
   object-fit: cover;
 }
