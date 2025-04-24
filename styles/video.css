@@ -1,0 +1,334 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #181818;
+  font-family: Arial, sans-serif;
+  color: white;
+  padding: 0 10%;
+}
+.video-page {
+  display: flex;
+  margin: 0;
+  padding: 24px 0 0 24px;
+  gap: 24px;
+}
+
+/* 구분선 */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #303030;
+  margin: 8px 0;
+}
+
+/* 왼쪽 컨텐츠 */
+.video-container {
+  flex: 0 1 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 비디오 플레이어 */
+.video-player {
+  width: 100%;
+  border-radius: 4px;
+}
+.video-player img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 비디오 정보 */
+.video-info {
+  padding: 20px 0 8px 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.video-title {
+  font-size: 18px;
+  font-weight: 400;
+}
+.video-info .info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.video-info .video-stats {
+  padding: 12px 0;
+  font-size: 14px;
+  color: #aaaaaa;
+}
+.video-info .video-buttons {
+  display: flex;
+  gap: 8px;
+}
+.video-info .video-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+}
+.video-info .video-button img {
+  padding: 6px;
+}
+.video-info .video-button span {
+  padding: 10px 6px 10px 0;
+  font-size: 14px;
+}
+
+/* 채널 정보 */
+.video-description {
+  margin-bottom: 16px;
+  gap: 10px;
+}
+
+.channel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.channel-title .channel-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.channel-title .channel-info {
+  margin: 0 12px;
+}
+
+.channel-title .channel-name {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.channel-title .subscribers {
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.subscribe-button {
+  background-color: #cc0000;
+  color: white;
+  text-align: center;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.subscribe-button:hover {
+  background-color: #b10000;
+}
+
+.description-text {
+  font-size: 14px;
+  color: white;
+  line-height: 100%;
+  margin: 10px 0;
+  letter-spacing: 0%;
+  padding-left: 60px;
+}
+
+.show-more {
+  font-size: 14px;
+  color: #aaaaaa;
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding-left: 60px;
+}
+
+/* 댓글 */
+.comment-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 32px;
+}
+
+.comment-count {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
+
+.sort-by {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+}
+
+.sort-by img {
+  width: 24px;
+  height: 24px;
+}
+
+.comment-field {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 0 32px 0;
+}
+.comment-field .user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment-field input {
+  flex: 1;
+  background-color: #181818;
+  border: none;
+  border-bottom: 1px solid #303030;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #aaaaaa;
+  outline: none;
+}
+
+.comment {
+  display: flex;
+  gap: 12px;
+}
+
+.comment .user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: white;
+  line-height: 20px;
+  letter-spacing: 0%;
+  padding: 5px 0;
+}
+
+.comment-toolbar {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  color: #aaaaaa;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.comment-toolbar img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.comment-toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* 오른쪽 사이드바 */
+.video-sidebar {
+  flex: 0 1 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 20px 20px 0 0;
+}
+
+.sidebar-top-menu {
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar-button {
+  background-color: #303030;
+  border: 0.3px solid #aaaaaa;
+  border-radius: 32px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-video {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.sidebar-thumbnail {
+  position: relative;
+  width: 168px;
+  height: 94px;
+  border-radius: 4px;
+  background-image: url("/assets/images/thumbnail.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.sidebar-videoTime {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  padding: 3px 4px;
+  font-size: 10px;
+  line-height: 100%;
+  color: white;
+  background: black;
+}
+
+.sidebar-video-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebar-video-title {
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+  margin-bottom: 4px;
+}
+.sidebar-video-channel,
+.sidebar-video-info {
+  font-size: 12px;
+  color: #aaaaaa;
+  line-height: 18px;
+}
