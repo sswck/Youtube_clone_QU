@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // "/" 또는 "/index.html" 경로 처리 추가
     if (path === "/" || path === "/index.html") {
       loadInitialContent();
+      loadInitalCardUI();
       history.pushState(null, "", "/"); // URL "/"은 선택 사항 or "/index.html"
       return;
     }
