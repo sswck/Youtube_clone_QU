@@ -58,6 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadContent(path) {
+    // "/" 또는 "/index.html" 경로 처리 추가
+    if (path === "/" || path === "/index.html") {
+      loadInitialContent();
+      history.pushState(null, "", "/"); // URL "/"은 선택 사항 or "/index.html"
+      return;
+    }
+
     fetch(path)
       .then((response) => {
         if (!response.ok) {
