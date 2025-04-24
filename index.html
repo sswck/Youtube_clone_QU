@@ -9,27 +9,27 @@
         padding: 20px;
         text-align: center;
       }
-      h1 {
-        margin-bottom: 20px;
-      }
-      p {
-        line-height: 1.6;
+      .layout-wrapper {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
       }
     </style>
-    <link rel="stylesheet" href="styles/topbar.css" />
-    <link rel="stylesheet" href="styles/sidebar.css" />
     <script src="scripts/sidebar.js"></script>
   </head>
   <body>
     <div id="top-bar-container"></div>
-    <div id="side-bar-container" style="height: 20px"></div>
+    <!-- 레이아웃을 위한 래퍼: 사이드바 + 콘텐츠만 포함 -->
+    <div class="layout-wrapper">
+      <div id="side-bar-container"></div>
 
-    <!-- 동적 로드 영역 -->
-    <div class="content">
-      <div class="homepage-container">
-        <h1>테스트 홈페이지</h1>
-        <p>이 페이지는 index.html의 기본 콘텐츠입니다.</p>
-        <p>상단의 YouTube 로고를 클릭하거나, 우측 상단의 프로필 아바타를 클릭하여 페이지 이동을 테스트해보세요.</p>
+      <!-- 동적 로드 영역 -->
+      <div class="content">
+        <div class="homepage-container">
+          <h1>테스트 홈페이지</h1>
+          <p>이 페이지는 index.html의 기본 콘텐츠입니다.</p>
+        </div>
       </div>
     </div>
 

@@ -3,7 +3,9 @@ body {
   padding: 0;
 }
 aside {
-  max-width: 240px;
+  width: 240px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
   background-color: #212121;
   color: #fff;
   font-weight: 300;

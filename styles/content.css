@@ -1,0 +1,118 @@
+.content {
+  overflow-x: auto;
+}
+
+/* 필터 버튼 바 */
+.filter-bar {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 16px 24px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.filter-bar button {
+  padding: 8px 16px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.filter-bar button:hover {
+  background-color: #444;
+}
+
+.filter-bar button.active {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+#card-ui {
+  padding: 24px;
+  height: calc(100vh - 56px - 79px); /* 56px for header, 79px for filter bar */
+  overflow-y: auto;
+}
+
+/* 비디오 카드 그리드 */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 24px;
+}
+
+/* 카드 전체 */
+.video-card {
+  background-color: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 썸네일 */
+.thumbnail-wrapper {
+  position: relative;
+}
+
+.thumbnail-wrapper img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: white;
+}
+
+/* 비디오 정보 */
+.video-info {
+  display: flex;
+  padding: 12px;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.meta {
+  flex: 1;
+  overflow: hidden;
+}
+
+.meta h4 {
+  margin: 0;
+  font-size: 14px;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta p {
+  margin: 4px 0 0 0;
+  color: #aaa;
+  font-size: 12px;
+}
