@@ -49,7 +49,9 @@ async function fetchVideoListWithChannelInfo() {
     return videosWithChannel;
   } catch (error) {
     console.error("비디오 목록 및 채널 정보 가져오기 실패:", error);
-    videoGrid.innerHTML = "<p>비디오 목록을 불러오는 데 실패했습니다.</p>";
+    if (videoGrid) {
+      videoGrid.innerHTML = "<p>비디오 목록을 불러오는 데 실패했습니다.</p>";
+    }
     return [];
   }
 }
@@ -57,7 +59,7 @@ async function fetchVideoListWithChannelInfo() {
 function createVideoCardWithChannel(video) {
   const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
   const thumbnailUrl = video.thumbnail || "/assets/images/thumbnail.png";
-  const avatarUrl = video.channelInfo?.channel_profile || "https://randomuser.me/api/portraits/men/32.jpg"; // 채널 프로필 이미지 사용
+  const avatarUrl = video.channelInfo?.channel_profile || "https://randomuser.me/api/portraits/men/32.jpg";
 
   const createdDate = new Date(video.created_dt);
   const timeAgo = formatTimeAgo(createdDate);
@@ -65,9 +67,7 @@ function createVideoCardWithChannel(video) {
 
   return `
     <article class="card">
-      <div style="position: relative; overflow: hidden; border-radius: 12px 12px 0 0;">
-        <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail" style="width: 100%; display: block; object-fit: cover;">
-        </div>
+      <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail" style="width: 100%; display: block; object-fit: cover;">
       <div class="card-details">
         <img class="card-avatar" src="${avatarUrl}" alt="Channel Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
         <div class="card-data">
@@ -83,9 +83,13 @@ function createVideoCardWithChannel(video) {
 function renderVideoListWithChannel(videos) {
   if (videos && videos.length > 0) {
     const cardsHTML = videos.map(createVideoCardWithChannel).join("");
-    videoGrid.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
+    if (videoGrid) {
+      videoGrid.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
+    }
   } else {
-    videoGrid.innerHTML = "<p>표시할 비디오가 없습니다.</p>";
+    if (videoGrid) {
+      videoGrid.innerHTML = "<p>표시할 비디오가 없습니다.</p>";
+    }
   }
 }
 
@@ -115,7 +119,7 @@ function formatTimeAgo(date) {
   return Math.floor(seconds) + " seconds ago";
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const videosWithChannel = await fetchVideoListWithChannelInfo();
-  renderVideoListWithChannel(videosWithChannel);
-});
+// 즉시 API 호출 및 렌더링 시도
+fetchVideoListWithChannelInfo()
+  .then(renderVideoListWithChannel)
+  .catch((error) => console.error("초기 데이터 로딩 실패:", error));

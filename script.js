@@ -60,22 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((html) => {
         contentDiv.innerHTML = html;
-        // home.html이 로드된 경우에만 home.js 스크립트 실행
         if (path === "/components/home.html") {
-          loadHomeScript();
+          const scripts = contentDiv.querySelectorAll("script");
+          scripts.forEach((script) => {
+            const newScript = document.createElement("script");
+            Array.from(script.attributes).forEach((attr) => {
+              newScript.setAttribute(attr.name, attr.value);
+            });
+            newScript.textContent = script.textContent;
+            script.parentNode.replaceChild(newScript, script);
+          });
         }
       })
       .catch((error) => {
         console.error("콘텐츠 로딩 오류:", error);
         contentDiv.innerHTML = "<p>페이지를 로드하는 데 실패했습니다.</p>";
       });
-  }
-
-  // home.js 스크립트를 동적으로 로드하는 함수
-  function loadHomeScript() {
-    const script = document.createElement("script");
-    script.src = "/scripts/home.js";
-    document.body.appendChild(script);
   }
 
   // 초기 상단 바 로드
