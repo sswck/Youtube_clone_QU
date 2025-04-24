@@ -1,28 +1,35 @@
 import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo } from "./utils.js";
 
+/**
+ * Initializes the page by fetching video information, channel information, and video list data.
+ * @throws {Error} If any of the data fetching operations fail.
+ */
 async function init() {
+  // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
   if (!videoID) {
     console.error("No video ID provided in the URL.");
     return;
   }
 
-  const videoData = await getVideoInfo(videoID); // 동영상 정보 가져오기
+  // API 호출하여 동영상 정보, 채널 정보, 동영상 목록 가져오기
+  const videoData = await getVideoInfo(videoID);
   if (!videoData) {
     console.error("Failed to fetch video data.");
     return;
   }
-  const channelData = await getChannelInfo(videoData.channel_id); // 채널 정보 가져오기
+  const channelData = await getChannelInfo(videoData.channel_id);
   if (!channelData) {
     console.error("Failed to fetch channel data.");
     return;
   }
-  const videoListData = await getVideoList(); // 동영상 목록 가져오기
+  const videoListData = await getVideoList();
   if (!videoListData) {
     console.error("Failed to fetch video list data.");
     return;
   }
+
   displayVideoInfo(videoData); // 동영상 정보 표시
   displayChannelInfo(channelData); // 채널 정보 표시
   displayVideoList(videoListData); // 동영상 목록 표시
@@ -45,10 +52,11 @@ function displayVideoInfo(data) {
 }
 
 function displayChannelInfo(data) {
-  const channelAvatar = document.querySelector(".channel-avatar img");
+  const channelAvatar = document.querySelector(".channel-avatar");
   const channelName = document.querySelector(".channel-name");
   const subscribers = document.querySelector(".subscribers span");
 
+  // channelAvatar.src = data.channel_avatar;
   channelName.textContent = data.channel_name;
   subscribers.textContent = data.subscribers;
 }
@@ -63,7 +71,9 @@ function displayVideoList(data) {
   }
 
   data.forEach(async (video) => {
+    // 채널 id를 사용하여 채널 정보를 가져옵니다.
     const channelName = (await getChannelInfo(video.channel_id).then((channelData) => channelData.channel_name)) || "Unknown Channel";
+
     const videoItem = document.createElement("div");
     videoItem.className = "sidebar-video";
     videoItem.innerHTML = `
