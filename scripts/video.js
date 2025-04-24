@@ -1,4 +1,5 @@
 import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
+import { timeAgo } from "./utils.js";
 
 async function init() {
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
@@ -38,7 +39,7 @@ function displayVideoInfo(data) {
   video.src = data.thumbnail;
   title.textContent = data.title;
   views.textContent = data.views;
-  createdDate.textContent = data.created_dt;
+  createdDate.textContent = timeAgo(data.created_dt);
   liked.textContent = data.likes;
   disliked.textContent = data.dislikes;
 }
@@ -70,7 +71,7 @@ function displayVideoList(data) {
       <div class="sidebar-video-text">
         <span class="sidebar-video-title">${video.title}</span>
         <span class="sidebar-video-channel">${channelName}</span>
-        <span class="sidebar-video-info">${video.views} views ${video.created_dt}</span>
+        <span class="sidebar-video-info">${video.views} views ${timeAgo(video.created_dt)}</span>
       </div>
       `;
     videoList.appendChild(videoItem);
