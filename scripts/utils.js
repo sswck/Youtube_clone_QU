@@ -1,3 +1,9 @@
+/**
+ * @description
+ *  현재 시각으로부터 시간을 계산해 얼마나 과거인지 표시
+ * @param {string|Date} timestamp   Date   ,   ISO 8601
+ * @return {string}
+ */
 function timeAgo(timestamp) {
   const now = new Date();
   const past = new Date(timestamp);
