@@ -314,10 +314,11 @@ body {
 }
 
 .sidebar-thumbnail {
+  display: flex;
+  flex: 0 0 168px;
   position: relative;
   width: 168px;
   height: 94px;
-  border-radius: 4px;
   background-image: url("/assets/images/thumbnail.png");
   background-size: cover;
   background-position: center;
@@ -336,6 +337,8 @@ body {
 
 .sidebar-video-text {
   display: flex;
+  flex: 1;
+  min-width: 100px;
   flex-direction: column;
   justify-content: center;
 }

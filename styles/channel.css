@@ -180,8 +180,8 @@
   max-width: 600px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* 최대 줄 수 */
   line-clamp: 5;
-  -webkit-line-clamp: 5; /* 최대 줄 수수 */
   overflow: hidden; /* 초과 텍스트 숨기기 */
 }
 
