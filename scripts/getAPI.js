@@ -57,3 +57,20 @@ function getVideoList(successCallback) {
 
 // 각 JS 파일에서 successCallback을 정의하여 사용
 export { getVideoInfo, getChannelInfo, getVideoList };
+
+function testAPI() {
+  function showVideoData(data) {
+    console.log("🎥 Video Info:", data);
+  }
+  function showChannelData(data) {
+    console.log("📺 Channel Info:", data);
+  }
+  function showVideoList(data) {
+    console.log("🎞 Video List:", data);
+  }
+  getVideoInfo("1", showVideoData);
+  getChannelInfo("1", showChannelData);
+  getVideoList(showVideoList);
+}
+
+// testAPI();
