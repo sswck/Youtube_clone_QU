@@ -136,13 +136,15 @@
 
 .featured-video {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; 삭제*/
   margin-bottom: 32px;
+  gap: 20px;
 }
 
 .video-player {
   position: relative;
-  width: 100%;
+  /* width: 100%; */
+  width: 424px;
   aspect-ratio: 16 / 9;
   background-color: #000; /* 비디오 플레이어 배경 */
   overflow: hidden;
@@ -174,6 +176,12 @@
   font-size: 0.9rem;
   color: #fff;
   line-height: 1.4;
+  /* 가로 최대길이 지정 */
+  max-width: 600px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* 최대 줄 수수 */
+  overflow: hidden; /* 초과 텍스트 숨기기 */
 }
 
 .video-section {
