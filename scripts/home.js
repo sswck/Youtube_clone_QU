@@ -1,6 +1,23 @@
 import { getVideoListWithChannelInfo } from "./getAPI.js";
 import { timeAgo } from "./utils.js";
 
+function queryFilter(videos) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get("search")?.toLowerCase() || "";
+  console.log("Search Query:", searchQuery);
+
+  // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
+  const filteredVideos = searchQuery
+    ? videos.filter(
+        (video) =>
+          video.title.toLowerCase().includes(searchQuery) ||
+          video.channelInfo?.channel_name.toLowerCase().includes(searchQuery) ||
+          video.tags.includes(searchQuery)
+      )
+    : videos;
+  return filteredVideos;
+}
+
 function formatViewCount(viewCount) {
   if (viewCount >= 1000000) {
     return (viewCount / 1000000).toFixed(1) + "M";
