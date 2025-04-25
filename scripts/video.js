@@ -56,7 +56,7 @@ function displayChannelInfo(data) {
   const channelName = document.querySelector(".channel-name");
   const subscribers = document.querySelector(".subscribers span");
 
-  // channelAvatar.src = data.channel_avatar;
+  channelAvatar.src = data.channel_profile;
   channelName.textContent = data.channel_name;
   subscribers.textContent = data.subscribers;
 }
