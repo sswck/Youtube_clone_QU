@@ -55,7 +55,18 @@ async function getChannelInfo(channelID) {
 
 /**
  * @description
- * 비디오 목록을 가져옵니다.
+ * 채널에 속한 비디오 목록을 가져옵니다.
+ * @param {number} channelID - The ID of the channel to retrieve the video list from.
+ * @returns {Promise<Object[]>} A promise that resolves with an array of video information data as a JSON object,
+ * or rejects with an error if the request fails.
+ */
+async function getChannelVideoList(channelID) {
+  return await fetchData("video/getChannelVideoList", { channel_id: channelID });
+}
+
+/**
+ * @description
+ * 전체 비디오 목록을 가져옵니다.
  * @returns {Promise<Object[]>} A promise that resolves with an array of video information data as a JSON object,
  * or rejects with an error if the request fails.
  */
@@ -63,4 +74,4 @@ async function getVideoList() {
   return await fetchData("video/getVideoList", {});
 }
 
-export { getVideoInfo, getChannelInfo, getVideoList };
+export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList };
