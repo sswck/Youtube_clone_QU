@@ -1,11 +1,30 @@
 import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo } from "./utils.js";
 
+function loadTopBar() {
+  fetch("/components/top-bar.html")
+    .then((res) => res.text())
+    .then((html) => {
+      document.querySelector(".topbar").innerHTML = html;
+    });
+}
+
+// 사이드 바 로드 함수
+function loadSideBar() {
+  fetch("/components/side-bar.html")
+    .then((res) => res.text())
+    .then((html) => {
+      document.querySelector(".sidebar").innerHTML = html;
+    });
+}
+
 /**
  * Initializes the page by fetching video information, channel information, and video list data.
  * @throws {Error} If any of the data fetching operations fail.
  */
 async function initVideoPage() {
+  loadTopBar(); // 상단 바 로드
+  loadSideBar(); // 사이드 바 로드
   // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
   if (!videoID) {
@@ -29,6 +48,7 @@ async function initVideoPage() {
 }
 
 function displayVideoInfo(data) {
+  // 비디오 정보 (thumbnail, title, views, created date, likes, dislikes) 표시
   const video = document.querySelector(".video-player img");
   const title = document.querySelector(".video-title");
   const views = document.querySelector("#view-count");
@@ -42,6 +62,19 @@ function displayVideoInfo(data) {
   createdDate.textContent = timeAgo(data.created_dt);
   liked.textContent = data.likes;
   disliked.textContent = data.dislikes;
+
+  // 비디오 태그 버튼 생성 (예: 동물, 고양이 등)
+  const tagsContainer = document.querySelector(".sidebar-tags");
+  tagsContainer.innerHTML = ""; // 기존 태그 초기화
+
+  tagsContainer.innerHTML = `<button class="sidebar-button">All</button>`; // "All" 버튼 추가
+  // 태그 버튼 생성
+  data.tags.forEach((tag) => {
+    const tagElement = document.createElement("button");
+    tagElement.className = "sidebar-button";
+    tagElement.textContent = tag;
+    tagsContainer.appendChild(tagElement);
+  });
 }
 
 function displayChannelInfo(data) {
@@ -63,20 +96,32 @@ function displayVideoList(data) {
     return;
   }
 
+  const videoID = parseInt(new URLSearchParams(window.location.search).get("video_id") || 1, 10); // 현재 비디오 ID
+
   data.forEach(async (video) => {
+    if (video.id === videoID) return; // 현재 비디오 ID와 일치하는 경우 건너뜁니다.
+    console.log(typeof video.id, typeof videoID); // 비디오 ID 확인
     // 채널 id를 사용하여 채널 정보를 가져옵니다.
     const channelName = (await getChannelInfo(video.channel_id).then((channelData) => channelData.channel_name)) || "Unknown Channel";
-
     const videoItem = document.createElement("div");
     videoItem.className = "sidebar-video";
     videoItem.innerHTML = `
-      <div class="sidebar-thumbnail" style="background-image: url('${video.thumbnail}');"><span class="sidebar-videoTime">23:45</span></div>
-      <div class="sidebar-video-text">
-        <span class="sidebar-video-title">${video.title}</span>
-        <span class="sidebar-video-channel">${channelName}</span>
-        <span class="sidebar-video-info">${video.views} views ${timeAgo(video.created_dt)}</span>
-      </div>
+      <a href="video.html?video_id=${video.id}" class="sidebar-video-link"></a>
+        <div class="sidebar-thumbnail" style="background-image: url('${video.thumbnail}');"><span class="sidebar-videoTime">--:--</span></div>
+        <div class="sidebar-video-text">
+          <span class="sidebar-video-title">${video.title}</span>
+          <span class="sidebar-video-channel">${channelName}</span>
+          <span class="sidebar-video-info">${video.views} views ${timeAgo(video.created_dt)}</span>
+        </div>
+      </a>
       `;
+
+    // 클릭 이벤트 추가
+    videoItem.addEventListener("click", (event) => {
+      event.preventDefault(); // 기본 동작 방지
+      window.location.href = `video.html?video_id=${video.id}`;
+    });
+
     videoList.appendChild(videoItem);
   });
 }

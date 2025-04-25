@@ -287,7 +287,7 @@ body {
   padding: 20px 20px 0 0;
 }
 
-.sidebar-top-menu {
+.sidebar-tags {
   display: flex;
   gap: 8px;
 }
@@ -310,8 +310,13 @@ body {
 
 .sidebar-video {
   display: flex;
-  gap: 12px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sidebar-video:hover {
+  transform: scale(1.02);
+  background-color: #202020;
+  border: 1px solid #303030;
 }
 
 .sidebar-thumbnail {
@@ -320,6 +325,7 @@ body {
   position: relative;
   width: 168px;
   height: 94px;
+  margin-right: 12px;
   background-image: url("/assets/images/thumbnail.png");
   background-size: cover;
   background-position: center;
