@@ -8,12 +8,11 @@ body {
   background-color: #181818;
   font-family: Arial, sans-serif;
   color: white;
-  padding: 0 10%;
 }
 .video-page {
   display: flex;
   margin: 0;
-  padding: 24px 0 0 24px;
+  padding: 24px 10%;
   gap: 24px;
 }
 
