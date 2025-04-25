@@ -1,91 +1,101 @@
+// script.js
+// SPA 라우팅 및 레이아웃 로딩 담당
+
 document.addEventListener("DOMContentLoaded", () => {
   const topBarContainer = document.getElementById("top-bar-container");
   const sideBarContainer = document.getElementById("side-bar-container");
   const contentDiv = document.querySelector(".content");
-  const navLinks = document.querySelectorAll("[data-link]");
 
   // 상단 바 로드 함수
   function loadTopBar() {
     fetch("/components/top-bar.html")
-      .then((response) => response.text())
+      .then((res) => res.text())
       .then((html) => {
         topBarContainer.innerHTML = html;
-        // 상단 바가 로드된 후 data-link 속성을 가진 요소에 이벤트 리스너를 다시 등록
-        const topBarLinks = topBarContainer.querySelectorAll("[data-link]");
-        topBarLinks.forEach((link) => {
-          link.addEventListener("click", handleLinkClick);
-        });
+        const links = topBarContainer.querySelectorAll("[data-link]");
+        links.forEach((a) => a.addEventListener("click", handleLinkClick));
       });
   }
 
   // 사이드 바 로드 함수
   function loadSideBar() {
     fetch("/components/side-bar.html")
-      .then((response) => response.text())
+      .then((res) => res.text())
       .then((html) => {
         sideBarContainer.innerHTML = html;
-        // 사이드 바가 로드된 후 data-link 속성을 가진 요소에 이벤트 리스너를 다시 등록
-        const sideBarLinks = sideBarContainer.querySelectorAll("[data-link]");
-        sideBarLinks.forEach((link) => {
-          link.addEventListener("click", handleLinkClick);
-        });
+        const links = sideBarContainer.querySelectorAll("[data-link]");
+        links.forEach((a) => a.addEventListener("click", handleLinkClick));
       });
   }
 
-  // 초기 콘텐츠 로드 함수 (home.html 로드)
+  // 초기 콘텐츠 로드 (Home)
   function loadInitialContent() {
-    loadContent("/components/home.html");
+    fetch("/components/home.html")
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      })
+      .then((html) => {
+        contentDiv.innerHTML = html;
+        // home.js 등 스크립트 실행
+        loadScript("/scripts/home.js", "home-script");
+      })
+      .catch((e) => {
+        console.error("초기 콘텐츠 로딩 오류:", e);
+        contentDiv.innerHTML = "<p>초기 페이지 로드 실패</p>";
+      });
   }
 
-  function handleLinkClick(event) {
-    event.preventDefault();
-    const path = this.getAttribute("href");
+  // 컨텐츠 로드 핸들러
+  function handleLinkClick(e) {
+    e.preventDefault();
+    const path = e.currentTarget.getAttribute("href");
     loadContent(path);
     history.pushState(null, "", path);
   }
 
+  // 동적 컨텐츠 로드
   function loadContent(path) {
-    // "/" 또는 "/index.html" 경로 처리 추가
     if (path === "/" || path === "/index.html") {
       loadInitialContent();
       return;
     }
-
     fetch(path)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
       })
       .then((html) => {
         contentDiv.innerHTML = html;
-        if (path === "/components/home.html") {
-          const scripts = contentDiv.querySelectorAll("script");
-          scripts.forEach((script) => {
-            const newScript = document.createElement("script");
-            Array.from(script.attributes).forEach((attr) => {
-              newScript.setAttribute(attr.name, attr.value);
-            });
-            newScript.textContent = script.textContent;
-            script.parentNode.replaceChild(newScript, script);
-          });
+        // 콘텐츠별 스크립트 실행
+        if (path.includes("home.html")) {
+          loadScript("/scripts/home.js", "home-script");
+        } else if (path.includes("Channel_Page.html")) {
+          loadScript("/scripts/channel.js", "channel-script");
         }
       })
-      .catch((error) => {
-        console.error("콘텐츠 로딩 오류:", error);
-        contentDiv.innerHTML = "<p>페이지를 로드하는 데 실패했습니다.</p>";
+      .catch((e) => {
+        console.error("콘텐츠 로딩 오류:", e);
+        contentDiv.innerHTML = "<p>페이지 로드 실패</p>";
       });
   }
 
-  // 초기 상단 바 로드
+  // 유틸: 스크립트 태그 동적 추가
+  function loadScript(src, id) {
+    // 기존 로드된 스크립트 제거
+    const old = document.getElementById(id);
+    if (old) old.remove();
+    const s = document.createElement("script");
+    s.src = src;
+    s.id = id;
+    document.body.appendChild(s);
+  }
+
+  // 초기화
   loadTopBar();
-  // 초기 사이드 바 로드
   loadSideBar();
-  // 초기 콘텐츠 로드 (home.html)
   loadInitialContent();
 
-  window.onpopstate = function (event) {
-    loadContent(window.location.pathname);
-  };
+  // 뒤로/앞으로 버튼 처리
+  window.onpopstate = () => loadContent(window.location.pathname);
 });
