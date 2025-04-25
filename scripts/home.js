@@ -1,5 +1,5 @@
 import { getVideoListWithChannelInfo } from "./getAPI.js";
-import { timeAgo } from "./utils.js";
+import { timeAgo, formatView } from "./utils.js";
 
 function queryFilter(videos) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -16,15 +16,6 @@ function queryFilter(videos) {
       )
     : videos;
   return filteredVideos;
-}
-
-function formatViewCount(viewCount) {
-  if (viewCount >= 1000000) {
-    return (viewCount / 1000000).toFixed(1) + "M";
-  } else if (viewCount >= 1000) {
-    return (viewCount / 1000).toFixed(1) + "K";
-  }
-  return viewCount;
 }
 
 function createVideoCardWithChannel(video) {
@@ -44,7 +35,7 @@ function createVideoCardWithChannel(video) {
           <div class="card-data">
             <h3 class="card-title">${video.title}</h3>
             <p class="card-channel">${channelName}</p>
-            <p class="card-stats">${video.views ? formatViewCount(video.views) + " views" : "조회수 정보 없음"} • ${timeInfo}</p>
+            <p class="card-stats">${video.views ? formatView(video.views) + " views" : "조회수 정보 없음"} • ${timeInfo}</p>
           </div>
         </div>
       </article>
@@ -57,9 +48,10 @@ async function initChannelPage() {
     // 채널 정보가 포함된 전체 비디오 리스트 로드 및 요소를 담을 곳 선언
     const videos = await getVideoListWithChannelInfo();
     const videoGrid = document.getElementById("card-ui");
+    const filteredVideos = queryFilter(videos);
 
-    if (videos && videos.length > 0) {
-      const cardsHTML = videos.map(createVideoCardWithChannel).join("");
+    if (filteredVideos && filteredVideos.length > 0) {
+      const cardsHTML = filteredVideos.map(createVideoCardWithChannel).join("");
       if (videoGrid) {
         videoGrid.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
       }
