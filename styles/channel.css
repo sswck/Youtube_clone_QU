@@ -152,7 +152,7 @@
   margin-bottom: 16px;
 }
 
-.video-player img {
+.video-player video {
   display: block;
   width: 100%;
   height: 100%;
@@ -218,7 +218,14 @@
 }
 
 /* 비디오 카드 (기존 card.css 스타일 활용 가능) */
-.video-card {
+/* .video-card {
+  background-color: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+} */
+
+#channel-videos .card {
+  /* 기존 .video-card 스타일 복사 */
   background-color: #181818;
   border-radius: 8px;
   overflow: hidden;
