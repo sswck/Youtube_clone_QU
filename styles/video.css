@@ -8,13 +8,24 @@ body {
   background-color: #181818;
   font-family: Arial, sans-serif;
   color: white;
-  padding: 0 10%;
+}
+.topbar {
+  visibility: hidden;
+}
+.layout-wrapper {
+  display: flex;
+}
+.sidebar {
+  display: none;
 }
 .video-page {
+  visibility: hidden;
   display: flex;
   margin: 0;
-  padding: 24px 0 0 24px;
+  padding: 24px 10%;
   gap: 24px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 
 /* 텍스트 줄 수 제한 */
@@ -286,7 +297,7 @@ body {
   padding: 20px 20px 0 0;
 }
 
-.sidebar-top-menu {
+.sidebar-tags {
   display: flex;
   gap: 8px;
 }
@@ -299,6 +310,23 @@ body {
   font-size: 14px;
   color: white;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-button:hover {
+  background-color: #404040; /* 기존보다 살짝 어두운 색 */
+  color: #cccccc; /* 텍스트 색상을 연하게 */
+  transform: scale(1.05); /* 기존보다 조금 더 작은 확대 효과 */
+  transition: all 0.2s ease-in-out; /* 부드러운 애니메이션 */
+}
+
+.sidebar-button.active {
+  background-color: #ffffff; /* 배경색을 흰색으로 */
+  border: 2px solid #aaaaaa; /* 테두리 색상을 노란색으로 변경 */
+  color: black; /* 글씨 색상을 검은색으로 */
+  font-weight: bold; /* 글씨를 더욱 강조 */
+  transform: scale(1.1); /* 살짝 확대 효과 */
+  transition: all 0.2s ease-in-out; /* 부드러운 변화 */
 }
 
 .sidebar-list {
@@ -309,8 +337,13 @@ body {
 
 .sidebar-video {
   display: flex;
-  gap: 12px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.sidebar-video:hover {
+  transform: scale(1.02);
+  background-color: #202020;
+  border: 1px solid #303030;
 }
 
 .sidebar-thumbnail {
@@ -319,6 +352,7 @@ body {
   position: relative;
   width: 168px;
   height: 94px;
+  margin-right: 12px;
   background-image: url("/assets/images/thumbnail.png");
   background-size: cover;
   background-position: center;
@@ -338,6 +372,7 @@ body {
 .sidebar-video-text {
   display: flex;
   flex: 1;
+  padding-right: 12px;
   min-width: 100px;
   flex-direction: column;
   justify-content: center;
