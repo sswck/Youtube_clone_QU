@@ -32,30 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // 초기 콘텐츠 로드 함수
+  // 초기 콘텐츠 로드 함수 (home.html 로드)
   function loadInitialContent() {
-    fetch("/components/home.html")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
-      })
-      .then((html) => {
-        contentDiv.innerHTML = html;
-      })
-      .catch((error) => {
-        console.error("초기 콘텐츠 로딩 오류:", error);
-        contentDiv.innerHTML = "<p>초기 페이지를 로드하는 데 실패했습니다.</p>";
-      });
-  }
-
-  function loadInitalCardUI() {
-    fetch("/components/CardUI.html")
-      .then((res) => res.text())
-      .then((html) => {
-        document.getElementById("card-ui").innerHTML = html;
-      });
+    loadContent("/components/home.html");
   }
 
   function handleLinkClick(event) {
@@ -69,8 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // "/" 또는 "/index.html" 경로 처리 추가
     if (path === "/" || path === "/index.html") {
       loadInitialContent();
-      loadInitalCardUI();
-      history.pushState(null, "", "/"); // URL "/"은 선택 사항 or "/index.html"
       return;
     }
 
@@ -83,6 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((html) => {
         contentDiv.innerHTML = html;
+        if (path === "/components/home.html") {
+          const scripts = contentDiv.querySelectorAll("script");
+          scripts.forEach((script) => {
+            const newScript = document.createElement("script");
+            Array.from(script.attributes).forEach((attr) => {
+              newScript.setAttribute(attr.name, attr.value);
+            });
+            newScript.textContent = script.textContent;
+            script.parentNode.replaceChild(newScript, script);
+          });
+        }
       })
       .catch((error) => {
         console.error("콘텐츠 로딩 오류:", error);
@@ -94,11 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadTopBar();
   // 초기 사이드 바 로드
   loadSideBar();
-  // 초기 콘텐츠 로드
+  // 초기 콘텐츠 로드 (home.html)
   loadInitialContent();
-
-  // cardUI 로드
-  loadInitalCardUI();
 
   window.onpopstate = function (event) {
     loadContent(window.location.pathname);
