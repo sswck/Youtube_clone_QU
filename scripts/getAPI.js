@@ -74,4 +74,31 @@ async function getVideoList() {
   return await fetchData("video/getVideoList", {});
 }
 
-export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList };
+/**
+ * @description
+ * 전체 비디오 목록(채널 정보 포함)을 가져옵니다. WARNING : 로드 시 시간이 더 소요될 수 있습니다.
+ * @returns {Promise<Object[]>} A promise that resolves with an array of video information data as a JSON object,
+ * or rejects with an error if the request fails.
+ */
+
+async function getVideoListWithChannelInfo() {
+  try {
+    const videos = await getVideoList();
+    const videosWithChannel = [];
+    for (const video of videos) {
+      const videoInfo = await getVideoInfo(video.id);
+      if (videoInfo && videoInfo.channel_id) {
+        const channelInfo = await getChannelInfo(videoInfo.channel_id);
+        videosWithChannel.push({ ...video, channelInfo });
+      } else {
+        videosWithChannel.push(video); // 채널 정보가 없으면 기존 비디오 정보만 사용
+      }
+    }
+    return videosWithChannel;
+  } catch (error) {
+    console.error("비디오 목록 및 채널 정보 가져오기 실패:", error);
+    return [];
+  }
+}
+
+export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList, getVideoListWithChannelInfo };
