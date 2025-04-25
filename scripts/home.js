@@ -1,6 +1,17 @@
 const API_BASE_URL = "http://techfree-oreumi-api.kro.kr:5000";
 const videoGrid = document.getElementById("card-ui");
 
+function queryFilter(videos) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get("search")?.toLowerCase() || "";
+  console.log("Search Query:", searchQuery);
+
+  const filteredVideos = searchQuery
+    ? videos.filter((video) => video.title.toLowerCase().includes(searchQuery) || video.channelInfo?.channel_name.toLowerCase().includes(searchQuery))
+    : videos;
+  return filteredVideos;
+}
+
 async function fetchVideoInfo(videoId) {
   try {
     const response = await fetch(`${API_BASE_URL}/video/getVideoInfo?video_id=${videoId}`);
@@ -46,7 +57,9 @@ async function fetchVideoListWithChannelInfo() {
         videosWithChannel.push(video); // 채널 정보가 없으면 기존 비디오 정보만 사용
       }
     }
-    return videosWithChannel;
+    const filteredVideos = queryFilter(videosWithChannel);
+    return filteredVideos;
+    // return videosWithChannel;
   } catch (error) {
     console.error("비디오 목록 및 채널 정보 가져오기 실패:", error);
     if (videoGrid) {
