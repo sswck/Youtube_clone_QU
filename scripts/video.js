@@ -97,6 +97,34 @@ function displayVideoInfo(data) {
     tagElement.textContent = tag;
     tagsContainer.appendChild(tagElement);
   });
+
+  addTagFilterFunctionality();
+}
+
+function addTagFilterFunctionality() {
+  const buttons = document.querySelectorAll(".sidebar-button");
+
+  // 최초 로드 시 "All" 버튼 활성화
+  const allButton = document.querySelector(".sidebar-button:first-child");
+  if (allButton) {
+    allButton.classList.add("active");
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedTag = button.textContent;
+
+      // 기존 활성화된 버튼 초기화 후 클릭된 버튼만 활성화
+      buttons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      document.querySelectorAll(".sidebar-video").forEach((video) => {
+        const videoTags = video.getAttribute("data-tags")?.split(",") || [];
+        video.style.visibility = selectedTag === "All" || videoTags.includes(selectedTag) ? "visible" : "hidden";
+        video.style.position = selectedTag === "All" || videoTags.includes(selectedTag) ? "static" : "absolute";
+      });
+    });
+  });
 }
 
 function displayChannelInfo(data) {
@@ -136,6 +164,9 @@ function displayVideoList(data) {
         </div>
       </a>
       `;
+
+    // 비디오 태그를 data-tags 속성에 저장
+    videoItem.setAttribute("data-tags", video.tags.join(","));
 
     // 클릭 이벤트 추가
     videoItem.addEventListener("click", (event) => {
