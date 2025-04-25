@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const s = document.createElement("script");
     s.src = src;
     s.id = id;
+    s.type = "module";
     document.body.appendChild(s);
   }
 
