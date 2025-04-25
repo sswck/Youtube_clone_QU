@@ -5,7 +5,7 @@ import { timeAgo } from "./utils.js";
  * Initializes the page by fetching video information, channel information, and video list data.
  * @throws {Error} If any of the data fetching operations fail.
  */
-async function init() {
+async function initVideoPage() {
   // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
   if (!videoID) {
@@ -80,5 +80,10 @@ function displayVideoList(data) {
     videoList.appendChild(videoItem);
   });
 }
-
-init();
+// SPA 환경에서 채널 페이지 로드 시점 대기
+const intervalId = setInterval(() => {
+  if (document.querySelector(".video-page")) {
+    clearInterval(intervalId);
+    initVideoPage();
+  }
+}, 100);

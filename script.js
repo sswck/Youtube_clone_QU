@@ -72,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
           loadScript("/scripts/home.js", "home-script");
         } else if (path.includes("Channel_Page.html")) {
           loadScript("/scripts/channel.js", "channel-script");
+        } else if (path.includes("video.html")) {
+          loadScript("/scripts/video.js", "video-script");
         }
       })
       .catch((e) => {
