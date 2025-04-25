@@ -17,20 +17,14 @@ async function init() {
   try {
     const videoData = await getVideoInfo(videoID);
     displayVideoInfo(videoData); // 동영상 정보 표시
-  } catch (error) {
-    console.error("Error fetching video info:", error);
-  }
-  try {
+
     const channelData = await getChannelInfo(videoData.channel_id);
     displayChannelInfo(channelData); // 채널 정보 표시
-  } catch (error) {
-    console.error("Error fetching channel info:", error);
-  }
-  try {
+
     const videoListData = await getVideoList();
     displayVideoList(videoListData); // 동영상 목록 표시
   } catch (error) {
-    console.error("Error fetching video list:", error);
+    console.error("Error fetching API data:", error);
   }
 }
 
