@@ -6,8 +6,14 @@ function queryFilter(videos) {
   const searchQuery = urlParams.get("search")?.toLowerCase() || "";
   console.log("Search Query:", searchQuery);
 
+  // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
   const filteredVideos = searchQuery
-    ? videos.filter((video) => video.title.toLowerCase().includes(searchQuery) || video.channelInfo?.channel_name.toLowerCase().includes(searchQuery))
+    ? videos.filter(
+        (video) =>
+          video.title.toLowerCase().includes(searchQuery) ||
+          video.channelInfo?.channel_name.toLowerCase().includes(searchQuery) ||
+          video.tags.includes(searchQuery)
+      )
     : videos;
   return filteredVideos;
 }
