@@ -10,12 +10,14 @@ function initSearch() {
   }
 
   searchInput.addEventListener("keypress", (event) => {
+    event.preventDefault();
     if (event.key === "Enter") {
       triggerSearch();
     }
   });
 
   searchButton.addEventListener("click", triggerSearch);
+  console.log("Search initialized.");
 }
 
 // 0.1초마다 채널 페이지(.channel-page) 등장 여부 확인
