@@ -9,7 +9,17 @@ body {
   font-family: Arial, sans-serif;
   color: white;
 }
+.topbar {
+  visibility: hidden;
+}
+.layout-wrapper {
+  display: flex;
+}
+.sidebar {
+  display: none;
+}
 .video-page {
+  visibility: hidden;
   display: flex;
   margin: 0;
   padding: 24px 10%;

@@ -6,6 +6,26 @@ function loadTopBar() {
     .then((res) => res.text())
     .then((html) => {
       document.querySelector(".topbar").innerHTML = html;
+
+      const topbar = document.querySelector(".topbar");
+      topbar.style.display = "block";
+
+      // 요소가 삽입된 후 이벤트 리스너 추가
+      setTimeout(() => {
+        const menuButton = document.querySelector(".menu-button");
+        const sidebar = document.querySelector(".sidebar");
+
+        // 로드 완료 후 topbar 보이게 설정
+        const topBar = document.querySelector(".topbar");
+        topBar.style.visibility = "visible";
+
+        if (menuButton && sidebar) {
+          sidebar.style.display = "none";
+          menuButton.addEventListener("click", () => {
+            sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+          });
+        }
+      }, 100); // 100ms 지연 후 버튼 찾기
     });
 }
 
@@ -18,13 +38,11 @@ function loadSideBar() {
     });
 }
 
-/**
- * Initializes the page by fetching video information, channel information, and video list data.
- * @throws {Error} If any of the data fetching operations fail.
- */
+// 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
   loadTopBar(); // 상단 바 로드
   loadSideBar(); // 사이드 바 로드
+
   // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
   if (!videoID) {
@@ -45,6 +63,10 @@ async function initVideoPage() {
   } catch (error) {
     console.error("Error fetching API data:", error);
   }
+
+  // 비디오 페이지 로드 후 표시
+  const videoPage = document.querySelector(".video-page");
+  videoPage.style.visibility = "visible";
 }
 
 function displayVideoInfo(data) {
@@ -100,7 +122,6 @@ function displayVideoList(data) {
 
   data.forEach(async (video) => {
     if (video.id === videoID) return; // 현재 비디오 ID와 일치하는 경우 건너뜁니다.
-    console.log(typeof video.id, typeof videoID); // 비디오 ID 확인
     // 채널 id를 사용하여 채널 정보를 가져옵니다.
     const channelName = (await getChannelInfo(video.channel_id).then((channelData) => channelData.channel_name)) || "Unknown Channel";
     const videoItem = document.createElement("div");
