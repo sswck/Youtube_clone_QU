@@ -28,7 +28,7 @@ function createVideoCardWithChannel(video) {
   const channelName = video.channelInfo?.channel_name || "알 수 없는 채널";
 
   return `
-      <article class="card">
+      <article class="card" data-video-id="${video.id}">
         <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail" style="width: 100%; display: block; object-fit: cover;">
         <div class="card-details">
           <img class="card-avatar" src="${avatarUrl}" alt="Channel Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
@@ -54,6 +54,17 @@ async function initChannelPage() {
       const cardsHTML = filteredVideos.map(createVideoCardWithChannel).join("");
       if (videoGrid) {
         videoGrid.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
+
+        // DOM 업데이트 이후 이벤트 리스너 등록
+        const cardElements = videoGrid.querySelectorAll(".card");
+        cardElements.forEach((card) => {
+          card.addEventListener("click", () => {
+            // 여기에 카드를 클릭했을 때 수행할 동작을 작성합니다.
+            const videoId = card.dataset.videoId;
+            console.log(videoId);
+            window.location.href = `/components/video.html?video_id=${videoId}`;
+          });
+        });
       }
     } else {
       if (videoGrid) {
@@ -67,7 +78,7 @@ async function initChannelPage() {
 
 // SPA 환경에서 채널 페이지 로드 시점 대기
 const intervalId = setInterval(() => {
-  if (document.querySelector("#card-ui")) {
+  if (document.getElementById("card-ui")) {
     clearInterval(intervalId);
     initChannelPage();
   }
