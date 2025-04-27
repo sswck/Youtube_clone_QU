@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contentDiv = document.querySelector(".content");
 
   // 상단 바 로드 함수
-  function loadTopBar() {
+  function old_loadTopBar() {
     fetch("/components/top-bar.html")
       .then((res) => res.text())
       .then((html) => {
@@ -17,14 +17,51 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
+  function loadTopBar() {
+    fetch("/components/top-bar.html")
+      .then((res) => res.text())
+      .then((html) => {
+        topBarContainer.innerHTML = html;
+
+        //const topbar = document.querySelector("#top-bar-container");
+        topBarContainer.style.display = "block";
+
+        // 요소가 삽입된 후 이벤트 리스너 추가
+        setTimeout(() => {
+          const menuButton = document.querySelector(".menu-button");
+          //const sidebar = document.querySelector("#side-bar-container");
+
+          // 로드 완료 후 topbar 보이게 설정
+          //const topBar = document.querySelector("#top-bar-container");
+          topBarContainer.style.visibility = "visible";
+
+          if (menuButton && sideBarContainer) {
+            //sideBarContainer.style.display = "none";
+            menuButton.addEventListener("click", () => {
+              sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
+            });
+          }
+        }, 100); // 100ms 지연 후 버튼 찾기
+      });
+  }
+
   // 사이드 바 로드 함수
-  function loadSideBar() {
+  function old_loadSideBar() {
     fetch("/components/side-bar.html")
       .then((res) => res.text())
       .then((html) => {
         sideBarContainer.innerHTML = html;
         const links = sideBarContainer.querySelectorAll("[data-link]");
         links.forEach((a) => a.addEventListener("click", handleLinkClick));
+      });
+  }
+
+  function loadSideBar() {
+    fetch("/components/side-bar.html")
+      .then((res) => res.text())
+      .then((html) => {
+        //document.querySelector("#side-bar-container").innerHTML = html;
+        sideBarContainer.innerHTML = html;
       });
   }
 
