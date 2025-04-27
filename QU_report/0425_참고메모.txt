@@ -1,0 +1,117 @@
+api 아바타 문제 --> getVideoListWithChannelInfo 함수를 getAPI.js에 추가하여 해결
+
+MAIN에 API적용하기->해결?
+HOME.JS 수정하기 --------------> 인터벌사용해서 찾으면 클리어하는 방식으로 해결
+
+0424내용진행(메인 stashed data로 조금 진행했음 거기에 이어서하기)
+
+getAPI에 비디오리스트 함께 가져오기 만들기, 링크로영상가져오기?
+utils에 formatViewCount 기능 추가
+
+우선 현상유지하고
+1명이 테스트 컴포넌트를 만들어서 상단바 및 사이드바 FETCH, API적용 후 INDEX에서 이동할 때마다 잘 동작하는지 -> video확인
+script.js재작성하기 - index.html도?
+
+-------script.js 수정 전 잠깐 저장
+// script.js
+// SPA 라우팅 및 레이아웃 로딩 담당
+
+document.addEventListener("DOMContentLoaded", () => {
+  const topBarContainer = document.getElementById("top-bar-container");
+  const sideBarContainer = document.getElementById("side-bar-container");
+  const contentDiv = document.querySelector(".content");
+
+  // 상단 바 로드 함수
+  function loadTopBar() {
+    fetch("/components/top-bar.html")
+      .then((res) => res.text())
+      .then((html) => {
+        topBarContainer.innerHTML = html;
+        const links = topBarContainer.querySelectorAll("[data-link]");
+        links.forEach((a) => a.addEventListener("click", handleLinkClick));
+      });
+  }
+
+  // 사이드 바 로드 함수
+  function loadSideBar() {
+    fetch("/components/side-bar.html")
+      .then((res) => res.text())
+      .then((html) => {
+        sideBarContainer.innerHTML = html;
+        const links = sideBarContainer.querySelectorAll("[data-link]");
+        links.forEach((a) => a.addEventListener("click", handleLinkClick));
+      });
+  }
+
+  // 초기 콘텐츠 로드 (Home)
+  function loadInitialContent() {
+    fetch("/components/home.html")
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      })
+      .then((html) => {
+        contentDiv.innerHTML = html;
+        // home.js 등 스크립트 실행
+        loadScript("/scripts/home.js", "home-script");
+      })
+      .catch((e) => {
+        console.error("초기 콘텐츠 로딩 오류:", e);
+        contentDiv.innerHTML = "<p>초기 페이지 로드 실패</p>";
+      });
+  }
+
+  // 컨텐츠 로드 핸들러
+  function handleLinkClick(e) {
+    e.preventDefault();
+    const path = e.currentTarget.getAttribute("href");
+    loadContent(path);
+    history.pushState(null, "", path);
+  }
+
+  // 동적 컨텐츠 로드
+  function loadContent(path) {
+    if (path === "/" || path === "/index.html") {
+      loadInitialContent();
+      return;
+    }
+    fetch(path)
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      })
+      .then((html) => {
+        contentDiv.innerHTML = html;
+        // 콘텐츠별 스크립트 실행
+        if (path.includes("home.html")) {
+          loadScript("/scripts/home.js", "home-script");
+        } else if (path.includes("Channel_Page.html")) {
+          loadScript("/scripts/channel.js", "channel-script");
+        }
+      })
+      .catch((e) => {
+        console.error("콘텐츠 로딩 오류:", e);
+        contentDiv.innerHTML = "<p>페이지 로드 실패</p>";
+      });
+  }
+
+  // 유틸: 스크립트 태그 동적 추가
+  function loadScript(src, id) {
+    // 기존 로드된 스크립트 제거
+    const old = document.getElementById(id);
+    if (old) old.remove();
+    const s = document.createElement("script");
+    s.src = src;
+    s.id = id;
+    s.type = "module";
+    document.body.appendChild(s);
+  }
+
+  // 초기화
+  loadTopBar();
+  loadSideBar();
+  loadInitialContent();
+
+  // 뒤로/앞으로 버튼 처리
+  window.onpopstate = () => loadContent(window.location.pathname);
+});
