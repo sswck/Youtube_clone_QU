@@ -47,7 +47,7 @@ body {
 
 .filter-bar {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   gap: 8px;
   padding: 0 0px;
   /* background-color: #1a1a1a; */
