@@ -1,11 +1,54 @@
-/* 필터 버튼 바 */
+.filter-bar-container {
+  display: flex;
+  align-items: center; /* 버튼과 필터 바를 세로로 중앙 정렬 */
+  padding: 16px 24px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+  position: relative;
+}
+
+.scroll-button {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 8px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.scroll-button:hover {
+  opacity: 0.8;
+}
+
+.left-scroll {
+  left: 0;
+}
+
+.right-scroll {
+  right: 0;
+}
+
+.filter-bar-container:hover .scroll-button {
+  opacity: 0.5;
+}
+
 .filter-bar {
   display: flex;
   overflow-x: auto;
   gap: 8px;
-  padding: 16px 24px;
-  background-color: #1a1a1a;
-  border-bottom: 1px solid #333;
+  padding: 0 0px;
+  /* background-color: #1a1a1a; */
+  /* border-bottom: 1px solid #333; */
+  list-style: none;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 
 .filter-bar button {
@@ -31,7 +74,8 @@
 
 #card-ui {
   padding: 24px;
-  height: calc(100vh - 56px - 79px); /* 56px for header, 79px for filter bar */
+  /* 56px for header, 79px for filter bar */
+  /* height: calc(100vh - 56px - 79px); */
   overflow-y: auto;
 }
 
