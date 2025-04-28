@@ -1,5 +1,18 @@
 /* 전체 채널 페이지 컨테이너 */
 
+.layout-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.topbar {
+  visibility: hidden;
+}
+
+.sidebar {
+  visibility: hidden;
+}
+
 .channel-page {
   background-color: #0f0f0f; /* 이미지 배경색과 유사하게 */
   color: #fff;
@@ -7,6 +20,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  visibility: hidden;
 }
 
 /* 채널 헤더 */
@@ -18,7 +32,7 @@
 
 .channel-banner {
   width: 100%;
-  height: 200px; /* 이미지 배너 높이에 맞춰 조절 */
+  height: 200px;
 }
 
 .channel-banner img {
