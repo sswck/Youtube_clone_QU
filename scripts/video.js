@@ -33,18 +33,39 @@ async function initVideoPage() {
   // 비디오 페이지 로드 후 표시
   const videoPage = document.querySelector(".video-page");
   videoPage.style.visibility = "visible";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const videoPlayer = document.getElementById("videoPlayer");
+
+    if (!videoPlayer) {
+      console.error("Video player not found.");
+      return;
+    }
+
+    // 비디오가 로드되었을 때 자동 재생 (선택사항)
+    videoPlayer.play();
+
+    // 예제: 비디오 일시 정지 후 다시 재생
+    document.getElementById("buttonPlayPause").addEventListener("click", () => {
+      if (videoPlayer.paused) {
+        videoPlayer.play();
+      } else {
+        videoPlayer.pause();
+      }
+    });
+  });
 }
 
 function displayVideoInfo(data) {
   // 비디오 정보 (thumbnail, title, views, created date, likes, dislikes) 표시
-  const video = document.querySelector(".video-player img");
+  const video = document.querySelector("#videoPlayer");
   const title = document.querySelector(".video-title");
   const views = document.querySelector("#view-count");
   const createdDate = document.querySelector("#created-date");
   const liked = document.querySelector("#buttonLike span");
   const disliked = document.querySelector("#buttonDislike span");
 
-  video.src = data.thumbnail;
+  video.src = `https://storage.googleapis.com/youtube-clone-video/${data.id}.mp4`;
   title.textContent = data.title;
   views.textContent = formatView(data.views);
   createdDate.textContent = timeAgo(data.created_dt);

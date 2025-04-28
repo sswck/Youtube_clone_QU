@@ -66,12 +66,19 @@ body {
 /* 비디오 플레이어 */
 .video-player {
   width: 100%;
+  max-width: 800px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
   border-radius: 4px;
 }
-.video-player img {
+
+/* 비디오 태그 스타일 */
+.video-player video {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  max-height: 450px; /* 최대 높이 설정 (선택 사항) */
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: black; /* 배경색 추가 */
 }
 
 /* 비디오 정보 */
