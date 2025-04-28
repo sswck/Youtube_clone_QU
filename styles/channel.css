@@ -242,11 +242,13 @@ body {
 }
 
 .video-card {
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 5px;
 }
 
 .video-card:hover {
   transform: translateY(-4px);
+  background-color: #404040;
 }
 
 /* 비디오 카드 (기존 card.css 스타일 활용 가능) */
