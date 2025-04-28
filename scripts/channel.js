@@ -1,51 +1,23 @@
-// /scripts/channel.js
+import { loadTopBar, loadSideBar } from "./loadUI.js";
 import { getChannelInfo, getChannelVideoList } from "./getAPI.js";
 import { timeAgo } from "./utils.js";
 
-function loadTopBar() {
-  fetch("/components/top-bar.html")
-    .then((res) => {
-      if (!res.ok) throw new Error(`TopBar fetch failed: ${res.status}`);
-      return res.text();
-    })
-    .then((html) => {
-      const topbar = document.querySelector(".topbar");
-      topbar.innerHTML = html;
-      topbar.style.display = "block";
-    })
-    .catch((err) => console.error("TopBar load error:", err));
-}
-
-function loadSideBar() {
-  fetch("/components/side-bar.html")
-    .then((res) => {
-      if (!res.ok) throw new Error(`SideBar fetch failed: ${res.status}`);
-      return res.text();
-    })
-    .then((html) => {
-      const sidebar = document.querySelector(".sidebar");
-      sidebar.innerHTML = html;
-      sidebar.style.display = "block";
-    })
-    .catch((err) => console.error("SideBar load error:", err));
-}
-
 async function initChannelPage() {
-  // 0) 공통 컴포넌트부터 로드
-  loadTopBar();
-  loadSideBar();
+  // 0) 공통 UI 로드 (탑바·사이드바)
+  await loadTopBar();
+  await loadSideBar();
 
-  // 1) API로 채널 정보, 영상 리스트 가져오기
   try {
+    // 1) 채널 정보 렌더링
     const ch = await getChannelInfo(2);
     document.querySelector(".channel-banner img").src = ch.channel_banner;
     document.querySelector(".channel-profile .channel-avatar").src = ch.channel_profile;
     document.querySelector(".channel-name").textContent = ch.channel_name;
     document.querySelector(".subscriber-count").textContent = ch.subscribers.toLocaleString() + " subscribers";
 
+    // 2) 비디오 리스트 렌더링
     const videos = await getChannelVideoList(2);
-    const grids = document.querySelectorAll(".video-grid");
-    grids.forEach((grid) => {
+    document.querySelectorAll(".video-grid").forEach((grid) => {
       grid.innerHTML = videos
         .map(
           (video) => `
@@ -64,15 +36,16 @@ async function initChannelPage() {
         .join("");
     });
 
-    // 2) 모든 렌더링 끝나면 페이지 보이기
-    const page = document.querySelector(".channel-page");
-    page.style.visibility = "visible";
+    // 3) 숨겨둔 컨테이너와 콘텐츠 보이기
+    document.getElementById("top-bar-container").style.visibility = "visible";
+    document.getElementById("side-bar-container").style.visibility = "visible";
+    document.querySelector(".content").style.visibility = "visible";
   } catch (error) {
     console.error("채널 페이지 초기화 중 오류:", error);
   }
 }
 
-// SPA 환경: .channel-page 가 DOM에 나타나는 시점까지 대기
+// SPA 환경: .channel-page 요소가 DOM에 나타날 때까지 대기
 const intervalId = setInterval(() => {
   if (document.querySelector(".channel-page")) {
     clearInterval(intervalId);
