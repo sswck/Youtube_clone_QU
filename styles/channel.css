@@ -235,6 +235,14 @@
   gap: 16px;
 }
 
+.video-card {
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+}
+
 /* 비디오 카드 (기존 card.css 스타일 활용 가능) */
 /* .video-card {
   background-color: #181818;
