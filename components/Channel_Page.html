@@ -8,17 +8,15 @@
   </head>
   <body>
     <!-- TopBar 컨테이너 -->
-    <div class="topbar">
-      <script type="module" src="/scripts/topbar.js"></script>
+    <div id="top-bar-container">
+      <script src="scripts/topbar.js"></script>
     </div>
-
     <!-- 사이드바+콘텐츠를 감싸는 래퍼 -->
     <div class="layout-wrapper">
-      <!-- Sidebar 컨테이너 -->
-      <div class="sidebar">
-        <script type="module" src="/scripts/sidebar.js"></script>
+      <!-- 사이드바 로드 -->
+      <div id="side-bar-container">
+        <script src="scripts/sidebar.js"></script>
       </div>
-
       <!-- 실제 채널 페이지 콘텐츠 -->
       <main class="channel-page">
         <!-- 채널 헤더 -->

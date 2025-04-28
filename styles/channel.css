@@ -9,11 +9,6 @@
   flex-direction: column;
 }
 
-.layout-wrapper {
-  display: flex;
-  height: 100%;
-}
-
 /* 채널 헤더 */
 .channel-header {
   position: relative;
