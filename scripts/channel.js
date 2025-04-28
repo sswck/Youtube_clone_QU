@@ -1,5 +1,3 @@
-// /scripts/channel.js
-
 import { loadTopBar, loadSideBar } from "./loadUI.js";
 import { getChannelInfo, getChannelVideoList } from "./getAPI.js";
 import { timeAgo } from "./utils.js";
@@ -9,10 +7,11 @@ async function initChannelPage() {
   await loadTopBar();
   await loadSideBar();
 
+  // 1) 페이지 깜빡임 방지
   const channelPage = document.querySelector(".channel-page");
   channelPage.style.visibility = "visible";
 
-  // 0.1) 사이드바 토글 이벤트 등록
+  // 2) 사이드바 토글 이벤트 등록
   const menuButton = document.getElementById("top-bar-container")?.querySelector(".menu-button");
   const layoutWrapper = document.querySelector(".layout-wrapper");
   if (menuButton && layoutWrapper) {
@@ -21,24 +20,25 @@ async function initChannelPage() {
     });
   }
 
-  // 1) URL 파라미터에서 channel_id 가져오기 (없으면 1)
+  // 3) URL 파라미터에서 channel_id 가져오기 (없으면 1)
   const channelID = new URLSearchParams(window.location.search).get("channel_id") || 1;
 
   try {
-    // 2) 채널 정보 렌더
+    // 4) 채널 정보 렌더
     const ch = await getChannelInfo(channelID);
     document.querySelector(".channel-banner img").src = ch.channel_banner;
     document.querySelector(".channel-profile .channel-avatar").src = ch.channel_profile;
     document.querySelector(".channel-name").textContent = ch.channel_name;
     document.querySelector(".subscriber-count").textContent = ch.subscribers.toLocaleString() + " subscribers";
 
-    // 3) 비디오 그리드 렌더
+    // 5) 비디오 그리드 렌더 + 클릭 이벤트 등록
     const videos = await getChannelVideoList(channelID);
     document.querySelectorAll(".video-grid").forEach((grid) => {
+      // 5-1) 카드 마크업 생성 (data-video-id 포함)
       grid.innerHTML = videos
         .map(
           (video) => `
-        <div class="video-card">
+        <div class="video-card" data-video-id="${video.id}">
           <img class="card-thumbnail" src="${video.thumbnail}" alt="${video.title}">
           <div class="card-data">
             <h4 class="card-title">${video.title}</h4>
@@ -51,9 +51,17 @@ async function initChannelPage() {
       `
         )
         .join("");
+
+      // 5-2) 렌더된 카드에 클릭 리스너 붙이기
+      grid.querySelectorAll(".video-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const videoId = card.getAttribute("data-video-id");
+          window.location.href = `video.html?video_id=${videoId}`;
+        });
+      });
     });
 
-    // 4) UI 보이기
+    // 6) UI 보이기 (topbar, sidebar, 기타 콘텐츠)
     document.getElementById("top-bar-container").style.visibility = "visible";
     document.getElementById("side-bar-container").style.visibility = "visible";
     document.querySelector(".content").style.visibility = "visible";
