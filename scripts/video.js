@@ -1,5 +1,5 @@
 import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
-import { timeAgo } from "./utils.js";
+import { timeAgo, formatView } from "./utils.js";
 
 function loadTopBar() {
   fetch("/components/top-bar.html")
@@ -80,20 +80,20 @@ function displayVideoInfo(data) {
 
   video.src = data.thumbnail;
   title.textContent = data.title;
-  views.textContent = data.views;
+  views.textContent = formatView(data.views);
   createdDate.textContent = timeAgo(data.created_dt);
-  liked.textContent = data.likes;
-  disliked.textContent = data.dislikes;
+  liked.textContent = formatView(data.likes);
+  disliked.textContent = formatView(data.dislikes);
 
   // 비디오 태그 버튼 생성 (예: 동물, 고양이 등)
-  const tagsContainer = document.querySelector(".sidebar-tags");
+  const tagsContainer = document.querySelector(".secondary-tags");
   tagsContainer.innerHTML = ""; // 기존 태그 초기화
 
-  tagsContainer.innerHTML = `<button class="sidebar-button">All</button>`; // "All" 버튼 추가
+  tagsContainer.innerHTML = `<button class="secondary-button">All</button>`; // "All" 버튼 추가
   // 태그 버튼 생성
   data.tags.forEach((tag) => {
     const tagElement = document.createElement("button");
-    tagElement.className = "sidebar-button";
+    tagElement.className = "secondary-button";
     tagElement.textContent = tag;
     tagsContainer.appendChild(tagElement);
   });
@@ -102,10 +102,10 @@ function displayVideoInfo(data) {
 }
 
 function addTagFilterFunctionality() {
-  const buttons = document.querySelectorAll(".sidebar-button");
+  const buttons = document.querySelectorAll(".secondary-button");
 
   // 최초 로드 시 "All" 버튼 활성화
-  const allButton = document.querySelector(".sidebar-button:first-child");
+  const allButton = document.querySelector(".secondary-button:first-child");
   if (allButton) {
     allButton.classList.add("active");
   }
@@ -118,7 +118,7 @@ function addTagFilterFunctionality() {
       buttons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
 
-      document.querySelectorAll(".sidebar-video").forEach((video) => {
+      document.querySelectorAll(".secondary-video").forEach((video) => {
         const videoTags = video.getAttribute("data-tags")?.split(",") || [];
         video.style.visibility = selectedTag === "All" || videoTags.includes(selectedTag) ? "visible" : "hidden";
         video.style.position = selectedTag === "All" || videoTags.includes(selectedTag) ? "static" : "absolute";
@@ -134,11 +134,11 @@ function displayChannelInfo(data) {
 
   channelAvatar.src = data.channel_profile;
   channelName.textContent = data.channel_name;
-  subscribers.textContent = data.subscribers;
+  subscribers.textContent = formatView(data.subscribers);
 }
 
 function displayVideoList(data) {
-  const videoList = document.querySelector(".sidebar-list");
+  const videoList = document.querySelector(".secondary-list");
   videoList.innerHTML = ""; // Clear existing content
 
   if (!data || data.length === 0) {
@@ -153,14 +153,14 @@ function displayVideoList(data) {
     // 채널 id를 사용하여 채널 정보를 가져옵니다.
     const channelName = (await getChannelInfo(video.channel_id).then((channelData) => channelData.channel_name)) || "Unknown Channel";
     const videoItem = document.createElement("div");
-    videoItem.className = "sidebar-video";
+    videoItem.className = "secondary-video";
     videoItem.innerHTML = `
-      <a href="video.html?video_id=${video.id}" class="sidebar-video-link"></a>
-        <div class="sidebar-thumbnail" style="background-image: url('${video.thumbnail}');"><span class="sidebar-videoTime">--:--</span></div>
-        <div class="sidebar-video-text">
-          <span class="sidebar-video-title">${video.title}</span>
-          <span class="sidebar-video-channel">${channelName}</span>
-          <span class="sidebar-video-info">${video.views} views ${timeAgo(video.created_dt)}</span>
+      <a href="video.html?video_id=${video.id}" class="secondary-video-link"></a>
+        <div class="secondary-thumbnail" style="background-image: url('${video.thumbnail}');"><span class="secondary-videoTime">--:--</span></div>
+        <div class="secondary-video-text">
+          <span class="secondary-video-title">${video.title}</span>
+          <span class="secondary-video-channel">${channelName}</span>
+          <span class="secondary-video-info">${formatView(video.views)} views ${timeAgo(video.created_dt)}</span>
         </div>
       </a>
       `;
