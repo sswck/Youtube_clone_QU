@@ -1,53 +1,13 @@
 import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
-
-function loadTopBar() {
-  fetch("/components/top-bar.html")
-    .then((res) => res.text())
-    .then((html) => {
-      document.querySelector(".topbar").innerHTML = html;
-
-      const topbar = document.querySelector(".topbar");
-      topbar.style.display = "block";
-
-      // 요소가 삽입된 후 이벤트 리스너 추가
-      setTimeout(() => {
-        const menuButton = document.querySelector(".menu-button");
-        const sidebar = document.querySelector(".sidebar");
-
-        // 로드 완료 후 topbar 보이게 설정
-        const topBar = document.querySelector(".topbar");
-        topBar.style.visibility = "visible";
-
-        if (menuButton && sidebar) {
-          sidebar.style.display = "none"; // 사이드 바 숨김
-          menuButton.addEventListener("click", () => {
-            sidebar.style.display = sidebar.style.display === "none" ? "block" : "none"; // 사이드 바 보이기/숨기기
-          });
-        }
-      }, 100); // 100ms 지연 후 버튼 찾기
-    });
-}
-
-// 사이드 바 로드 함수
-function loadSideBar() {
-  fetch("/components/side-bar.html")
-    .then((res) => res.text())
-    .then((html) => {
-      document.querySelector(".sidebar").innerHTML = html;
-
-      const script = document.createElement("script");
-      script.type = "module";
-      script.src = "/scripts/sidebar.js";
-      document.body.appendChild(script); // ⭐ 스크립트 재로드
-    });
-}
+import { loadTopBar, loadSideBar } from "./loadUI.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
   loadTopBar(); // 상단 바 로드
   loadSideBar(); // 사이드 바 로드
+  document.querySelector("#side-bar-container").style.display = "none"; // 사이드 바 최초 상태: 안 보이게 설정
 
   // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
