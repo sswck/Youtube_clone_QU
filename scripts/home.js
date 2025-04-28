@@ -29,7 +29,7 @@ function createVideoCardWithChannel(video) {
 
   return `
       <article class="card" data-video-id="${video.id}">
-        <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail" style="width: 100%; display: block; object-fit: cover;">
+        <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail">
         <div class="card-details">
           <img class="card-avatar" src="${avatarUrl}" alt="Channel Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
           <div class="card-data">

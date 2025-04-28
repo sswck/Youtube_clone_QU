@@ -163,7 +163,7 @@ body {
   font-size: 12px;
 }
 
-.cards-container {
+/* .cards-container {
   display: flex;
   flex-wrap: wrap;
   gap: 40px 16px;
@@ -176,14 +176,36 @@ body {
   max-width: 400px;
   gap: 12px;
   cursor: pointer;
+} */
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 16px;
+  justify-content: flex-start; /* 남는 공간은 오른쪽에 비워둠 */
+}
+
+.card {
+  /* flex: grow shrink basis */
+  flex: 0 1 300px; /* 300px를 기본 크기로, 필요하면 줄이되, 절대 키우지 않음 */
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
+  background-color: #404040;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 .card-thumbnail {
-  object-fit: cover;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 원하는 비율 (예: 16:9) */
+  object-fit: contain; /* 잘림 없이 비율 유지 */
+  object-position: center; /* 가운데 정렬 */
+  background-color: black; /* 빈 공간 배경색 */
+  margin-bottom: 12px;
 }
 
 .card-details {
