@@ -1,72 +1,16 @@
 // script.js
 // SPA 라우팅 및 레이아웃 로딩 담당
 
+import { loadTopBar, loadSideBar } from "/scripts/loadUI.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const topBarContainer = document.getElementById("top-bar-container");
-  const sideBarContainer = document.getElementById("side-bar-container");
   const contentDiv = document.querySelector(".content");
-
-  // 상단 바 로드 함수
-  function old_loadTopBar() {
-    fetch("/components/top-bar.html")
-      .then((res) => res.text())
-      .then((html) => {
-        topBarContainer.innerHTML = html;
-        const links = topBarContainer.querySelectorAll("[data-link]");
-        links.forEach((a) => a.addEventListener("click", handleLinkClick));
-      });
-  }
-
-  function loadTopBar() {
-    fetch("/components/top-bar.html")
-      .then((res) => res.text())
-      .then((html) => {
-        topBarContainer.innerHTML = html;
-
-        //const topbar = document.querySelector("#top-bar-container");
-        topBarContainer.style.display = "block";
-
-        // 요소가 삽입된 후 이벤트 리스너 추가
-        setTimeout(() => {
-          const menuButton = document.querySelector(".menu-button");
-          //const sidebar = document.querySelector("#side-bar-container");
-
-          // 로드 완료 후 topbar 보이게 설정
-          //const topBar = document.querySelector("#top-bar-container");
-          topBarContainer.style.visibility = "visible";
-
-          if (menuButton && sideBarContainer) {
-            //sideBarContainer.style.display = "none";
-            menuButton.addEventListener("click", () => {
-              sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
-            });
-          }
-        }, 100); // 100ms 지연 후 버튼 찾기
-      });
-  }
-
-  // 사이드 바 로드 함수
-  function old_loadSideBar() {
-    fetch("/components/side-bar.html")
-      .then((res) => res.text())
-      .then((html) => {
-        sideBarContainer.innerHTML = html;
-        const links = sideBarContainer.querySelectorAll("[data-link]");
-        links.forEach((a) => a.addEventListener("click", handleLinkClick));
-      });
-  }
-
-  function loadSideBar() {
-    fetch("/components/side-bar.html")
-      .then((res) => res.text())
-      .then((html) => {
-        //document.querySelector("#side-bar-container").innerHTML = html;
-        sideBarContainer.innerHTML = html;
-      });
-  }
 
   // 초기 콘텐츠 로드 (Home)
   function loadInitialContent() {
+    loadTopBar();
+    loadSideBar();
+
     fetch("/components/home.html")
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
@@ -76,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
         contentDiv.innerHTML = html;
         // home.js 등 스크립트 실행
         loadScript("/scripts/home.js", "home-script");
+        // content 로드 후 표시
+        contentDiv.style.visibility = "visible";
       })
       .catch((e) => {
         console.error("초기 콘텐츠 로딩 오류:", e);
@@ -84,12 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 컨텐츠 로드 핸들러
-  function handleLinkClick(e) {
-    e.preventDefault();
-    const path = e.currentTarget.getAttribute("href");
-    loadContent(path);
-    history.pushState(null, "", path);
-  }
+  // function handleLinkClick(e) {
+  //   e.preventDefault();
+  //   const path = e.currentTarget.getAttribute("href");
+  //   loadContent(path);
+  //   history.pushState(null, "", path);
+  // }
 
   // 동적 컨텐츠 로드
   function loadContent(path) {
@@ -132,8 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 초기화
-  loadTopBar();
-  loadSideBar();
   loadInitialContent();
 
   // 뒤로/앞으로 버튼 처리

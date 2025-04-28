@@ -19,6 +19,12 @@
       .content {
         flex: 1; /* 남은 가로 공간을 전부 차지 */
         overflow: auto; /* 필요하면 스크롤 나오도록 */
+        visibility: hidden;
+      }
+
+      #top-bar-container,
+      #side-bar-container {
+        visibility: hidden;
       }
     </style>
   </head>
@@ -42,6 +48,6 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
   </body>
 </html>

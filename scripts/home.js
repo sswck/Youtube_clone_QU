@@ -59,9 +59,9 @@ async function initChannelPage() {
         const cardElements = videoGrid.querySelectorAll(".card");
         cardElements.forEach((card) => {
           card.addEventListener("click", () => {
-            // 여기에 카드를 클릭했을 때 수행할 동작을 작성합니다.
+            // 카드를 클릭했을 때 수행할 동작
             const videoId = card.dataset.videoId;
-            console.log(videoId);
+            //console.log(videoId);
             window.location.href = `/components/video.html?video_id=${videoId}`;
           });
         });
