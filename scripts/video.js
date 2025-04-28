@@ -5,8 +5,8 @@ import { loadTopBar, loadSideBar } from "./loadUI.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
-  loadTopBar(); // 상단 바 로드
-  loadSideBar(); // 사이드 바 로드
+  await loadTopBar(); // 상단 바 로드
+  await loadSideBar(); // 사이드 바 로드
   document.querySelector("#side-bar-container").style.display = "none"; // 사이드 바 최초 상태: 안 보이게 설정
 
   // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
@@ -174,16 +174,18 @@ function displayVideoList(data) {
     // 클릭 이벤트 추가
     videoItem.addEventListener("click", (event) => {
       event.preventDefault(); // 기본 동작 방지
-      window.location.href = `video.html?video_id=${video.id}`;
+      window.location.href = `/components/video.html?video_id=${video.id}`;
     });
 
     videoList.appendChild(videoItem);
   });
 }
 // SPA 환경에서 채널 페이지 로드 시점 대기
-const intervalId = setInterval(() => {
-  if (document.querySelector(".video-page")) {
-    clearInterval(intervalId);
-    initVideoPage();
-  }
-}, 100);
+// const intervalId = setInterval(() => {
+//   if (document.querySelector(".video-page")) {
+//     clearInterval(intervalId);
+//     initVideoPage();
+//   }
+// }, 100);
+
+document.addEventListener("DOMContentLoaded", initVideoPage); // DOMContentLoaded 이벤트 리스너 추가
