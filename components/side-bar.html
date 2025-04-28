@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/styles/sidebar.css" />
 <aside>
-  <div class="sidebar-box">
+  <div class="sidebar-box" id="sidebar-home">
     <div class="sidebar-item" onclick="handleSidebarClick()">
       <img src="/assets/icons/sidebar/home-fill.svg" alt="Item Thumbnail" class="item-thumbnail" />
       <span class="item-title">Home</span>
@@ -16,7 +16,7 @@
   </div>
   <div class="divider"></div>
 
-  <div class="sidebar-box">
+  <div class="sidebar-box" id="sidebar-library">
     <div class="sidebar-item" onclick="handleSidebarClick()">
       <img src="/assets/icons/sidebar/library.svg" alt="Item Thumbnail" class="item-thumbnail" />
       <span class="item-title">Library</span>
@@ -44,7 +44,7 @@
   </div>
   <div class="divider"></div>
 
-  <div class="sidebar-box">
+  <div class="sidebar-box" id="sidebar-subscriptions">
     <div class="sidebar-title">SUBSCRIPTIONS</div>
     <div class="subscribed-channel" onclick="openSubscribedChannelPage()">
       <img src="/assets/images/User-Avatar.png" alt="Channel Thumbnail" class="channel-thumbnail" />
@@ -70,7 +70,7 @@
 
   <div class="divider"></div>
 
-  <div class="sidebar-box">
+  <div class="sidebar-box" id="sidebar-more">
     <div class="sidebar-title">MORE FROM YOUTUBE</div>
     <div class="sidebar-item" onclick="handleSidebarClick()">
       <img src="/assets/icons/sidebar/premium.svg" alt="Item Thumbnail" class="item-thumbnail" />
@@ -91,7 +91,7 @@
   </div>
   <div class="divider"></div>
 
-  <div class="sidebar-box">
+  <div class="sidebar-box" id="sidebar-settings">
     <div class="sidebar-item" onclick="handleSidebarClick()">
       <img src="/assets/icons/sidebar/settings.svg" alt="Item Thumbnail" class="item-thumbnail" />
       <span class="item-title">Settings</span>

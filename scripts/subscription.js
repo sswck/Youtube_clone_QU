@@ -24,7 +24,7 @@ export function getSubscriptions() {
 // ✅ 사이드바에 구독 목록 반영
 export function renderSubscriptions() {
   const subscriptions = getSubscriptions();
-  const sidebarContainer = document.querySelector(".sidebar-box:nth-of-type(3)"); // "SUBSCRIPTIONS" 영역
+  const sidebarContainer = document.querySelector("#sidebar-subscriptions"); // "SUBSCRIPTIONS" 영역
   sidebarContainer.innerHTML = '<div class="sidebar-title">SUBSCRIPTIONS</div>'; // 초기화 후 제목 추가
 
   // 최대 5개까지 표시
