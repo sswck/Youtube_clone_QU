@@ -1,9 +1,3 @@
-function handleSidebarClick() {
-  // Add your onclick functionality here
-  alert("Sidebar item clicked");
-}
+import { renderSubscriptions } from "./subscription.js";
 
-function openSubscribedChannelPage() {
-  // Add your onclick functionality here
-  alert("Subscribed channel page opened");
-}
+renderSubscriptions(); // 구독 목록 렌더링

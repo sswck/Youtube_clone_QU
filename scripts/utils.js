@@ -28,6 +28,13 @@ function timeAgo(timestamp) {
   return `${years}년 전`;
 }
 
+/**
+ * @description
+ * 큰 숫자는 포맷변환으로 백만, 천 조회수를 M, K로 축약 ex) 1584 -> 1.5K
+ * @param {number} viewCount - The view count to format.
+ * @return {string} - The formatted view count as a string.
+ */
+
 function formatView(viewCount) {
   if (viewCount >= 1000000) {
     return (viewCount / 1000000).toFixed(1) + "M";
@@ -48,6 +55,7 @@ function formatView(viewCount) {
 // console.log(timeAgo("Sun Apr 20 2025 07:11:35 GMT")); // 또 다른 GMT 형식
 // console.log(timeAgo("20250420 07:11:35")); // 숫자로만 구성된 날짜 형식
 // console.log(timeAgo("2025년 04월 20일 07시 11분 35초")); // 한글 형식 (파싱이 필요)
+
 // formatView -> 큰 숫자는 포맷변환으로 백만, 천 조회수를 M, K로 축약 ex) 1584 -> 1.5K
 
 export { timeAgo, formatView };
