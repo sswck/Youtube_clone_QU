@@ -1,8 +1,17 @@
 /* 전체 채널 페이지 컨테이너 */
+
 .channel-page {
   background-color: #0f0f0f; /* 이미지 배경색과 유사하게 */
   color: #fff;
   font-family: "Roboto", sans-serif; /* 유튜브 기본 폰트와 유사하게 */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-wrapper {
+  display: flex;
+  height: 100%;
 }
 
 /* 채널 헤더 */
@@ -291,4 +300,35 @@
   background-color: #fff;
   color: #0f0f0f;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  /* 채널 헤더를 세로 스택으로 */
+  .channel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+  }
+  .channel-avatar {
+    margin: 16px;
+  }
+  .channel-details {
+    margin: 0 16px 16px;
+  }
+
+  /* 네비게이션 가로 스크롤 */
+  .channel-nav {
+    overflow-x: auto;
+  }
+  .nav-list {
+    padding-left: 16px;
+  }
+  .nav-item {
+    margin-right: 12px;
+  }
+
+  /* 비디오 그리드를 2열으로 */
+  .video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 }
