@@ -39,7 +39,7 @@ function renderSubscriptions() {
       <img src="${channel.thumbnail}" alt="Channel Thumbnail" class="channel-thumbnail" />
       <span class="side-channel-name">${channel.name}</span>
     `;
-    channelElement.onclick = () => (window.location.href = `Channel_Page.html?channel_id=${channel.id}`);
+    channelElement.onclick = () => (window.location.href = `/components/Channel_Page.html?channel_id=${channel.id}`);
     sidebarContainer.appendChild(channelElement);
   });
 
@@ -68,7 +68,7 @@ function showAllSubscriptions(container) {
             <img src="${channel.thumbnail}" alt="Channel Thumbnail" class="channel-thumbnail" />
             <span class="side-channel-name">${channel.name}</span>
         `;
-    channelElement.onclick = () => (window.location.href = `/?channel_id=${channel.id}`);
+    channelElement.onclick = () => (window.location.href = `/components/Channel_Page.html/?channel_id=${channel.id}`);
     container.appendChild(channelElement);
   });
 }
