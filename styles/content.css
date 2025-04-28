@@ -1,3 +1,9 @@
+body {
+  background-color: #181818;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
 .filter-bar-container {
   display: flex;
   align-items: center; /* 버튼과 필터 바를 세로로 중앙 정렬 */
