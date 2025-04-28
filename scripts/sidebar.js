@@ -9,5 +9,6 @@ var intervalId = setInterval(function () {
   if (document.querySelector("#side-bar-container")) {
     clearInterval(intervalId);
     initSidebar();
+    document.querySelector("aside").style.visibility = "visible";
   }
 }, 100);
