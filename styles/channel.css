@@ -1,5 +1,11 @@
 /* 전체 채널 페이지 컨테이너 */
 
+body {
+  background-color: #181818;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
 .layout-wrapper {
   display: flex;
   flex-direction: row;
