@@ -16,7 +16,8 @@ body {
   display: flex;
 }
 .sidebar {
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 .video-page {
   visibility: hidden;
@@ -126,6 +127,12 @@ body {
   margin-bottom: 12px;
 }
 
+.channel-profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .channel-title .channel-avatar {
   width: 48px;
   height: 48px;
@@ -161,6 +168,10 @@ body {
 
 .subscribe-button:hover {
   background-color: #b10000;
+}
+
+.subscribe-button.subscribed {
+  background-color: #313131; /* 구독 후 버튼 색상 */
 }
 
 .description-text {

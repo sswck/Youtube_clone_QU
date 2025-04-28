@@ -18,7 +18,9 @@ function unsubscribe(channelId) {
 
 // ✅ 구독 목록 가져오기
 function getSubscriptions() {
-  return JSON.parse(localStorage.getItem("subscriptions")) || [];
+  const subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
+  // console.log("구독 목록:", subscriptions); // 디버깅용 로그
+  return subscriptions;
 }
 
 // ✅ 사이드바에 구독 목록 반영
@@ -34,10 +36,10 @@ function renderSubscriptions() {
     const channelElement = document.createElement("div");
     channelElement.className = "subscribed-channel";
     channelElement.innerHTML = `
-            <img src="${channel.thumbnail}" alt="Channel Thumbnail" class="channel-thumbnail" />
-            <span class="side-channel-name">${channel.name}</span>
-        `;
-    channelElement.onclick = () => (window.location.href = `/?channel_id=${channel.id}`);
+      <img src="${channel.thumbnail}" alt="Channel Thumbnail" class="channel-thumbnail" />
+      <span class="side-channel-name">${channel.name}</span>
+    `;
+    channelElement.onclick = () => (window.location.href = `Channel_Page.html?channel_id=${channel.id}`);
     sidebarContainer.appendChild(channelElement);
   });
 
