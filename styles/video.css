@@ -16,7 +16,7 @@ body {
   display: flex;
 }
 .sidebar {
-  display: none;
+  visibility: hidden;
 }
 .video-page {
   visibility: hidden;

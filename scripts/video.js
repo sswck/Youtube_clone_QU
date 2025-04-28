@@ -20,9 +20,9 @@ function loadTopBar() {
         topBar.style.visibility = "visible";
 
         if (menuButton && sidebar) {
-          sidebar.style.display = "none";
+          sidebar.style.visibility = "hidden"; // 사이드 바 숨김
           menuButton.addEventListener("click", () => {
-            sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+            sidebar.style.visibility = sidebar.style.visibility === "hidden" ? "visible" : "hidden";
           });
         }
       }, 100); // 100ms 지연 후 버튼 찾기
@@ -35,6 +35,10 @@ function loadSideBar() {
     .then((res) => res.text())
     .then((html) => {
       document.querySelector(".sidebar").innerHTML = html;
+
+      const script = document.createElement("script");
+      script.src = "/scripts/sidebar.js";
+      document.body.appendChild(script); // ⭐ 스크립트 재로드
     });
 }
 

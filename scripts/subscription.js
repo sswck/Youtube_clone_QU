@@ -1,5 +1,5 @@
 // ✅ 구독 추가
-export function subscribe(channel) {
+function subscribe(channel) {
   let subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
 
   // 이미 구독한 채널인지 확인
@@ -10,19 +10,19 @@ export function subscribe(channel) {
 }
 
 // ✅ 구독 취소
-export function unsubscribe(channelId) {
+function unsubscribe(channelId) {
   let subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
   subscriptions = subscriptions.filter((sub) => sub.id !== channelId);
   localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
 }
 
 // ✅ 구독 목록 가져오기
-export function getSubscriptions() {
+function getSubscriptions() {
   return JSON.parse(localStorage.getItem("subscriptions")) || [];
 }
 
 // ✅ 사이드바에 구독 목록 반영
-export function renderSubscriptions() {
+function renderSubscriptions() {
   const subscriptions = getSubscriptions();
   const sidebarContainer = document.querySelector("#sidebar-subscriptions"); // "SUBSCRIPTIONS" 영역
   sidebarContainer.innerHTML = '<div class="sidebar-title">SUBSCRIPTIONS</div>'; // 초기화 후 제목 추가
@@ -70,3 +70,5 @@ function showAllSubscriptions(container) {
     container.appendChild(channelElement);
   });
 }
+
+export { subscribe, unsubscribe, getSubscriptions, renderSubscriptions };
