@@ -3,61 +3,196 @@ import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar } from "./loadUI.js";
 
+/**
+ * 댓글 입력창에서 Enter 키를 누르면
+ * 새 댓글을 화면에 추가하고 좋아요·싫어요·삭제 기능을 위임으로 처리하는 함수
+ */
+function initCommentFeature() {
+  const commentInput = document.querySelector(".comment-field input");
+  const commentsList = document.querySelector(".comments-list");
+  if (!commentInput || !commentsList) return;
+
+  // 비디오 ID별로 다른 저장소 키 설정
+  const videoID = new URLSearchParams(window.location.search).get("video_id") || "1";
+  const storageKey = `comments_${videoID}`;
+
+  // 저장된 댓글 불러오기
+  let comments = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+  // 댓글 엘리먼트 생성 헬퍼
+  function createCommentElement({ text, created, likes, dislikes }) {
+    const el = document.createElement("div");
+    el.className = "comment";
+    el.dataset.created = created;
+    el.innerHTML = `
+      <img src="/assets/images/User-Avatar.png" alt="user avatar" class="user-avatar" />
+      <div class="comment-box">
+        <div class="comment-header">
+          <span class="comment-name">You</span>
+          <span class="comment-time">${timeAgo(created)}</span>
+        </div>
+        <span class="comment-text">${text}</span>
+        <div class="comment-toolbar">
+          <div class="comment-like">
+            <img src="/assets/icons/video/Liked.svg" alt="like-this-comment" />
+            <span class="comment-like-count">${likes}</span>
+          </div>
+          <div class="comment-dislike">
+            <img src="/assets/icons/video/DisLiked.svg" alt="dislike-this-comment" />
+            <span class="comment-dislike-count">${dislikes}</span>
+          </div>
+          <div class="comment-edit"><span>수정</span></div>
+          <div class="comment-delete"><span>삭제</span></div>
+        </div>
+      </div>`;
+    return el;
+  }
+
+  // 1. 기존 저장된 댓글 렌더링
+  comments.forEach((c) => commentsList.appendChild(createCommentElement(c)));
+
+  // 2️⃣ 새 댓글 추가 & 저장
+  commentInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter" && commentInput.value.trim() !== "") {
+      const text = commentInput.value.trim();
+      const created = new Date().toISOString();
+      const newCmt = { text, created, likes: 0, dislikes: 0 };
+
+      comments.unshift(newCmt);
+      localStorage.setItem(storageKey, JSON.stringify(comments));
+
+      commentsList.prepend(createCommentElement(newCmt));
+      commentInput.value = "";
+    }
+  });
+
+  // 이벤트 위임: 좋아요·싫어요·삭제·수정
+  commentsList.addEventListener("click", (event) => {
+    const commentEl = event.target.closest(".comment");
+    if (!commentEl) return;
+    const created = commentEl.dataset.created;
+    const idx = comments.findIndex((c) => c.created === created);
+    if (idx === -1) return;
+
+    // 좋아요
+    if (event.target.closest(".comment-like")) {
+      comments[idx].likes++;
+      localStorage.setItem(storageKey, JSON.stringify(comments));
+      commentEl.querySelector(".comment-like-count").textContent = comments[idx].likes;
+      return;
+    }
+
+    // 싫어요
+    if (event.target.closest(".comment-dislike")) {
+      comments[idx].dislikes++;
+      localStorage.setItem(storageKey, JSON.stringify(comments));
+      commentEl.querySelector(".comment-dislike-count").textContent = comments[idx].dislikes;
+      return;
+    }
+
+    // 삭제
+    if (event.target.closest(".comment-delete")) {
+      comments.splice(idx, 1);
+      localStorage.setItem(storageKey, JSON.stringify(comments));
+      commentEl.remove();
+      return;
+    }
+
+    // 수정
+    if (event.target.closest(".comment-edit")) {
+      const textSpan = commentEl.querySelector(".comment-text");
+      const original = textSpan.textContent;
+
+      // 입력창 생성
+      const textarea = document.createElement("textarea");
+      textarea.className = "comment-edit-input";
+      textarea.value = original;
+
+      textSpan.replaceWith(textarea);
+      textarea.focus();
+      textarea.setSelectionRange(0, original.length);
+
+      // 높이 초기화 & 자동 조절
+      const resize = () => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      };
+      textarea.addEventListener("input", resize);
+      resize(); // 최초 높이 맞추기
+
+      // 수정 완료 함수
+      function finishEdit() {
+        const newText = textarea.value.trim() || original;
+        comments[idx].text = newText;
+        localStorage.setItem(storageKey, JSON.stringify(comments));
+
+        const span = document.createElement("span");
+        span.className = "comment-text";
+        span.textContent = newText;
+        textarea.replaceWith(span);
+      }
+
+      // Enter 키 또는 포커스 아웃 시 수정 완료
+      textarea.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          finishEdit();
+        }
+      });
+      textarea.addEventListener("blur", finishEdit);
+
+      return;
+    }
+  });
+}
+
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
   await loadTopBar(); // 상단 바 로드
   await loadSideBar(); // 사이드 바 로드
-  document.querySelector("#side-bar-container").style.display = "none"; // 사이드 바 최초 상태: 안 보이게 설정
+  document.querySelector("#side-bar-container").style.display = "none";
 
-  // videoID는 URL의 쿼리 파라미터에서 가져옵니다. 예: ?video_id=12345
+  // video_id 쿼리 파라미터 가져오기 (기본 1)
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
   if (!videoID) {
     console.error("No video ID provided in the URL.");
     return;
   }
 
-  // API 호출하여 동영상 정보, 채널 정보, 동영상 목록 가져오기
+  // API 호출 및 화면에 렌더링
   try {
     const videoData = await getVideoInfo(videoID);
-    displayVideoInfo(videoData); // 동영상 정보 표시
+    displayVideoInfo(videoData);
 
     const channelData = await getChannelInfo(videoData.channel_id);
-    displayChannelInfo(channelData); // 채널 정보 표시
+    displayChannelInfo(channelData);
 
     const videoListData = await getVideoList();
-    displayVideoList(videoListData); // 동영상 목록 표시
+    displayVideoList(videoListData);
   } catch (error) {
     console.error("Error fetching API data:", error);
   }
 
-  // 비디오 페이지 로드 후 표시
+  // 비디오 페이지 보이기
   const videoPage = document.querySelector(".video-page");
   videoPage.style.visibility = "visible";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const videoPlayer = document.getElementById("videoPlayer");
+  // 댓글 기능 초기화
+  initCommentFeature();
 
-    if (!videoPlayer) {
-      console.error("Video player not found.");
-      return;
-    }
-
-    // 비디오가 로드되었을 때 자동 재생 (선택사항)
+  // 비디오 플레이어 제어 (선택사항)
+  const videoPlayer = document.getElementById("videoPlayer");
+  if (videoPlayer) {
     videoPlayer.play();
-
-    // 예제: 비디오 일시 정지 후 다시 재생
-    document.getElementById("buttonPlayPause").addEventListener("click", () => {
-      if (videoPlayer.paused) {
-        videoPlayer.play();
-      } else {
-        videoPlayer.pause();
-      }
+    const playPauseBtn = document.getElementById("buttonPlayPause");
+    playPauseBtn?.addEventListener("click", () => {
+      videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause();
     });
-  });
+  }
 }
 
+// 동영상 정보 표시
 function displayVideoInfo(data) {
-  // 비디오 정보 (thumbnail, title, views, created date, likes, dislikes) 표시
   const video = document.querySelector("#videoPlayer");
   const title = document.querySelector(".video-title");
   const views = document.querySelector("#view-count");
@@ -72,141 +207,107 @@ function displayVideoInfo(data) {
   liked.textContent = formatView(data.likes);
   disliked.textContent = formatView(data.dislikes);
 
-  // 비디오 태그 버튼 생성 (예: 동물, 고양이 등)
+  // 태그 버튼
   const tagsContainer = document.querySelector(".secondary-tags");
-  tagsContainer.innerHTML = ""; // 기존 태그 초기화
-
-  tagsContainer.innerHTML = `<button class="secondary-button">All</button>`; // "All" 버튼 추가
-  // 태그 버튼 생성
+  tagsContainer.innerHTML = `<button class="secondary-button">All</button>`;
   data.tags.forEach((tag) => {
-    const tagElement = document.createElement("button");
-    tagElement.className = "secondary-button";
-    tagElement.textContent = tag;
-    tagsContainer.appendChild(tagElement);
+    const btn = document.createElement("button");
+    btn.className = "secondary-button";
+    btn.textContent = tag;
+    tagsContainer.appendChild(btn);
   });
-
   addTagFilterFunctionality();
 }
 
+// 태그 필터 기능
 function addTagFilterFunctionality() {
   const buttons = document.querySelectorAll(".secondary-button");
+  const allBtn = document.querySelector(".secondary-button:first-child");
+  allBtn?.classList.add("active");
 
-  // 최초 로드 시 "All" 버튼 활성화
-  const allButton = document.querySelector(".secondary-button:first-child");
-  if (allButton) {
-    allButton.classList.add("active");
-  }
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const selectedTag = button.textContent;
-
-      // 기존 활성화된 버튼 초기화 후 클릭된 버튼만 활성화
-      buttons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      document.querySelectorAll(".secondary-video").forEach((video) => {
-        const videoTags = video.getAttribute("data-tags")?.split(",") || [];
-        video.style.visibility = selectedTag === "All" || videoTags.includes(selectedTag) ? "visible" : "hidden";
-        video.style.position = selectedTag === "All" || videoTags.includes(selectedTag) ? "static" : "absolute";
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const selected = btn.textContent;
+      document.querySelectorAll(".secondary-video").forEach((vid) => {
+        const tags = vid.getAttribute("data-tags")?.split(",") || [];
+        const show = selected === "All" || tags.includes(selected);
+        vid.style.visibility = show ? "visible" : "hidden";
+        vid.style.position = show ? "static" : "absolute";
       });
     });
   });
 }
 
+// 채널 정보 표시
 function displayChannelInfo(data) {
-  const channelAvatar = document.querySelector(".channel-avatar");
-  const channelName = document.querySelector(".channel-name");
-  const subscribers = document.querySelector(".subscribers span");
+  document.querySelector(".channel-avatar").src = data.channel_profile;
+  document.querySelector(".channel-name").textContent = data.channel_name;
+  document.querySelector(".subscribers span").textContent = formatView(data.subscribers);
 
-  channelAvatar.src = data.channel_profile;
-  channelName.textContent = data.channel_name;
-  subscribers.textContent = formatView(data.subscribers);
-
-  const channelProfile = document.querySelector(".channel-profile");
-  // 클릭 이벤트 추가
-  channelProfile.addEventListener("click", (event) => {
-    event.preventDefault(); // 기본 동작 방지
+  // 채널 프로필 클릭 시 이동
+  document.querySelector(".channel-profile")?.addEventListener("click", (e) => {
+    e.preventDefault();
     window.location.href = `Channel_Page.html?channel_id=${data.id}`;
   });
 
-  const channelId = data.id;
-  // 구독 버튼 클릭 이벤트
-  const subscribeButton = document.querySelector(".subscribe-button");
-  if (subscribeButton) {
-    subscribeButton.addEventListener("click", () => {
-      if (!channelId || !channelName || !channelAvatar) {
-        console.error("Channel information is missing.");
-        return;
-      }
-      const subscribedChannels = getSubscriptions();
-      const isSubscribed = subscribedChannels.some((channel) => channel.id === channelId);
-      if (isSubscribed) {
+  // 구독 버튼
+  const subBtn = document.querySelector(".subscribe-button");
+  if (subBtn) {
+    const channelId = data.id;
+    subBtn.addEventListener("click", () => {
+      const subs = getSubscriptions();
+      const isSub = subs.some((c) => c.id === channelId);
+      if (isSub) {
         unsubscribe(channelId);
-        subscribeButton.textContent = "SUBSCRIBE"; // UI 변경
-        subscribeButton.classList.remove("subscribed"); // 색상 변경
+        subBtn.textContent = "SUBSCRIBE";
+        subBtn.classList.remove("subscribed");
       } else {
         subscribe({ id: channelId, name: data.channel_name, thumbnail: data.channel_profile });
-        subscribeButton.textContent = "SUBSCRIBED"; // UI 변경
-        subscribeButton.classList.add("subscribed"); // 색상 변경
+        subBtn.textContent = "SUBSCRIBED";
+        subBtn.classList.add("subscribed");
       }
     });
-
-    // 초기 로드 시 버튼 상태 설정
-    const subscribedChannels = getSubscriptions();
-    if (subscribedChannels.some((channel) => channel.id === channelId)) {
-      subscribeButton.textContent = "SUBSCRIBED";
-      subscribeButton.classList.add("subscribed");
-    } else {
-      subscribeButton.textContent = "SUBSCRIBE";
+    // 초기 상태 적용
+    if (getSubscriptions().some((c) => c.id === data.id)) {
+      subBtn.textContent = "SUBSCRIBED";
+      subBtn.classList.add("subscribed");
     }
   }
 }
 
+// 추천 동영상 리스트 표시
 function displayVideoList(data) {
-  const videoList = document.querySelector(".secondary-list");
-  videoList.innerHTML = ""; // Clear existing content
+  const list = document.querySelector(".secondary-list");
+  list.innerHTML = "";
 
-  if (!data || data.length === 0) {
-    videoList.innerHTML = "<p>No videos available.</p>";
+  const currentId = parseInt(new URLSearchParams(window.location.search).get("video_id") || "1", 10);
+  if (!data.length) {
+    list.innerHTML = "<p>No videos available.</p>";
     return;
   }
 
-  const videoID = parseInt(new URLSearchParams(window.location.search).get("video_id") || 1, 10); // 현재 비디오 ID
-
   data.forEach(async (video) => {
-    if (video.id === videoID) return; // 현재 비디오 ID와 일치하는 경우 건너뜁니다.
-    // 채널 id를 사용하여 채널 정보를 가져옵니다.
-    const channelName = (await getChannelInfo(video.channel_id).then((channelData) => channelData.channel_name)) || "Unknown Channel";
-    const videoItem = document.createElement("div");
-    videoItem.className = "secondary-video";
-    videoItem.innerHTML = `
-        <div class="secondary-thumbnail" style="background-image: url('${video.thumbnail}');"><span class="secondary-videoTime">--:--</span></div>
-        <div class="secondary-video-text">
-          <span class="secondary-video-title">${video.title}</span>
-          <span class="secondary-video-channel">${channelName}</span>
-          <span class="secondary-video-info">${formatView(video.views)} views ${timeAgo(video.created_dt)}</span>
-        </div>
-      `;
-
-    // 비디오 태그를 data-tags 속성에 저장
-    videoItem.setAttribute("data-tags", video.tags.join(","));
-
-    // 클릭 이벤트 추가
-    videoItem.addEventListener("click", (event) => {
-      event.preventDefault(); // 기본 동작 방지
+    if (video.id === currentId) return;
+    const chName = (await getChannelInfo(video.channel_id)).channel_name || "Unknown";
+    const item = document.createElement("div");
+    item.className = "secondary-video";
+    item.setAttribute("data-tags", video.tags.join(","));
+    item.innerHTML = `
+      <div class="secondary-thumbnail" style="background-image: url('${video.thumbnail}')">
+        <span class="secondary-videoTime">--:--</span>
+      </div>
+      <div class="secondary-video-text">
+        <span class="secondary-video-title">${video.title}</span>
+        <span class="secondary-video-channel">${chName}</span>
+        <span class="secondary-video-info">${formatView(video.views)} views ${timeAgo(video.created_dt)}</span>
+      </div>`;
+    item.addEventListener("click", () => {
       window.location.href = `/components/video.html?video_id=${video.id}`;
     });
-
-    videoList.appendChild(videoItem);
+    list.appendChild(item);
   });
 }
-// SPA 환경에서 채널 페이지 로드 시점 대기
-// const intervalId = setInterval(() => {
-//   if (document.querySelector(".video-page")) {
-//     clearInterval(intervalId);
-//     initVideoPage();
-//   }
-// }, 100);
 
-document.addEventListener("DOMContentLoaded", initVideoPage); // DOMContentLoaded 이벤트 리스너 추가
+document.addEventListener("DOMContentLoaded", initVideoPage);
