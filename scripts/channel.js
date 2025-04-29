@@ -64,7 +64,6 @@ async function initChannelPage() {
     // 6) UI 보이기 (topbar, sidebar, 기타 콘텐츠)
     document.getElementById("top-bar-container").style.visibility = "visible";
     document.getElementById("side-bar-container").style.visibility = "visible";
-    document.querySelector(".content").style.visibility = "visible";
   } catch (error) {
     console.error("채널 페이지 초기화 중 오류:", error);
   }
