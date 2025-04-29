@@ -26,9 +26,11 @@ function createVideoCardWithChannel(video) {
   const createdDate = new Date(video.created_dt);
   const timeInfo = timeAgo(createdDate);
   const channelName = video.channelInfo?.channel_name || "알 수 없는 채널";
+  const vID = video.id;
+  const chID = video.channel_id;
 
   return `
-      <article class="card" data-video-id="${video.id}">
+      <article class="card" data-video-id="${vID}" data-channel-id="${chID}">
         <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail">
         <div class="card-details">
           <img class="card-avatar" src="${avatarUrl}" alt="Channel Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
@@ -88,8 +90,12 @@ function renderVideos(videos, container) {
     // 카드 클릭 이벤트 리스너
     container.querySelectorAll(".card").forEach((card) => {
       card.addEventListener("click", () => {
-        const videoId = card.dataset.videoId;
-        window.location.href = `/components/video.html?video_id=${videoId}`;
+        // 클릭된 요소가 card-avatar 클래스 영역이면 채널페이지로, 그 외 영역은 비디오페이지
+        if (event.target.classList.contains("card-avatar")) {
+          window.location.href = `/components/Channel_Page.html?channel_id=${card.dataset["channelId"]}`;
+        } else {
+          window.location.href = `/components/video.html?video_id=${card.dataset.videoId}`;
+        }
       });
     });
   } else if (container) {
