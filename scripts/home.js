@@ -73,12 +73,14 @@ function initFilterBar() {
     filterBar.scrollBy({ left: filterBar.clientWidth / 2, behavior: "smooth" });
   });
 
-  // card-ui 높이 자동 계산
+  // card-ui 높이 자동 계산 (왜 여기서?)
   const topBarHeight = topBar ? topBar.offsetHeight : 56;
   const filterBarHeight = filterBarContainer ? filterBarContainer.offsetHeight : 79;
   if (cardUi) {
     cardUi.style.height = `calc(100vh - ${topBarHeight}px - ${filterBarHeight}px)`;
   }
+
+  filterBarContainer.style.visibility = "visible"; // 로드 후 필터바 보이게
 }
 
 function renderVideos(videos, container) {
@@ -104,7 +106,7 @@ function renderVideos(videos, container) {
 }
 
 // 채널 페이지 초기화 로직
-async function initChannelPage() {
+async function initHomePage() {
   try {
     // 채널 정보가 포함된 전체 비디오 리스트 로드 및 요소를 담을 곳 선언
     const videos = await getVideoListWithChannelInfo();
@@ -152,6 +154,10 @@ async function initChannelPage() {
     });
 
     initFilterBar();
+
+    // home 페이지 로드 후 표시
+    const homePage = document.querySelector(".content");
+    homePage.style.visibility = "visible";
   } catch (error) {
     console.error("채널 페이지 초기화 중 오류:", error);
     const cardUi = document.getElementById("card-ui");
@@ -172,6 +178,8 @@ function filterByTag(videos, activeTag) {
 const intervalId = setInterval(() => {
   if (document.getElementById("card-ui")) {
     clearInterval(intervalId);
-    initChannelPage();
+    initHomePage();
   }
 }, 100);
+
+// document.addEventListener("DOMContentLoaded", initHomePage);

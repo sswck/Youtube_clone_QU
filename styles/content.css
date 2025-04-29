@@ -11,6 +11,7 @@ body {
   background-color: #1a1a1a;
   border-bottom: 1px solid #333;
   position: relative;
+  visibility: hidden;
 }
 
 .scroll-button {
@@ -221,6 +222,14 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  outline: 1px solid dodgerblue;
 }
 
 .card-data {
