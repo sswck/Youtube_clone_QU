@@ -1,15 +1,12 @@
 import { loadTopBar, loadSideBar } from "./loadUI.js";
 import { getChannelInfo, getChannelVideoList } from "./getAPI.js";
+import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { timeAgo } from "./utils.js";
 
 async function initChannelPage() {
   // 0) 공통 UI 로드
   await loadTopBar();
   await loadSideBar();
-
-  // 1) 페이지 깜빡임 방지
-  const channelPage = document.querySelector(".channel-page");
-  channelPage.style.visibility = "visible";
 
   // 2) 사이드바 토글 이벤트 등록
   const menuButton = document.getElementById("top-bar-container")?.querySelector(".menu-button");
@@ -61,12 +58,36 @@ async function initChannelPage() {
       });
     });
 
-    // 6) UI 보이기 (topbar, sidebar, 기타 콘텐츠)
-    document.getElementById("top-bar-container").style.visibility = "visible";
-    document.getElementById("side-bar-container").style.visibility = "visible";
+    // 구독 버튼
+    const subBtn = document.querySelector(".subscribe-btn");
+    if (subBtn) {
+      const channelId = ch.id;
+      subBtn.addEventListener("click", () => {
+        const subs = getSubscriptions();
+        const isSub = subs.some((c) => c.id === channelId);
+        if (isSub) {
+          unsubscribe(channelId);
+          subBtn.textContent = "SUBSCRIBE";
+          subBtn.classList.remove("subscribed");
+        } else {
+          subscribe({ id: channelId, name: ch.channel_name, thumbnail: ch.channel_profile });
+          subBtn.textContent = "SUBSCRIBED";
+          subBtn.classList.add("subscribed");
+        }
+      });
+      // 초기 상태 적용
+      if (getSubscriptions().some((c) => c.id === ch.id)) {
+        subBtn.textContent = "SUBSCRIBED";
+        subBtn.classList.add("subscribed");
+      }
+    }
   } catch (error) {
     console.error("채널 페이지 초기화 중 오류:", error);
   }
+
+  // 전부 로딩 후 페이지 표시
+  const channelPage = document.querySelector(".channel-page");
+  channelPage.style.visibility = "visible";
 }
 
 document.addEventListener("DOMContentLoaded", initChannelPage);
