@@ -32,8 +32,7 @@ body {
 /* 텍스트 줄 수 제한 */
 .video-title,
 .secondary-video-title,
-.description-text,
-.comment-text {
+.description-text {
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
@@ -232,7 +231,9 @@ body {
   align-items: center;
   gap: 20px;
   padding: 5px 0 32px 0;
+  margin-right: 20px;
 }
+
 .comment-field .user-avatar {
   width: 40px;
   height: 40px;
@@ -243,16 +244,24 @@ body {
   flex: 1;
   background-color: #181818;
   border: none;
+  border-radius: 5px;
   border-bottom: 1px solid #303030;
-  padding: 5px 0;
+  padding: 5px 8px;
   font-size: 14px;
   color: #aaaaaa;
   outline: none;
 }
 
+.comment-field input:focus {
+  color: white;
+}
+
 .comment {
   display: flex;
   gap: 12px;
+  padding-bottom: 18px;
+  min-width: 0;
+  margin-right: 20px;
 }
 
 .comment .user-avatar {
@@ -264,6 +273,8 @@ body {
 .comment-box {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
 .comment-name {
@@ -282,6 +293,7 @@ body {
   line-height: 20px;
   letter-spacing: 0%;
   padding: 5px 0;
+  white-space: pre-wrap;
 }
 
 .comment-toolbar {
@@ -303,6 +315,32 @@ body {
   display: flex;
   align-items: center;
   gap: 0;
+}
+
+/* 댓글 수정 스타일 */
+.comment-edit-input {
+  width: 100%;
+  height: auto;
+  min-height: 1.2em;
+  overflow: hidden; /* 스크롤바 숨기기 */
+  resize: none; /* 사용자가 드래그해서 크기 변경 못하게 */
+  background-color: #181818;
+  border: none;
+  border-radius: 5px;
+  border-bottom: 1px solid #303030;
+  font: inherit; /* 부모 요소의 font-family, font-size, font-weight 등을 그대로 물려받음 */
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #aaaaaa;
+  outline: none;
+  margin: 10px 0;
+  padding: 5px 5px;
+}
+
+/* 엔터 치거나 블러 시 원래 텍스트로 돌아가기 때문에 포커스 스타일만 */
+.comment-edit-input:focus {
+  border-bottom-color: #555;
 }
 
 /* 오른쪽 사이드바 */
