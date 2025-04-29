@@ -109,9 +109,13 @@ async function initChannelPage() {
 
     if (!filterBar || !videoGridContainer) return;
 
+    // 초기 비디오 목록 렌더링 (기존 검색 쿼리 적용)
+    const initialFilteredVideos = queryFilter(videos);
+    renderVideos(initialFilteredVideos, videoGridContainer);
+
     const allTags = []; // 모든 태그를 저장할 배열
 
-    videos.forEach((video) => {
+    initialFilteredVideos.forEach((video) => {
       if (video.tags && Array.isArray(video.tags)) {
         video.tags.forEach((tag) => allTags.push(tag));
       }
@@ -133,17 +137,13 @@ async function initChannelPage() {
         filterBar.querySelectorAll("button").forEach((btn) => btn.classList.remove("active"));
         button.classList.add("active");
         activeTag = tag;
-        const filteredVideosByTag = filterByTag(videos, activeTag);
+        const filteredVideosByTag = filterByTag(initialFilteredVideos, activeTag);
         // 기존 검색 쿼리 파라미터도 함께 고려하여 필터링 (기존 queryFilter 활용)
         const finalFilteredVideos = queryFilter(filteredVideosByTag);
         renderVideos(finalFilteredVideos, videoGridContainer);
       });
       filterBar.appendChild(button);
     });
-
-    // 초기 비디오 목록 렌더링 (기존 검색 쿼리 적용)
-    const initialFilteredVideos = queryFilter(videos);
-    renderVideos(initialFilteredVideos, videoGridContainer);
 
     initFilterBar();
   } catch (error) {
