@@ -10,7 +10,6 @@ function initSearch() {
   }
 
   searchInput.addEventListener("keypress", (event) => {
-    event.preventDefault();
     if (event.key === "Enter") {
       triggerSearch();
     }
