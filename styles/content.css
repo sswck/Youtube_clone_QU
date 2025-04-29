@@ -179,16 +179,18 @@ body {
 } */
 
 .cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px 16px;
-  justify-content: flex-start; /* 남는 공간은 오른쪽에 비워둠 */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 자동 칼럼 조정 */
+  gap: 16px; /* 카드 간 간격 */
+  padding-top: 24px;
+  margin: 0 auto; /* 남는 공간은 오른쪽에 비워둠 */
 }
 
 .card {
   /* flex: grow shrink basis */
-  flex: 0 1 300px; /* 300px를 기본 크기로, 필요하면 줄이되, 절대 키우지 않음 */
+  width: 100%; /* 그리드 셀 너비에 딱 맞춤 */
   border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
@@ -202,7 +204,7 @@ body {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9; /* 원하는 비율 (예: 16:9) */
-  object-fit: contain; /* 잘림 없이 비율 유지 */
+  object-fit: cover; /* 잘림 없이 비율 유지 */
   object-position: center; /* 가운데 정렬 */
   background-color: black; /* 빈 공간 배경색 */
   margin-bottom: 12px;
