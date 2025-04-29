@@ -192,6 +192,7 @@ function displayVideoInfo(data) {
   const createdDate = document.querySelector("#created-date");
   const liked = document.querySelector("#buttonLike span");
   const disliked = document.querySelector("#buttonDislike span");
+  const description = document.querySelector(".description-text");
 
   video.src = `https://storage.googleapis.com/youtube-clone-video/${data.id}.mp4`;
   title.textContent = data.title;
@@ -199,6 +200,7 @@ function displayVideoInfo(data) {
   createdDate.textContent = timeAgo(data.created_dt);
   liked.textContent = formatView(data.likes);
   disliked.textContent = formatView(data.dislikes);
+  description.textContent = data.description;
 
   // 태그 버튼
   const tagsContainer = document.querySelector(".secondary-tags");
