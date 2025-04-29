@@ -180,18 +180,19 @@ body {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 자동 칼럼 조정 */
-  gap: 16px; /* 카드 간 간격 */
-  padding-top: 24px;
-  margin: 0 auto; /* 남는 공간은 오른쪽에 비워둠 */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 자동 칼럼 조정 */
+  gap: 16px;
+  margin: 0 auto;
 }
 
 .card {
   /* flex: grow shrink basis */
   width: 100%; /* 그리드 셀 너비에 딱 맞춤 */
+  max-width: 450px;
   border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
 .card:hover {
