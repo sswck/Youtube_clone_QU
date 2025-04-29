@@ -270,7 +270,7 @@ function displayChannelInfo(data) {
   }
 }
 
-// 추천 동영상 리스트 표시
+// ==================== 추천 동영상 리스트 표시 ====================
 function displayVideoList(data) {
   const list = document.querySelector(".secondary-list");
   list.innerHTML = "";
