@@ -3,7 +3,7 @@ import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar } from "./loadUI.js";
 
-// 최초 동영상 페이지 로드 함수
+// ==================== 최초 동영상 페이지 로드 함수 ====================
 async function initVideoPage() {
   await loadTopBar(); // 상단 바 로드
   await loadSideBar(); // 사이드 바 로드
@@ -30,7 +30,7 @@ async function initVideoPage() {
     console.error("Error fetching API data:", error);
   }
 
-  // 비디오 페이지 로드 후 표시
+  // 전부 로딩 완료 된 후에 비디오 페이지를 보이게 합니다.
   const videoPage = document.querySelector(".video-page");
   videoPage.style.visibility = "visible";
 
@@ -41,23 +41,16 @@ async function initVideoPage() {
       console.error("Video player not found.");
       return;
     }
-
-    // 비디오가 로드되었을 때 자동 재생 (선택사항)
-    videoPlayer.play();
-
-    // 예제: 비디오 일시 정지 후 다시 재생
-    document.getElementById("buttonPlayPause").addEventListener("click", () => {
-      if (videoPlayer.paused) {
-        videoPlayer.play();
-      } else {
-        videoPlayer.pause();
-      }
-    });
   });
+
+  const videoPlayer = document.getElementById("videoPlayer");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+
+  customVideoPlayer(); // 비디오 플레이어 커스텀 함수 호출
 }
 
+// ==================== 동영상 정보 표시 함수 ====================
 function displayVideoInfo(data) {
-  // 비디오 정보 (thumbnail, title, views, created date, likes, dislikes) 표시
   const video = document.querySelector("#videoPlayer");
   const title = document.querySelector(".video-title");
   const views = document.querySelector("#view-count");
@@ -88,6 +81,7 @@ function displayVideoInfo(data) {
   addTagFilterFunctionality();
 }
 
+// ==================== 태그 필터링 기능 추가 ====================
 function addTagFilterFunctionality() {
   const buttons = document.querySelectorAll(".secondary-button");
 
@@ -114,6 +108,7 @@ function addTagFilterFunctionality() {
   });
 }
 
+// ==================== 채널 정보 표시 함수 ====================
 function displayChannelInfo(data) {
   const channelAvatar = document.querySelector(".channel-avatar");
   const channelName = document.querySelector(".channel-name");
@@ -163,6 +158,7 @@ function displayChannelInfo(data) {
   }
 }
 
+// ==================== 동영상 목록 표시 함수 ====================
 function displayVideoList(data) {
   const videoList = document.querySelector(".secondary-list");
   videoList.innerHTML = ""; // Clear existing content
@@ -201,12 +197,116 @@ function displayVideoList(data) {
     videoList.appendChild(videoItem);
   });
 }
-// SPA 환경에서 채널 페이지 로드 시점 대기
-// const intervalId = setInterval(() => {
-//   if (document.querySelector(".video-page")) {
-//     clearInterval(intervalId);
-//     initVideoPage();
-//   }
-// }, 100);
+
+// ==================== 비디오 플레이어 커스텀 함수 ====================
+function customVideoPlayer() {
+  const videoPlayer = document.getElementById("videoPlayer");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const volumeBtn = document.getElementById("volumeBtn");
+  const volumeSlider = document.getElementById("volumeSlider");
+  const speedBtn = document.getElementById("speedBtn");
+  const speedOptions = document.querySelector(".speed-options");
+  const pipBtn = document.getElementById("pipBtn");
+  const fullscreenBtn = document.getElementById("fullscreenBtn");
+  const progressBar = document.getElementById("progressBar");
+  const timeDisplay = document.getElementById("timeDisplay");
+
+  // 🎥 ▶️ 재생 / 일시 정지
+  playPauseBtn.addEventListener("click", () => {
+    if (videoPlayer.paused) {
+      videoPlayer.play();
+      playPauseBtn.textContent = "⏸";
+    } else {
+      videoPlayer.pause();
+      playPauseBtn.textContent = "▶️";
+    }
+  });
+  videoPlayer.addEventListener("click", () => {
+    if (videoPlayer.paused) {
+      videoPlayer.play();
+      playPauseBtn.textContent = "⏸";
+    } else {
+      videoPlayer.pause();
+      playPauseBtn.textContent = "▶️";
+    }
+  });
+
+  function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  // 🎯 시간 업데이트
+  videoPlayer.addEventListener("timeupdate", () => {
+    const currentTime = formatTime(videoPlayer.currentTime);
+    const totalTime = formatTime(videoPlayer.duration);
+    timeDisplay.textContent = `${currentTime} / ${totalTime}`;
+  });
+
+  // 🎯 비디오 로드 시 총 길이 설정
+  videoPlayer.addEventListener("loadedmetadata", () => {
+    timeDisplay.textContent = `00:00 / ${formatTime(videoPlayer.duration)}`;
+  });
+
+  // 🔊 볼륨 조절
+  volumeBtn.addEventListener("click", () => {
+    if (videoPlayer.volume > 0) {
+      videoPlayer.volume = 0;
+      volumeBtn.textContent = "🔇";
+    } else {
+      videoPlayer.volume = 1;
+      volumeBtn.textContent = "🔊";
+    }
+  });
+
+  // 볼륨 슬라이더 조절
+  volumeSlider.addEventListener("input", (e) => {
+    videoPlayer.volume = e.target.value;
+  });
+
+  // ⚡ 배속 변경
+  speedBtn.addEventListener("click", () => {
+    if (speedOptions.style.display === "none" || speedOptions.style.display === "") {
+      speedOptions.style.display = "flex"; // 🎯 드롭다운 열기
+    } else {
+      speedOptions.style.display = "none"; // 🎯 드롭다운 닫기
+    }
+  });
+
+  document.querySelectorAll(".speed").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      videoPlayer.playbackRate = parseFloat(btn.dataset.speed);
+      speedOptions.style.display = "none"; // 🎯 선택 후 드롭다운 닫기
+    });
+  });
+
+  // 📺 PIP 모드
+  pipBtn.addEventListener("click", () => {
+    if (document.pictureInPictureElement) {
+      document.exitPictureInPicture();
+    } else {
+      videoPlayer.requestPictureInPicture();
+    }
+  });
+
+  // ⛶ 전체 화면
+  fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+      videoPlayer.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  // ⏳ 재생바 조절
+  videoPlayer.addEventListener("timeupdate", () => {
+    progressBar.value = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+  });
+
+  progressBar.addEventListener("input", (e) => {
+    videoPlayer.currentTime = (e.target.value / 100) * videoPlayer.duration;
+  });
+}
 
 document.addEventListener("DOMContentLoaded", initVideoPage); // DOMContentLoaded 이벤트 리스너 추가
