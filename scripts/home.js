@@ -5,6 +5,8 @@ function queryFilter(videos) {
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get("search")?.toLowerCase() || "";
   console.log("Search Query:", searchQuery);
+  const searchInput = document.getElementById("search-bar-input");
+  searchInput.value = searchQuery;
 
   // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
   const filteredVideos = searchQuery
