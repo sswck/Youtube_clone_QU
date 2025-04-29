@@ -262,6 +262,15 @@ function customVideoPlayer() {
 
   // 볼륨 슬라이더 조절
   volumeSlider.addEventListener("input", (e) => {
+    var gradient_value = 100 / e.target.attributes.max.value;
+    e.target.style.background =
+      "linear-gradient(to right, rgb(0,0,255) 0%, rgb(0,153,255)" +
+      (gradient_value * e.target.value) / 2 +
+      "%, rgb(255,255,255)" +
+      gradient_value * e.target.value +
+      "%, rgb(85,85,85)" +
+      gradient_value * e.target.value +
+      "%)";
     videoPlayer.volume = e.target.value;
   });
 
@@ -299,13 +308,31 @@ function customVideoPlayer() {
     }
   });
 
-  // ⏳ 재생바 조절
-  videoPlayer.addEventListener("timeupdate", () => {
-    progressBar.value = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+  // ⏳ 영상 재생 시간에 따른 프로그레스 바 업데이트
+  videoPlayer.addEventListener("timeupdate", (e) => {
+    const percentage = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+    progressBar.value = percentage;
+    progressBar.style.background =
+      "linear-gradient(to right, rgb(255,0,0) 0%, rgb(255,153,0)" +
+      percentage / 2 +
+      "%, rgb(255,255,255)" +
+      percentage +
+      "%, rgb(85,85,85)" +
+      percentage +
+      "%)";
   });
 
+  // ⏳ 프로그레스 바 클릭 시 비디오 재생 위치 변경
   progressBar.addEventListener("input", (e) => {
     videoPlayer.currentTime = (e.target.value / 100) * videoPlayer.duration;
+    e.target.style.background =
+      "linear-gradient(to right, rgb(255,0,0) 0%, rgb(255,153,0)" +
+      e.target.value / 2 +
+      "%, rgb(255,255,255)" +
+      e.target.value +
+      "%, rgb(85,85,85)" +
+      e.target.value +
+      "%)";
   });
 }
 

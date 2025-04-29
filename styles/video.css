@@ -67,7 +67,7 @@ body {
 .video-player {
   position: relative;
   width: 100%;
-  max-width: 800px; /* 최대 너비 설정 */
+  /* max-width: 800px; 최대 너비 설정 */
   margin: 0 auto; /* 중앙 정렬 */
   border-radius: 4px;
 }
@@ -76,7 +76,7 @@ body {
 .video-player video {
   width: 100%;
   height: auto;
-  max-height: 450px; /* 최대 높이 설정 (선택 사항) */
+  /* max-height: 450px; 최대 높이 설정 (선택 사항) */
   object-fit: contain;
   border-radius: 8px;
   background-color: black; /* 배경색 추가 */
@@ -96,39 +96,6 @@ body {
   opacity: 0;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
   transition: opacity 0.3s ease-in-out;
-}
-
-/* 슬라이더 스타일 - 볼륨, 프로그래스 바 */
-input[type="range"] {
-  -webkit-appearance: none; /* 기본 스타일 제거 (크롬, 사파리) */
-  appearance: none; /* 다른 브라우저에서도 기본 스타일 제거 */
-  width: 100%;
-  height: 4px; /* 슬라이더 높이 */
-  background: linear-gradient(90deg, #ff0000 0%, #ff9900 50%, #ffffff 100%);
-
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* 슬라이더 핸들(thumb) 스타일 */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: white;
-  border: 2px solid red;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: white;
-  border: 2px solid red;
-  border-radius: 50%;
-  cursor: pointer;
 }
 
 .video-player:hover .video-controls {
@@ -158,11 +125,25 @@ input[type="range"]::-moz-range-thumb {
 
 .volume-wrapper {
   display: flex;
-  justify-content: center;
+  padding: 0;
+  gap: 10px;
 }
 
 .volume-wrapper input {
   display: none; /* 🎯 볼륨 컨트롤 숨김 */
+  background: linear-gradient(to right, #0000ff 0%, #0099ff 25%, #ffffff 50%, #555555 50%);
+  width: 96px;
+}
+
+/* 슬라이더 핸들(thumb) 스타일 */
+.volume-wrapper input::-webkit-slider-thumb {
+  background: white;
+  border: 2px solid blue;
+}
+
+.volume-wrapper input::-moz-range-thumb {
+  background: white;
+  border: 2px solid blue;
 }
 
 .volume-wrapper:hover input {
@@ -207,6 +188,43 @@ input[type="range"]::-moz-range-thumb {
   bottom: 45px; /* 🎯 버튼 위쪽 배치 */
   left: 10px;
   right: 10px;
+  background-color: #555555;
+}
+
+/* 슬라이더 핸들(thumb) 스타일 */
+#progressBar::-webkit-slider-thumb {
+  background: white;
+  border: 2px solid red;
+}
+
+#progressBar::-moz-range-thumb {
+  background: white;
+  border: 2px solid red;
+}
+
+input[type="range"] {
+  -webkit-appearance: none; /* 기본 스타일 제거 (크롬, 사파리) */
+  appearance: none; /* 다른 브라우저에서도 기본 스타일 제거 */
+  height: 4px; /* 슬라이더 높이 */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 슬라이더 핸들(thumb) 스타일 */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* 비디오 정보 */
