@@ -7,20 +7,20 @@ body {
 .filter-bar-container {
   display: flex;
   align-items: center; /* 버튼과 필터 바를 세로로 중앙 정렬 */
-  padding: 16px 24px;
+  padding: 8px 30px;
   background-color: #1a1a1a;
   border-bottom: 1px solid #333;
   position: relative;
 }
 
 .scroll-button {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  font-size: 1.5em;
+  font-size: 1.2em;
   cursor: pointer;
-  padding: 8px;
-  margin: 0;
+  padding: 6px;
+  margin: 0 4px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -30,52 +30,52 @@ body {
 }
 
 .scroll-button:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .left-scroll {
-  left: 0;
+  left: 2px;
 }
 
 .right-scroll {
-  right: 0;
+  right: 2px;
 }
 
 .filter-bar-container:hover .scroll-button {
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .filter-bar {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   gap: 8px;
-  padding: 0 0px;
-  /* background-color: #1a1a1a; */
-  /* border-bottom: 1px solid #333; */
+  padding: 0 8px;
   list-style: none;
   margin: 0;
   scroll-behavior: smooth;
 }
 
 .filter-bar button {
-  padding: 8px 16px;
+  padding: 8px 12px;
   background: #333;
   color: white;
-  border: none;
-  border-radius: 20px;
+  border: 1px solid #333;
+  border-radius: 16px;
   cursor: pointer;
   white-space: nowrap;
-  transition: transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .filter-bar button:hover {
   background-color: #444;
+  border-color: #444;
 }
 
 .filter-bar button.active {
   background-color: white;
   color: black;
   font-weight: bold;
+  border-color: white;
 }
 
 #card-ui {

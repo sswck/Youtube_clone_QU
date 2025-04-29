@@ -25,5 +25,6 @@ var intervalId = setInterval(function () {
   if (document.querySelector("#top-bar-container")) {
     clearInterval(intervalId);
     initSearch();
+    document.querySelector("header").style.visibility = "visible";
   }
 }, 100);

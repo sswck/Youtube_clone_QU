@@ -66,12 +66,19 @@ body {
 /* 비디오 플레이어 */
 .video-player {
   width: 100%;
+  max-width: 800px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
   border-radius: 4px;
 }
-.video-player img {
+
+/* 비디오 태그 스타일 */
+.video-player video {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  max-height: 450px; /* 최대 높이 설정 (선택 사항) */
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: black; /* 배경색 추가 */
 }
 
 /* 비디오 정보 */
@@ -314,30 +321,24 @@ body {
 }
 
 .secondary-button {
-  background-color: #303030;
-  border: 0.3px solid #aaaaaa;
-  border-radius: 32px;
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 8px 16px;
+  background: #333;
   color: white;
+  border: none;
+  border-radius: 20px;
   cursor: pointer;
+  white-space: nowrap;
   transition: transform 0.2s ease;
 }
 
 .secondary-button:hover {
-  background-color: #404040; /* 기존보다 살짝 어두운 색 */
-  color: #cccccc; /* 텍스트 색상을 연하게 */
-  transform: scale(1.05); /* 기존보다 조금 더 작은 확대 효과 */
-  transition: all 0.2s ease-in-out; /* 부드러운 애니메이션 */
+  background-color: #444;
 }
 
 .secondary-button.active {
-  background-color: #ffffff; /* 배경색을 흰색으로 */
-  border: 2px solid #aaaaaa; /* 테두리 색상을 노란색으로 변경 */
-  color: black; /* 글씨 색상을 검은색으로 */
-  font-weight: bold; /* 글씨를 더욱 강조 */
-  transform: scale(1.1); /* 살짝 확대 효과 */
-  transition: all 0.2s ease-in-out; /* 부드러운 변화 */
+  background-color: white;
+  color: black;
+  font-weight: bold;
 }
 
 .secondary-list {

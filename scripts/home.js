@@ -48,7 +48,7 @@ function initFilterBar() {
   const leftScrollButton = filterBarContainer.querySelector(".left-scroll");
   const rightScrollButton = filterBarContainer.querySelector(".right-scroll");
   const cardUi = document.getElementById("card-ui");
-  const topBar = document.querySelector(".top-bar");
+  const topBar = document.getElementById("top-bar-container");
 
   if (!filterBarContainer) return; // 필터 바 컨테이너가 없으면 종료
 
@@ -109,8 +109,22 @@ async function initChannelPage() {
 
     if (!filterBar || !videoGridContainer) return;
 
-    // 임시 태그 목록 (API 연동 후 실제 데이터로 변경)
-    const tags = ["All", "액션", "코미디", "드라마", "SF", "다큐멘터리"];
+    // 초기 비디오 목록 렌더링 (기존 검색 쿼리 적용)
+    const initialFilteredVideos = queryFilter(videos);
+    renderVideos(initialFilteredVideos, videoGridContainer);
+
+    const allTags = []; // 모든 태그를 저장할 배열
+
+    initialFilteredVideos.forEach((video) => {
+      if (video.tags && Array.isArray(video.tags)) {
+        video.tags.forEach((tag) => allTags.push(tag));
+      }
+    });
+
+    // 중복 제거를 위해 Set 사용
+    const uniqueTags = new Set(allTags);
+    // Set을 다시 배열로 변환하고 "All"을 맨 앞에 추가
+    const tags = ["All", ...Array.from(uniqueTags)];
 
     // 필터 버튼 생성 및 이벤트 리스너 추가
     tags.forEach((tag) => {
@@ -123,7 +137,7 @@ async function initChannelPage() {
         filterBar.querySelectorAll("button").forEach((btn) => btn.classList.remove("active"));
         button.classList.add("active");
         activeTag = tag;
-        const filteredVideosByTag = filterByTag(videos, activeTag);
+        const filteredVideosByTag = filterByTag(initialFilteredVideos, activeTag);
         // 기존 검색 쿼리 파라미터도 함께 고려하여 필터링 (기존 queryFilter 활용)
         const finalFilteredVideos = queryFilter(filteredVideosByTag);
         renderVideos(finalFilteredVideos, videoGridContainer);
@@ -131,33 +145,7 @@ async function initChannelPage() {
       filterBar.appendChild(button);
     });
 
-    // 초기 비디오 목록 렌더링 (기존 검색 쿼리 적용)
-    const initialFilteredVideos = queryFilter(videos);
-    renderVideos(initialFilteredVideos, videoGridContainer);
-
     initFilterBar();
-
-    // if (filteredVideos && filteredVideos.length > 0) {
-    //   const cardsHTML = filteredVideos.map(createVideoCardWithChannel).join("");
-    //   if (videoGrid) {
-    //     videoGrid.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
-
-    //     // DOM 업데이트 이후 이벤트 리스너 등록
-    //     const cardElements = videoGrid.querySelectorAll(".card");
-    //     cardElements.forEach((card) => {
-    //       card.addEventListener("click", () => {
-    //         // 카드를 클릭했을 때 수행할 동작
-    //         const videoId = card.dataset.videoId;
-    //         //console.log(videoId);
-    //         window.location.href = `/components/video.html?video_id=${videoId}`;
-    //       });
-    //     });
-    //   }
-    // } else {
-    //   if (videoGrid) {
-    //     videoGrid.innerHTML = "<p>표시할 비디오가 없습니다.</p>";
-    //   }
-    // }
   } catch (error) {
     console.error("채널 페이지 초기화 중 오류:", error);
     const cardUi = document.getElementById("card-ui");
