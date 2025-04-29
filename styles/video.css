@@ -84,7 +84,7 @@ body {
 /* 비디오 컨트롤 */
 .video-controls {
   position: absolute;
-  height: 30%;
+  height: 15%;
   bottom: 0;
   left: 0;
   right: 0;

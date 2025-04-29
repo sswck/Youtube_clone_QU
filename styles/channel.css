@@ -253,6 +253,7 @@ body {
 .video-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .video-card:hover {
