@@ -30,6 +30,15 @@ async function initChannelPage() {
 
     // 5) 비디오 그리드 렌더 + 클릭 이벤트 등록
     const videos = await getChannelVideoList(channelID);
+
+    // 대표 비디오 설정
+    const featuredVideo = videos[0]; // 첫 번째 비디오를 대표 비디오로 설정
+
+    document.querySelector(".video-player video").src = `https://storage.googleapis.com/youtube-clone-video/${featuredVideo.id}.mp4`;
+    document.querySelector(".featured-video .video-title").textContent = featuredVideo.title;
+    document.querySelector(".featured-video .video-stats").textContent = `${featuredVideo.views.toLocaleString()} views • ${timeAgo(featuredVideo.created_dt)}`;
+    document.querySelector(".featured-video .video-description").textContent = featuredVideo.description;
+
     document.querySelectorAll(".video-grid").forEach((grid) => {
       // 5-1) 카드 마크업 생성 (data-video-id 포함)
       grid.innerHTML = videos
