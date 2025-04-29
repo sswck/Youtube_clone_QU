@@ -11,6 +11,7 @@ function initSearch() {
 
   searchInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
+      event.preventDefault();
       triggerSearch();
     }
   });
