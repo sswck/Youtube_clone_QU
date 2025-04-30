@@ -1,0 +1,113 @@
+/* /styles/theme.css */
+
+/* ── 다크모드 ── */
+:root {
+  /* ── Backgrounds ── */
+  --bg-body: #181818; /* body, 각 페이지 배경 */
+  --bg-filter-bar: #1a1a1a; /* content.css .filter-bar-container */
+  --bg-channel-page: #0f0f0f; /* channel.css .channel-page */
+  --bg-card: #000000; /* .video-card, .card */
+  --bg-card-hover: #404040; /* .card:hover */
+  --bg-secondary-video-hover: #202020; /* .secondary-video:hover */
+  --bg-divider: #303030; /* .divider */
+  --bg-topbar: #212121; /* header.top-bar */
+  --bg-menu-button: #212121; /* .menu-button */
+  --bg-search-input: #121212; /* .search-bar input */
+  --bg-search-button: #303030; /* .search-button */
+  --bg-voice-button: #000000; /* .voice-search-button */
+  --bg-right-button: #212121; /* .right-section button */
+  --bg-filter-bar-channel: #272727; /* channel-content .filter-bar */
+  --bg-subscribe-btn: #cc0000; /* .subscribe-btn */
+  --bg-subscribe-btn-hover: #b10000; /* .subscribe-btn:hover */
+  --bg-subscribe-btn-subscribed: #313131; /* .subscribe-btn.subscribed */
+
+  /* ── Text ── */
+  --text-primary: #ffffff; /* 기본 텍스트색 */
+  --text-secondary: #aaaaaa; /* 부제목·보조 텍스트 */
+  --text-active-inverse: #000000; /* active 상태 반전 텍스트 */
+  --text-nav: #aaaaaa; /* nav-item 비활성 텍스트 */
+  --text-nav-active: #ffffff; /* nav-item 활성 텍스트 */
+  --text-filter-active: #000000; /* filter-bar button.active 텍스트 */
+
+  /* ── Borders & Outlines ── */
+  --border-filter-bar: #333333; /* .filter-bar button border */
+  --border-search-input: #444444; /* search input border */
+  --border-secondary-video-hover: #303030; /* secondary-video border */
+  --border-thumb-main: #0000ff; /* 슬라이더 thumb 기본(blue) */
+  --border-thumb-alert: #ff0000; /* 슬라이더 thumb alert(red) */
+  --border-avatar-hover: #1e90ff; /* avatar hover outline(dodgerblue) */
+  --border-channel-nav: #333333; /* 채널 nav 하단선 */
+
+  /* ── Shadows ── */
+  --shadow-card: rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: rgba(0, 0, 0, 0.6);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+
+  /* ── Gradients & Overlays ── */
+  --gradient-control-start: rgba(0, 0, 0, 0);
+  --gradient-control-end: rgba(0, 0, 0, 0.8);
+  --scroll-button-bg: rgba(0, 0, 0, 0.5);
+  --duration-bg: rgba(0, 0, 0, 0.7);
+
+  /* ── Volume Slider ── */
+  --volume-stop1: #0000ff;
+  --volume-stop2: #0099ff;
+  --volume-stop3: #ffffff;
+  --volume-stop4: #555555;
+}
+
+/* ── 라이트모드 ── */
+[data-theme="light"] {
+  /* ── Backgrounds ── */
+  --bg-body: #ffffff;
+  --bg-filter-bar: #f1f1f1;
+  --bg-channel-page: #ffffff;
+  --bg-card: #f9f9f9;
+  --bg-card-hover: #e0e0e0;
+  --bg-secondary-video-hover: #e5e5e5;
+  --bg-divider: #cccccc;
+  --bg-topbar: #f5f5f5;
+  --bg-menu-button: #f5f5f5;
+  --bg-search-input: #ffffff;
+  --bg-search-button: #dddddd;
+  --bg-voice-button: #e0e0e0;
+  --bg-right-button: #f5f5f5;
+  --bg-filter-bar-channel: #eaeaea;
+  --bg-subscribe-btn: #cc0000;
+  --bg-subscribe-btn-hover: #b10000;
+  --bg-subscribe-btn-subscribed: #d3d3d3;
+
+  /* ── Text ── */
+  --text-primary: #000000;
+  --text-secondary: #555555;
+  --text-active-inverse: #ffffff;
+  --text-nav: #555555;
+  --text-nav-active: #000000;
+  --text-filter-active: #ffffff;
+
+  /* ── Borders & Outlines ── */
+  --border-filter-bar: #dddddd;
+  --border-search-input: #bbbbbb;
+  --border-secondary-video-hover: #dddddd;
+  --border-thumb-main: #0000ff;
+  --border-thumb-alert: #ff0000;
+  --border-avatar-hover: #1e90ff;
+  --border-channel-nav: #bbbbbb;
+
+  /* ── Shadows ── */
+  --shadow-card: rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: rgba(0, 0, 0, 0.2);
+  --shadow-light: rgba(0, 0, 0, 0.05);
+
+  /* ── Gradients & Overlays ── */
+  --gradient-control-start: rgba(255, 255, 255, 0);
+  --gradient-control-end: rgba(255, 255, 255, 0.8);
+  --scroll-button-bg: rgba(0, 0, 0, 0.2);
+  --duration-bg: rgba(0, 0, 0, 0.1);
+
+  /* ── Volume Slider ── */
+  --volume-stop1: #0000ff;
+  --volume-stop2: #0099ff;
+  --volume-stop3: #000000;
+  --volume-stop4: #888888;
+}
