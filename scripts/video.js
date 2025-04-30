@@ -2,7 +2,6 @@ import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
-import { customVideoPlayer } from "./videoPlayer.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -27,6 +26,12 @@ async function initVideoPage() {
 
     const videoListData = await getVideoList();
     displayVideoList(videoListData);
+
+    // 비디오 플레이어 커스터마이징
+    const videoElement = document.querySelector(".video-player");
+    await loadCustomVideo(videoElement);
+    document.getElementById("videoPlayer").src = `https://storage.googleapis.com/youtube-clone-video/${videoData.id}.mp4`;
+    videoElement.style.visibility = "visible";
   } catch (error) {
     console.error("Error fetching API data:", error);
   }
@@ -37,10 +42,6 @@ async function initVideoPage() {
 
   // 댓글 기능 초기화
   initCommentFeature();
-
-  // 비디오 플레이어 커스터마이징
-  await loadCustomVideo(document.querySelector(".video-player"));
-  customVideoPlayer(videoID);
 }
 
 // 동영상 정보 표시

@@ -71,7 +71,7 @@ async function loadCustomVideo(videoElement) {
     const html = await response.text();
 
     videoElement.innerHTML = html;
-    videoElement.style.visibility = "visible";
+    // videoElement.style.visibility = "visible";
   } catch (error) {
     console.error("비디오 플레이어를 로드하는 동안 오류가 발생했습니다:", error);
   }
