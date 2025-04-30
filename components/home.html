@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/styles/content.css" />
+<link rel="stylesheet" href="/styles/content.css" /><link rel="stylesheet" href="/styles/filter.css" />
+
 <div class="filter-bar-container" style="visibility: hidden">
   <button class="scroll-button left-scroll">&lt;</button>
   <ul class="filter-bar">
@@ -10,10 +11,34 @@
     <li class="filter-item"><button>다큐멘터리</button></li> -->
   </ul>
   <button class="scroll-button right-scroll">&gt;</button>
+  <div class="filter-popup-container">
+    <button class="filter-button">필터</button>
+    <div class="filter-popup">
+      <div class="filter-option">
+        <label for="length-filter">길이:</label>
+        <select id="length-filter">
+          <option value="">모든 길이</option>
+          <option value="short">짧은 동영상</option>
+          <option value="medium">중간 길이 동영상</option>
+          <option value="long">긴 동영상</option>
+        </select>
+      </div>
+      <div class="filter-option">
+        <label for="sort-by">정렬 기준:</label>
+        <select id="sort-by">
+          <option value="relevance">관련성</option>
+          <option value="uploadDate">업로드 날짜</option>
+          <option value="viewCount">조회수</option>
+        </select>
+      </div>
+      <button class="apply-filters">적용</button>
+    </div>
+  </div>
 </div>
 
 <div id="card-ui">
   <div class="cards-container"></div>
   <p>비디오 목록 로딩중...</p>
 </div>
+
 <script type="module" src="/scripts/home.js"></script>

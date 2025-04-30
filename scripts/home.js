@@ -107,6 +107,37 @@ function renderVideos(videos, container) {
   }
 }
 
+function filterByTag(videos, activeTag) {
+  if (activeTag === "All") {
+    return videos;
+  }
+  return videos.filter((video) => video.tags.includes(activeTag));
+}
+
+function applyVideoFilters(videos, length, sortBy) {
+  let filteredVideos = [...videos]; // 복사본 생성
+
+  // 길이 필터 적용
+  if (length === "short") {
+    filteredVideos = filteredVideos.filter((video) => video.duration <= 300); // 예: 5분 이하 (단위: 초)
+  } else if (length === "medium") {
+    filteredVideos = filteredVideos.filter((video) => video.duration > 300 && video.duration <= 900); // 예: 5분 초과 15분 이하
+  } else if (length === "long") {
+    filteredVideos = filteredVideos.filter((video) => video.duration > 900); // 예: 15분 초과
+  }
+
+  // 정렬 기준 적용
+  if (sortBy === "uploadDate") {
+    filteredVideos.sort((a, b) => new Date(b.created_dt) - new Date(a.created_dt)); // 최신순
+  } else if (sortBy === "viewCount") {
+    filteredVideos.sort((a, b) => (b.views || 0) - (a.views || 0)); // 조회수 높은 순
+  } else if (sortBy === "relevance") {
+    // 관련성 정렬은 서버에서 제공하는 기본 순서 유지 (또는 추가 로직 구현)
+  }
+
+  return filteredVideos;
+}
+
 // 채널 페이지 초기화 로직
 async function initHomePage() {
   try {
@@ -115,7 +146,13 @@ async function initHomePage() {
     //const videoGrid = document.getElementById("card-ui");
     const videoGridContainer = document.getElementById("card-ui");
     const filterBar = document.querySelector(".filter-bar");
+    const filterButton = document.querySelector(".filter-button");
+    const filterPopup = document.querySelector(".filter-popup");
+    const applyFiltersButton = document.querySelector(".apply-filters");
+    const lengthFilter = document.getElementById("length-filter");
+    const sortByFilter = document.getElementById("sort-by");
     let activeTag = "All";
+    let allVideos = [...videos]; // 전체 비디오 목록 저장
 
     if (!filterBar || !videoGridContainer) return;
 
@@ -157,6 +194,24 @@ async function initHomePage() {
 
     initFilterBar();
 
+    // 필터 팝업창 토글 기능
+    filterButton.addEventListener("click", () => {
+      filterPopup.classList.toggle("show");
+    });
+
+    // 필터 적용 버튼 클릭 이벤트
+    applyFiltersButton.addEventListener("click", () => {
+      const selectedLength = lengthFilter.value;
+      const selectedSortBy = sortByFilter.value;
+
+      // 필터링 및 정렬 로직 적용
+      const filteredAndSortedVideos = applyVideoFilters(allVideos, selectedLength, selectedSortBy);
+      renderVideos(filteredAndSortedVideos, videoGridContainer);
+
+      // 팝업창 닫기
+      filterPopup.classList.remove("show");
+    });
+
     // home 페이지 로드 후 표시
     const homePage = document.querySelector(".content");
     homePage.style.visibility = "visible";
@@ -167,13 +222,6 @@ async function initHomePage() {
       cardUi.innerHTML = "<p>비디오 목록을 불러오는 데 실패했습니다.</p>";
     }
   }
-}
-
-function filterByTag(videos, activeTag) {
-  if (activeTag === "All") {
-    return videos;
-  }
-  return videos.filter((video) => video.tags.includes(activeTag));
 }
 
 // SPA 환경에서 채널 페이지 로드 시점 대기
