@@ -19,39 +19,7 @@
       </div>
       <div class="video-page">
         <div class="video-container">
-          <div class="video-player">
-            <video id="videoPlayer" autoplay>
-              <source src="https://storage.googleapis.com/youtube-clone-video/1.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <!-- 비디오 내부에 커스텀 버튼 추가 -->
-            <div class="video-controls">
-              <input id="progressBar" type="range" min="0" value="0" step="0.1" />
-              <div class="controls-left">
-                <button id="playPauseBtn">▶️</button>
-                <div class="volume-wrapper">
-                  <button id="volumeBtn">🔊</button>
-                  <input id="volumeSlider" type="range" min="0" max="1" step="0.05" />
-                </div>
-                <span id="timeDisplay">00:00 / 00:00</span>
-              </div>
-
-              <div class="controls-right">
-                <div class="speed-wrapper">
-                  <button id="speedBtn">⚡</button>
-                  <div class="speed-options">
-                    <button class="speed" data-speed="2">2.0x</button>
-                    <button class="speed" data-speed="1.5">1.5x</button>
-                    <button class="speed" data-speed="1">1x</button>
-                    <button class="speed" data-speed="0.5">0.5x</button>
-                    <button class="speed" data-speed="0.25">0.25x</button>
-                  </div>
-                </div>
-                <button id="pipBtn">📺</button>
-                <button id="fullscreenBtn">⛶</button>
-              </div>
-            </div>
-          </div>
+          <div class="video-player"></div>
           <div class="video-info">
             <div class="video-title">Video Title Goes Here</div>
             <div class="info">
