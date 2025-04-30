@@ -1,4 +1,4 @@
-import { loadTopBar, loadSideBar } from "./loadUI.js";
+import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
 import { getChannelInfo, getChannelVideoList } from "./getAPI.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { timeAgo } from "./utils.js";
@@ -7,6 +7,15 @@ async function initChannelPage() {
   // 0) 공통 UI 로드
   await loadTopBar();
   await loadSideBar();
+  await loadCustomVideo(document.querySelector(".video-player"));
+
+  const videoElement = document.querySelector(".video-player video");
+  if (videoElement) {
+    videoElement.volume = 0;
+    videoElement.autoplay = true;
+    videoElement.loop = true;
+    videoElement.playsInline = true;
+  }
 
   // 2) 사이드바 토글 이벤트 등록
   const menuButton = document.getElementById("top-bar-container")?.querySelector(".menu-button");
@@ -31,7 +40,7 @@ async function initChannelPage() {
     // 5) 비디오 그리드 렌더 + 클릭 이벤트 등록
     const videos = await getChannelVideoList(channelID);
 
-    // 대표 비디오 설정
+    // 5-0) 대표 비디오 설정
     const featuredVideo = videos[0]; // 첫 번째 비디오를 대표 비디오로 설정
 
     document.querySelector(".video-player video").src = `https://storage.googleapis.com/youtube-clone-video/${featuredVideo.id}.mp4`;
