@@ -9,16 +9,14 @@
     <link rel="stylesheet" href="/styles/video.css" />
   </head>
   <body>
-    <div class="topbar" id="top-bar-container">
-      <script type="module" src="/scripts/topbar.js"></script>
-    </div>
+    <div class="topbar" id="top-bar-container"></div>
     <div class="layout-wrapper">
-      <div class="sidebar" id="side-bar-container">
-        <script type="module" src="/scripts/sidebar.js"></script>
-      </div>
+      <div class="sidebar" id="side-bar-container"></div>
       <div class="video-page">
         <div class="video-container">
-          <div class="video-player"></div>
+          <div class="video-player" style="visibility: hidden">
+            <video></video>
+          </div>
           <div class="video-info">
             <div class="video-title">Video Title Goes Here</div>
             <div class="info">
@@ -103,5 +101,8 @@
       </div>
     </div>
     <script type="module" src="/scripts/video.js"></script>
+    <script type="module" src="/scripts/topbar.js"></script>
+    <script type="module" src="/scripts/sidebar.js"></script>
+    <script type="module" src="/scripts/videoPlayer.js"></script>
   </body>
 </html>

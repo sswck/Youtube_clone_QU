@@ -10,15 +10,11 @@
   </head>
   <body>
     <!-- TopBar 컨테이너 -->
-    <div id="top-bar-container">
-      <script type="module" src="/scripts/topbar.js"></script>
-    </div>
+    <div id="top-bar-container"></div>
     <!-- 사이드바+콘텐츠를 감싸는 래퍼 -->
     <div class="layout-wrapper">
       <!-- 사이드바 로드 -->
-      <div id="side-bar-container">
-        <script type="module" src="/scripts/sidebar.js"></script>
-      </div>
+      <div id="side-bar-container"></div>
       <!-- 실제 채널 페이지 콘텐츠 -->
       <main class="channel-page">
         <!-- 채널 헤더 -->
@@ -61,7 +57,7 @@
           <!-- 대표 영상 -->
           <article class="featured-video">
             <div class="video-player">
-              <video src="https://storage.googleapis.com/youtube-clone-video/1.mp4" controls muted autoplay loop playsinline></video>
+              <video src=""></video>
             </div>
             <div class="video-info">
               <h4 class="video-title">Blind Woodturner: Turning passion into fine art</h4>
@@ -93,5 +89,8 @@
     </div>
 
     <script type="module" src="/scripts/channel.js"></script>
+    <script type="module" src="/scripts/topbar.js"></script>
+    <script type="module" src="/scripts/sidebar.js"></script>
+    <script type="module" src="/scripts/videoPlayer.js"></script>
   </body>
 </html>
