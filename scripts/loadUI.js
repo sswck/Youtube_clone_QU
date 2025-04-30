@@ -65,5 +65,17 @@ async function loadSideBar() {
   }
 }
 
+async function loadCustomVideo(videoElement) {
+  try {
+    const response = await fetch("/components/videoPlayer.html");
+    const html = await response.text();
+
+    videoElement.innerHTML = html;
+    videoElement.style.visibility = "visible";
+  } catch (error) {
+    console.error("비디오 플레이어를 로드하는 동안 오류가 발생했습니다:", error);
+  }
+}
+
 // 모듈 외부에서 함수를 사용할 수 있도록 export 합니다.
-export { loadTopBar, loadSideBar };
+export { loadTopBar, loadSideBar, loadCustomVideo };
