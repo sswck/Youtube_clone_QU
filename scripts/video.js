@@ -39,8 +39,7 @@ async function initVideoPage() {
   initCommentFeature();
 
   // 비디오 플레이어 커스터마이징
-  const videoPlayer = document.querySelector(".video-player");
-  await loadCustomVideo(videoPlayer);
+  await loadCustomVideo(document.querySelector(".video-player"));
   customVideoPlayer(videoID);
 }
 
@@ -163,10 +162,7 @@ function displayVideoList(data) {
   });
 }
 
-/**
- * 댓글 입력창에서 Enter 키를 누르면
- * 새 댓글을 화면에 추가하고 좋아요·싫어요·삭제 기능을 위임으로 처리하는 함수
- */
+// ==================== 댓글 기능 ====================
 function initCommentFeature() {
   const commentInput = document.querySelector(".comment-field input");
   const commentsList = document.querySelector(".comments-list");
