@@ -52,3 +52,52 @@ aside {
   height: 1px;
   background-color: #303030;
 }
+
+/* 토글 항목 전체 정렬 */
+.theme-toggle-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+}
+
+/* 스위치 트랙 */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 23px;
+}
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+}
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 17px;
+  width: 17px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+.theme-switch input:checked + .slider {
+  background-color: #444;
+}
+.theme-switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
