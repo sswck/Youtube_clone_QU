@@ -201,6 +201,12 @@ body {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
+.card-thumbnail-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
 .card-thumbnail {
   display: block;
   width: 100%;
@@ -209,6 +215,17 @@ body {
   object-position: center; /* 가운데 정렬 */
   background-color: black; /* 빈 공간 배경색 */
   margin-bottom: 12px;
+}
+
+.card-video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .card-details {

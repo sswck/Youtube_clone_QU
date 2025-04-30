@@ -21,7 +21,7 @@ function queryFilter(videos) {
 }
 
 function createVideoCardWithChannel(video) {
-  //const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
+  const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
   const thumbnailUrl = video.thumbnail || "/assets/images/thumbnail.png";
   const avatarUrl = video.channelInfo?.channel_profile || "https://randomuser.me/api/portraits/men/32.jpg";
 
@@ -33,7 +33,10 @@ function createVideoCardWithChannel(video) {
 
   return `
       <article class="card" data-video-id="${vID}" data-channel-id="${chID}">
-        <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail">
+        <div class="card-thumbnail-container">
+          <img class="card-thumbnail" data-imgid="${vID}" src="${thumbnailUrl}" alt="Video Thumbnail">
+          <video class="card-video" data-videoid="${vID}" src="${videoUrl}" muted loop preload="metadata" style="opacity: 0;"></video>
+        </div>
         <div class="card-details">
           <img class="card-avatar" src="${avatarUrl}" alt="Channel Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
           <div class="card-data">
@@ -93,6 +96,28 @@ function renderVideos(videos, container) {
 
     // 카드 클릭 이벤트 리스너
     container.querySelectorAll(".card").forEach((card) => {
+      const video = container.querySelector(`video[data-videoid="${card.dataset.videoId}" ]`);
+      //const video = container.querySelector(".card-video");
+      const thumbnail = container.querySelector(`img[data-imgid="${card.dataset.videoId}" ]`);
+      //const thumbnail = container.querySelector(".card-thumbnail");
+      let hoverTimeout;
+
+      card.addEventListener("mouseenter", () => {
+        hoverTimeout = setTimeout(() => {
+          thumbnail.style.opacity = "0";
+          video.style.opacity = "1";
+          video.play();
+        }, 500);
+      });
+
+      card.addEventListener("mouseleave", () => {
+        clearTimeout(hoverTimeout);
+        video.pause();
+        video.currentTime = 0;
+        video.style.opacity = "0";
+        thumbnail.style.opacity = "1";
+      });
+
       card.addEventListener("click", () => {
         // 클릭된 요소가 card-avatar 클래스 영역이면 채널페이지로, 그 외 영역은 비디오페이지
         if (event.target.classList.contains("card-avatar")) {
