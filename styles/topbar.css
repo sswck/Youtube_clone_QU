@@ -36,7 +36,7 @@ header.top-bar {
   padding: 8px;
 }
 
-.left-section .logo {
+.left-section .youtube-logo {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,6 +56,7 @@ header.top-bar {
 }
 .logo img {
   height: 24px;
+  margin-right: 5px;
 }
 
 /* 가운데 검색 섹션 */
@@ -129,4 +130,23 @@ header.top-bar {
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+}
+
+/* 상단바 아이콘에 대한 필터 설정 */
+.menu-button img,
+.youtube img,
+.search-button img,
+.upload-button img,
+.apps-button img,
+.notifications-button img {
+  filter: invert(0);
+}
+
+[data-theme="light"] .menu-button img,
+[data-theme="light"] .youtube img,
+[data-theme="light"] .search-button img,
+[data-theme="light"] .upload-button img,
+[data-theme="light"] .apps-button img,
+[data-theme="light"] .notifications-button img {
+  filter: invert(1);
 }

@@ -101,3 +101,22 @@ aside {
 .theme-switch input:checked + .slider::before {
   transform: translateX(22px);
 }
+
+/* 아이콘 이미지에 대한 기본 필터 설정 (다크모드) */
+.item-thumbnail {
+  width: 24px;
+  height: 24px;
+  filter: invert(0); /* 다크모드에서는 항상 흰색으로 보이도록 */
+}
+
+/* 채널 썸네일은 제외 (실제 이미지이므로) */
+.channel-thumbnail {
+  width: 24px;
+  height: 24px;
+  filter: none;
+}
+
+/* 라이트모드일 때 다시 원래 색으로 */
+[data-theme="light"] .item-thumbnail {
+  filter: invert(1); /* 라이트모드에서는 원래 색상으로 */
+}
