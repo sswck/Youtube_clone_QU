@@ -6,8 +6,8 @@ aside {
   width: 240px;
   height: calc(100vh - 56px);
   overflow-y: auto;
-  background-color: #212121;
-  color: #fff;
+  background-color: var(--bg-topbar);
+  color: var(--text-primary);
   font-weight: 300;
 }
 .sidebar-box {
@@ -26,7 +26,7 @@ aside {
 
 .sidebar-item:hover,
 .subscribed-channel:hover {
-  background-color: #303030;
+  background-color: var(--bg-divider);
 }
 
 .item-thumbnail,
@@ -44,13 +44,13 @@ aside {
 
 .sidebar-title {
   padding: 8px 24px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   font-weight: 700;
 }
 
 .divider {
   height: 1px;
-  background-color: #303030;
+  background-color: var(--bg-divider);
 }
 
 /* 토글 항목 전체 정렬 */
@@ -80,7 +80,7 @@ aside {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--switch-track-bg);
   border-radius: 34px;
   transition: background-color 0.3s;
 }
@@ -91,12 +91,12 @@ aside {
   width: 17px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: var(--switch-thumb-bg);
   border-radius: 50%;
   transition: transform 0.3s;
 }
 .theme-switch input:checked + .slider {
-  background-color: #444;
+  background-color: var(--switch-track-bg-checked);
 }
 .theme-switch input:checked + .slider::before {
   transform: translateX(22px);

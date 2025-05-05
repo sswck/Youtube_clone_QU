@@ -1,21 +1,21 @@
 body {
-  background-color: #181818;
+  background-color: var(--bg-body);
   font-family: Arial, sans-serif;
-  color: white;
+  color: var(--text-primary);
 }
 
 .filter-bar-container {
   display: flex;
   align-items: center; /* 버튼과 필터 바를 세로로 중앙 정렬 */
   padding: 8px 30px;
-  background-color: #1a1a1a;
-  border-bottom: 1px solid #333;
+  background-color: var(--bg-filter-bar);
+  border-bottom: 1px solid var(--border-filter-bar);
   position: relative;
 }
 
 .scroll-button {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+  background: var(--scroll-button-bg);
+  color: var(--text-primary);
   border: none;
   font-size: 1.2em;
   cursor: pointer;
@@ -57,9 +57,9 @@ body {
 
 .filter-bar button {
   padding: 8px 12px;
-  background: #333;
-  color: white;
-  border: 1px solid #333;
+  background: var(--border-filter-bar);
+  color: var(--text-primary);
+  border: 1px solid var(--border-filter-bar);
   border-radius: 16px;
   cursor: pointer;
   white-space: nowrap;
@@ -67,15 +67,15 @@ body {
 }
 
 .filter-bar button:hover {
-  background-color: #444;
-  border-color: #444;
+  background-color: var(--border-search-input);
+  border-color: var(--border-search-input);
 }
 
 .filter-bar button.active {
-  background-color: white;
-  color: black;
+  background-color: var(--bg-filter-active);
+  color: var(--text-filter-active);
   font-weight: bold;
-  border-color: white;
+  border-color: var(--bg-filter-active);
 }
 
 #card-ui {
@@ -95,10 +95,10 @@ body {
 
 /* 카드 전체 */
 .video-card {
-  background-color: #000;
+  background-color: var(--bg-voice-button);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px var(--shadow-card);
   transition: transform 0.2s ease;
 }
 
@@ -121,11 +121,11 @@ body {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--duration-bg);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 12px;
-  color: white;
+  color: var(--text-primary);
 }
 
 /* 비디오 정보 */
@@ -151,7 +151,7 @@ body {
 .meta h4 {
   margin: 0;
   font-size: 14px;
-  color: white;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -159,7 +159,7 @@ body {
 
 .meta p {
   margin: 4px 0 0 0;
-  color: #aaa;
+  color: var(--text-secondary);
   font-size: 12px;
 }
 
@@ -190,15 +190,15 @@ body {
   width: 100%; /* 그리드 셀 너비에 딱 맞춤 */
   max-width: 450px;
   border-radius: 5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px var(--shadow-card);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  background-color: #404040;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+  background-color: var(--bg-card-hover);
+  box-shadow: 0 12px 24px var(--shadow-card-hove);
 }
 
 .card-thumbnail {
@@ -207,7 +207,7 @@ body {
   aspect-ratio: 16 / 9; /* 원하는 비율 (예: 16:9) */
   object-fit: cover; /* 잘림 없이 비율 유지 */
   object-position: center; /* 가운데 정렬 */
-  background-color: black; /* 빈 공간 배경색 */
+  background-color: var(--bg-card); /* 빈 공간 배경색 */
   margin-bottom: 12px;
 }
 
@@ -227,8 +227,8 @@ body {
 
 .card-avatar:hover {
   transform: scale(1.1);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  outline: 1px solid dodgerblue;
+  box-shadow: 0 2px 5px var(--shadow-card);
+  outline: 1px solid var(--border-avatar-hover);
 }
 
 .card-data {
@@ -237,7 +237,7 @@ body {
   width: calc(100% - 72px);
 }
 .card-title {
-  color: white;
+  color: var(--text-primary);
   font-size: 12px;
   font-weight: 600;
   margin: 0 0 6px 0;
@@ -258,7 +258,7 @@ body {
   flex-direction: column;
   width: 100%;
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   margin: 0;
 }
 

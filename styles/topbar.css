@@ -4,9 +4,9 @@
   padding: 0;
 }
 body {
-  background: #000;
+  background: var(--bg-card);
   font-family: Arial, Helvetica, sans-serif;
-  color: #fff;
+  color: var(--text-primar);
 }
 
 /* 상단바 전체 */
@@ -17,7 +17,7 @@ header.top-bar {
   gap: 24px;
   padding: 0 16px;
   height: 56px;
-  background: #212121;
+  background: var(--bg-topbar);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -46,7 +46,7 @@ header.top-bar {
 .menu-button {
   width: 40px;
   height: 40px;
-  background: #212121;
+  background: var(--bg-topbar);
   border: none;
   cursor: pointer;
 }
@@ -72,9 +72,9 @@ header.top-bar {
 .search-bar input {
   flex: 1;
   height: 40px;
-  background: #121212;
-  border: 1px solid #444;
-  color: #fff;
+  background: var(--bg-search-inpu);
+  border: 1px solid var(--border-search-input);
+  color: var(--text-primar);
   padding: 6px 2px 6px 12px;
   border-radius: 15px 0 0 15px;
   font-size: 14px;
@@ -82,7 +82,7 @@ header.top-bar {
 .search-bar .search-button {
   width: 60px;
   height: 40px;
-  background: #303030;
+  background: var(--bg-search-button);
   border: none;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
@@ -93,7 +93,7 @@ header.top-bar {
   width: 40px;
   height: 40px;
   margin-left: 8px;
-  background: #000;
+  background: var(--bg-voice-button);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -116,7 +116,7 @@ header.top-bar {
 .right-section button {
   width: 40px;
   height: 40px;
-  background: #212121;
+  background: var(--bg-topbar);
   border: none;
   border-radius: 50%;
   cursor: pointer;
