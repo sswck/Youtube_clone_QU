@@ -111,7 +111,7 @@
   --border-channel-nav: #bbbbbb;
 
   /* ── Shadows ── */
-  --shadow-card: rgba(0, 0, 0, 0.1);
+  --shadow-card: #ffffff;
   --shadow-card-hover: rgba(0, 0, 0, 0.2);
   --shadow-light: rgba(0, 0, 0, 0.05);
 

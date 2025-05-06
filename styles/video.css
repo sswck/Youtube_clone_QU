@@ -344,6 +344,20 @@ body {
   border-bottom-color: var(--volume-stop4);
 }
 
+.comment-like img,
+.comment-dislike img,
+.sort-by img,
+.video-button img {
+  filter: invert(0);
+}
+
+[data-theme="light"] .comment-like img,
+[data-theme="light"] .comment-dislike img,
+[data-theme="light"] .sort-by img,
+[data-theme="light"] .video-button img {
+  filter: invert(1);
+}
+
 /* 오른쪽 사이드바 */
 .video-secondary {
   flex: 0 1 35%;

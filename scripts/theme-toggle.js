@@ -37,5 +37,43 @@ if (sidebarContainer) {
   observer.observe(sidebarContainer, { childList: true, subtree: true });
 }
 
-// 페이지 로드 시 초기화 시도
-document.addEventListener("DOMContentLoaded", initThemeToggle);
+// 페이지 로드 시 테마 초기화
+document.addEventListener("DOMContentLoaded", () => {
+  const htmlEl = document.documentElement;
+  const toggle = document.getElementById("theme-toggle-switch");
+  
+  // localStorage에서 테마 가져오기
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  
+  // HTML에 테마 적용
+  htmlEl.setAttribute("data-theme", savedTheme);
+  
+  // 토글 스위치 상태 설정
+  if (toggle) {
+    toggle.checked = savedTheme === "light";
+    
+    // 토글 이벤트 리스너
+    toggle.addEventListener("change", () => {
+      const theme = toggle.checked ? "light" : "dark";
+      htmlEl.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    });
+  }
+});
+
+// 사이드바 로드 완료 이벤트 리스너 추가
+document.addEventListener("sidebarLoaded", () => {
+  const toggle = document.getElementById("theme-toggle-switch");
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  
+  if (toggle) {
+    toggle.checked = savedTheme === "light";
+    
+    // 토글 이벤트 리스너 재설정
+    toggle.addEventListener("change", () => {
+      const theme = toggle.checked ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    });
+  }
+});
