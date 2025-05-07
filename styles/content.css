@@ -187,6 +187,8 @@ body {
 
 .card {
   /* flex: grow shrink basis */
+  z-index: 1;
+  position: relative;
   width: 100%; /* 그리드 셀 너비에 딱 맞춤 */
   max-width: 450px;
   border-radius: 5px;
@@ -199,6 +201,19 @@ body {
   transform: translateY(-4px);
   background-color: var(--bg-card-hover);
   box-shadow: 0 12px 24px var(--shadow-card-hove);
+}
+
+.overlay {
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle 100px at 100px 100px, rgba(255, 255, 255, 0.5) 0%, rgba(122, 122, 122, 0.5) 70%, rgba(0, 0, 0, 0.96) 100%);
+  filter: brightness(1.5) opacity(0);
+  mix-blend-mode: overlay;
+  background-size: 150% 150%;
+  background-position: 100%;
+  transition: all 0.1s;
 }
 
 .card-thumbnail-container {
@@ -235,6 +250,7 @@ body {
   gap: 12px;
 }
 .card-avatar {
+  z-index: 3;
   width: 36px;
   height: 36px;
   border-radius: 50%;

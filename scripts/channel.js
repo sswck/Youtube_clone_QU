@@ -2,6 +2,7 @@ import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
 import { getChannelInfo, getChannelVideoList } from "./getAPI.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { timeAgo } from "./utils.js";
+import { cardHoverStyle } from "./cardHoverStyle.js";
 
 async function initChannelPage() {
   // 0) 공통 UI 로드
@@ -69,6 +70,7 @@ async function initChannelPage() {
 
       // 5-2) 렌더된 카드에 클릭 리스너 붙이기
       grid.querySelectorAll(".video-card").forEach((card) => {
+        cardHoverStyle(card);
         card.addEventListener("click", () => {
           const videoId = card.getAttribute("data-video-id");
           window.location.href = `video.html?video_id=${videoId}`;

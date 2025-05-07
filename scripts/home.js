@@ -2,6 +2,7 @@ import { getVideoListWithChannelInfo } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
 import { getSubscriptions } from "./subscription.js";
 import { getLikedVideos } from "./likedVideos.js";
+import { cardHoverStyle } from "./cardHoverStyle.js";
 
 function queryFilter(videos) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -51,6 +52,7 @@ function createVideoCardWithChannel(video) {
 
   return `
       <article class="card" data-video-id="${vID}" data-channel-id="${chID}">
+        <div class="overlay"></div>
         <div class="card-thumbnail-container">
           <img class="card-thumbnail" data-imgid="${vID}" src="${thumbnailUrl}" alt="Video Thumbnail">
           <video class="card-video" data-videoid="${vID}" src="${videoUrl}" muted loop preload="metadata" style="opacity: 0;"></video>
@@ -119,6 +121,8 @@ function renderVideos(videos, container) {
       const thumbnail = container.querySelector(`img[data-imgid="${card.dataset.videoId}" ]`);
       //const thumbnail = container.querySelector(".card-thumbnail");
       let hoverTimeout;
+
+      cardHoverStyle(card, card.querySelector(".overlay")); // 카드 호버 스타일 적용
 
       card.addEventListener("mouseenter", () => {
         hoverTimeout = setTimeout(() => {
