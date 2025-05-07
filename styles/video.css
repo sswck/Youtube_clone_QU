@@ -123,6 +123,23 @@ body {
   color: var(--text-primary);
 }
 
+.video-info .video-button:hover {
+  background-color: var(--bg-divider);
+  border-radius: 4px;
+}
+
+#buttonLike {
+  background-color: transparent;
+  color: gray;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#buttonLike.liked {
+  color: #4caf50; /* 좋아요가 눌린 상태에서 색상 변경 */
+}
+
 /* 채널 정보 */
 .video-description {
   margin-bottom: 16px;
