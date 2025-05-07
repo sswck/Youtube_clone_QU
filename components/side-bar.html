@@ -104,11 +104,15 @@
       <img src="/assets/icons/sidebar/help.svg" alt="Item Thumbnail" class="item-thumbnail" />
       <span class="item-title">Help</span>
     </div>
-    <div class="sidebar-item">
-      <img src="/assets/icons/sidebar/feedback.svg" alt="Item Thumbnail" class="item-thumbnail" />
-      <span class="item-title">Send feedback</span>
+    <div class="sidebar-item theme-toggle-item">
+      <!-- 스위치 -->
+      <label class="theme-switch">
+        <input type="checkbox" id="theme-toggle-switch" />
+        <span class="slider"></span>
+      </label>
+      <!-- 레이블 -->
+      <span class="item-title">Dark / Light Mode</span>
     </div>
-  </div>
   <div class="divider"></div>
 </aside>
 <script type="module" src="/scripts/sidebar.js"></script>

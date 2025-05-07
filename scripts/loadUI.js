@@ -50,16 +50,23 @@ async function loadSideBar() {
     const html = await response.text();
     const sideBarContainer = document.getElementById("side-bar-container");
 
-    // 로드 완료 후 사이드바를 보이게 설정
-    sideBarContainer.style.visibility = "visible";
-
     if (!sideBarContainer) {
       console.error("사이드바 컨테이너(.sidebar)를 찾을 수 없습니다.");
       return;
     }
 
     sideBarContainer.innerHTML = html;
-    // 사이드바 관련 추가적인 초기화 작업이 있다면 여기에 작성합니다.
+
+    // 사이드바 로드 완료 후 테마 토글 초기화를 위한 이벤트 발생
+    const event = new CustomEvent("sidebarLoaded");
+    document.dispatchEvent(event);
+    
+    // 테마 상태 복원
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    
+    // 사이드바 표시
+    sideBarContainer.style.visibility = "visible";
   } catch (error) {
     console.error("사이드바를 로드하는 동안 오류가 발생했습니다:", error);
   }

@@ -5,6 +5,10 @@ import { loadTopBar, loadSideBar } from "/scripts/loadUI.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const contentDiv = document.querySelector(".content");
+  
+  // 초기 테마 설정
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
 
   // 초기 콘텐츠 로드 (Home)
   function loadInitialContent() {
