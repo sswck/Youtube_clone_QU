@@ -101,4 +101,57 @@ async function getVideoListWithChannelInfo() {
   }
 }
 
-export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList, getVideoListWithChannelInfo };
+/**
+ * @description
+ * fetch API를 사용하여 두 단어의 관계 정보를 비동기적으로 가져오는 함수.
+ * 입력 받은 두 단어를 사용하여 POST 요청을 보내고,
+ * 응답에서 관계 또는 유사도 수치를 추출하여 반환합니다.
+ * @async
+ * @param {string} firstWord - 첫 번째 단어.
+ * @param {string} secondWord - 두 번째 단어.
+ * @returns {Promise<Object|null>} A promise that resolves with the similarity analysis result (JSON object),
+ * or null if an error occurs or the information is not found.
+ */
+
+async function getWordRelationship(firstWord, secondWord) {
+  const openApiURL = "http://aiopen.etri.re.kr:8000/WiseWWN/WordRel";
+  const access_key = "3f699673-6330-4028-8aa9-01cf78a87fb8";
+
+  const argument = {
+    first_word: firstWord,
+    second_word: secondWord,
+  };
+
+  const requestJson = {
+    request_id: "reserved field", // 필요하다면 고유한 요청 ID를 생성할 수 있습니다.
+    argument: argument,
+  };
+
+  try {
+    const response = await fetch(openApiURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: access_key,
+      },
+      body: JSON.stringify(requestJson),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data && data.return_object) {
+      const distance = data.return_object["WWN WordRelInfo"].WordRelInfo.Distance;
+      return distance;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("단어 관계를 가져오는 중 오류 발생:", error);
+    return null;
+  }
+}
+
+export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList, getVideoListWithChannelInfo, getWordRelationship };
