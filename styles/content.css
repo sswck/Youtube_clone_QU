@@ -285,3 +285,67 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* 반응형 미디어쿼리: 메인 페이지 */
+
+@media (max-width: 768px) {
+  .filter-bar-container {
+    padding: 8px 16px;
+  }
+  .filter-bar {
+    gap: 6px;
+    padding: 0 6px;
+    overflow-x: auto;
+  }
+  .filter-bar button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  /* 스크롤 버튼 항상 표시 (터치 환경 대응) */
+  .scroll-button {
+    opacity: 1;
+  }
+
+  #card-ui {
+    padding: 16px;
+  }
+  .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .card,
+  .video-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-bar-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px 12px;
+  }
+  .filter-bar {
+    gap: 4px;
+    padding: 0;
+  }
+  .filter-bar button {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  .scroll-button {
+    position: static;
+    margin: 4px 0;
+    opacity: 1;
+    transform: none;
+  }
+
+  #card-ui {
+    padding: 12px;
+  }
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

@@ -338,8 +338,24 @@ body {
   font-weight: bold;
 } */
 
+@media (max-width: 1024px) {
+  .video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .featured-video {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .video-player {
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
 @media (max-width: 768px) {
-  /* 채널 헤더를 세로 스택으로 */
   .channel-header {
     flex-direction: column;
     align-items: flex-start;
@@ -352,7 +368,6 @@ body {
     margin: 0 16px 16px;
   }
 
-  /* 네비게이션 가로 스크롤 */
   .channel-nav {
     overflow-x: auto;
   }
@@ -363,8 +378,86 @@ body {
     margin-right: 12px;
   }
 
-  /* 비디오 그리드를 2열으로 */
   .video-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .channel-page {
+    width: 100%;
+    padding: 0;
+  }
+
+  /* 채널 헤더 세로 정렬 */
+  .channel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+  }
+  .channel-banner {
+    height: 150px;
+  }
+  .channel-avatar {
+    width: 48px;
+    height: 48px;
+    margin: 12px;
+  }
+  .channel-details {
+    margin: 0 12px 12px;
+  }
+  .subscribe-btn {
+    margin: 12px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* 내비게이션 항목 간격 줄이기 */
+  .channel-nav {
+    overflow-x: auto;
+  }
+  .nav-list {
+    padding-left: 12px;
+  }
+  .nav-item {
+    margin-right: 12px;
+  }
+  .nav-extra {
+    padding-right: 12px;
+  }
+
+  /* 대표 영상도 세로 배치, 플레이어 가득 채우기 */
+  .featured-video {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .video-player {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+  .video-info {
+    padding: 0 16px 16px;
+  }
+
+  /* 각 비디오 섹션 헤더 세로 정렬 */
+  .video-section .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  /* 비디오 그리드 1열, 간격 축소 */
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* 카드 내부 패딩·폰트 크기 축소 */
+  .card-data {
+    padding: 8px;
+  }
+  .card-title {
+    font-size: 0.95rem;
   }
 }
