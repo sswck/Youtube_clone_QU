@@ -128,16 +128,29 @@ body {
   border-radius: 4px;
 }
 
-#buttonLike {
-  background-color: transparent;
-  color: gray;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s;
+#buttonLike .button-icon {
+  transition: transform 2s ease;
 }
 
-#buttonLike.liked {
-  color: #4caf50; /* 좋아요가 눌린 상태에서 색상 변경 */
+#buttonLike::before .button-icon {
+  content: url("/assets/icons/video/Liked.svg");
+}
+
+#buttonLike.liked .button-icon {
+  content: url("/assets/icons/video/yt-liked-fill.svg");
+}
+
+#buttonLike:active .button-icon {
+  animation: icon-swap 4s ease-in-out;
+}
+
+@keyframes icon-swap {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2) translateX(-10px) rotate(-45deg);
+  }
 }
 
 /* 채널 정보 */

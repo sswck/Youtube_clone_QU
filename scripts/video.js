@@ -83,7 +83,7 @@ function displayVideoInfo(data) {
     const likedVideos = getLikedVideos();
     if (likedVideos.includes(videoId)) {
       likeButton.classList.add("liked");
-      likeCount.textContent = formatView(data.likes + 1); // 좋아요 수 증가
+      likeCount.textContent = formatView(data.likes + 1);
     }
 
     // 클릭 시 좋아요 추가/취소
@@ -91,11 +91,11 @@ function displayVideoInfo(data) {
       if (likeButton.classList.contains("liked")) {
         unlikeVideo(videoId);
         likeButton.classList.remove("liked");
-        likeCount.textContent = formatView(data.likes + 1); // 좋아요 수 증가
+        likeCount.textContent = formatView(data.likes);
       } else {
         likeVideo(videoId);
         likeButton.classList.add("liked");
-        likeCount.textContent = formatView(data.likes); // 좋아요 수 감소
+        likeCount.textContent = formatView(data.likes + 1);
       }
     });
   }
