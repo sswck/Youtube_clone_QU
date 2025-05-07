@@ -10,7 +10,7 @@ function cardHoverStyle(container, overlay) {
   });
 
   container.addEventListener("mouseleave", () => {
-    overlay.style = `filter : opacity(0);`;
+    // overlay.style = `filter : opacity(0);`;
     container.style = `transform: perspective(1000px) rotateY(0deg) rotateX(0deg);`;
   });
 }
