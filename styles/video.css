@@ -91,6 +91,7 @@ body {
 .video-title {
   font-size: 18px;
   font-weight: 400;
+  color: var(--text-primary);
 }
 .video-info .info {
   display: flex;
@@ -119,6 +120,7 @@ body {
 .video-info .video-button span {
   padding: 10px 6px 10px 0;
   font-size: 14px;
+  color: var(--text-primary);
 }
 
 /* 채널 정보 */
@@ -153,6 +155,7 @@ body {
 .channel-title .channel-name {
   font-size: 14px;
   font-weight: 400;
+  color: var(--text-primary);
 }
 
 .channel-title .subscribers {
