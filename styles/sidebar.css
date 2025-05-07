@@ -29,6 +29,12 @@ aside {
   background-color: var(--bg-divider);
 }
 
+.sidebar-item.selected,
+.subscribed-channel.selected {
+  background-color: var(--bg-divider);
+  color: var(--text-primary);
+}
+
 .item-thumbnail,
 .channel-thumbnail {
   width: 24px;

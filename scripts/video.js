@@ -2,6 +2,7 @@ import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
+import { likeVideo, unlikeVideo, getLikedVideos } from "./likedVideos.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -70,6 +71,34 @@ function displayVideoInfo(data) {
     tagsContainer.appendChild(btn);
   });
   addTagFilterFunctionality();
+
+  // 좋아요/싫어요 버튼 초기화
+  const likeButton = document.querySelector("#buttonLike");
+  const likeCount = document.querySelector("#buttonLike span");
+
+  if (likeButton) {
+    const videoId = data.id;
+
+    // 초기 좋아요 상태 확인
+    const likedVideos = getLikedVideos();
+    if (likedVideos.includes(videoId)) {
+      likeButton.classList.add("liked");
+      likeCount.textContent = formatView(data.likes + 1);
+    }
+
+    // 클릭 시 좋아요 추가/취소
+    likeButton.addEventListener("click", () => {
+      if (likeButton.classList.contains("liked")) {
+        unlikeVideo(videoId);
+        likeButton.classList.remove("liked");
+        likeCount.textContent = formatView(data.likes);
+      } else {
+        likeVideo(videoId);
+        likeButton.classList.add("liked");
+        likeCount.textContent = formatView(data.likes + 1);
+      }
+    });
+  }
 }
 
 // ==================== 태그 필터링 기능 추가 ====================

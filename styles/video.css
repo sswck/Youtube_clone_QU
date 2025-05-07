@@ -123,6 +123,36 @@ body {
   color: var(--text-primary);
 }
 
+.video-info .video-button:hover {
+  background-color: var(--bg-divider);
+  border-radius: 4px;
+}
+
+#buttonLike .button-icon {
+  transition: transform 2s ease;
+}
+
+#buttonLike::before .button-icon {
+  content: url("/assets/icons/video/Liked.svg");
+}
+
+#buttonLike.liked .button-icon {
+  content: url("/assets/icons/video/yt-liked-fill.svg");
+}
+
+#buttonLike:active .button-icon {
+  animation: icon-swap 4s ease-in-out;
+}
+
+@keyframes icon-swap {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2) translateX(-10px) rotate(-45deg);
+  }
+}
+
 /* 채널 정보 */
 .video-description {
   margin-bottom: 16px;
