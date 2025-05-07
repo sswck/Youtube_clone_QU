@@ -2,6 +2,7 @@
 function initThemeToggle() {
   const htmlEl = document.documentElement;
   const toggle = document.getElementById("theme-toggle-switch");
+  const themeToggleItem = document.querySelector(".theme-toggle-item");
   const saved = localStorage.getItem("theme") || "dark";
 
   // 초기 상태 복원
@@ -15,6 +16,18 @@ function initThemeToggle() {
       htmlEl.setAttribute("data-theme", theme);
       localStorage.setItem("theme", theme);
     });
+
+    // theme-toggle-item 클릭 이벤트 추가
+    if (themeToggleItem) {
+      themeToggleItem.addEventListener("click", (e) => {
+        // 체크박스나 슬라이더를 직접 클릭한 경우는 제외
+        if (e.target !== toggle && !e.target.classList.contains("slider")) {
+          toggle.checked = !toggle.checked;
+          // change 이벤트 발생시키기
+          toggle.dispatchEvent(new Event("change"));
+        }
+      });
+    }
   }
 }
 
