@@ -3,6 +3,7 @@ import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
 import { likeVideo, unlikeVideo, getLikedVideos } from "./likedVideos.js";
+import { cardHoverStyle } from "./cardHoverStyle.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -188,6 +189,7 @@ function displayVideoList(data) {
     item.addEventListener("click", () => {
       window.location.href = `/components/video.html?video_id=${video.id}`;
     });
+    cardHoverStyle(item);
     list.appendChild(item);
   });
 }
