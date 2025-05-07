@@ -4,6 +4,7 @@ import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
 import { likeVideo, unlikeVideo, getLikedVideos } from "./likedVideos.js";
 import { cardHoverStyle } from "./cardHoverStyle.js";
+import { buttonClickAnimation } from "./buttonClickAnimation.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -76,6 +77,7 @@ function displayVideoInfo(data) {
   // 좋아요/싫어요 버튼 초기화
   const likeButton = document.querySelector("#buttonLike");
   const likeCount = document.querySelector("#buttonLike span");
+  buttonClickAnimation(likeButton);
 
   if (likeButton) {
     const videoId = data.id;
