@@ -69,6 +69,10 @@
   align-self: center;
 }
 
+#timeDisplay {
+  color: var(--text-primary);
+}
+
 .speed-wrapper {
   position: relative;
   display: flex;
