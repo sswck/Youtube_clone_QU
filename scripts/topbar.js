@@ -17,7 +17,7 @@ function initSearch() {
   });
 
   searchButton.addEventListener("click", triggerSearch);
-  console.log("Search initialized.");
+  // console.log("Search initialized.");
 }
 
 // 0.1초마다 topbar 등장 여부 확인

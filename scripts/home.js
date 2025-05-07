@@ -4,7 +4,6 @@ import { timeAgo, formatView } from "./utils.js";
 function queryFilter(videos) {
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get("search")?.toLowerCase() || "";
-  console.log("Search Query:", searchQuery);
   const searchInput = document.getElementById("search-bar-input");
   searchInput.value = searchQuery;
 

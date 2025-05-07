@@ -37,15 +37,11 @@
     </style>
   </head>
   <body>
-    <div id="top-bar-container">
-      <script src="scripts/topbar.js" type="module"></script>
-    </div>
+    <div id="top-bar-container"></div>
     <!-- 레이아웃을 위한 래퍼: 사이드바 + 콘텐츠만 포함 -->
     <div class="layout-wrapper">
       <!-- 사이드바 로드 -->
-      <div id="side-bar-container">
-        <script src="scripts/sidebar.js" type="module"></script>
-      </div>
+      <div id="side-bar-container"></div>
 
       <!-- 동적 로드 영역 -->
       <div class="content">
@@ -56,6 +52,8 @@
       </div>
     </div>
 
+    <script src="scripts/topbar.js" type="module"></script>
+    <script src="scripts/sidebar.js" type="module"></script>
     <script src="/script.js" type="module"></script>
     <script type="module" src="/scripts/theme-toggle.js"></script>
   </body>
