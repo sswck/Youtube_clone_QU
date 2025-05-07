@@ -6,8 +6,8 @@ aside {
   width: 240px;
   height: calc(100vh - 56px);
   overflow-y: auto;
-  background-color: #212121;
-  color: #fff;
+  background-color: var(--bg-topbar);
+  color: var(--text-primary);
   font-weight: 300;
 }
 .sidebar-box {
@@ -26,7 +26,7 @@ aside {
 
 .sidebar-item:hover,
 .subscribed-channel:hover {
-  background-color: #303030;
+  background-color: var(--bg-divider);
 }
 
 .item-thumbnail,
@@ -44,11 +44,79 @@ aside {
 
 .sidebar-title {
   padding: 8px 24px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   font-weight: 700;
 }
 
 .divider {
   height: 1px;
-  background-color: #303030;
+  background-color: var(--bg-divider);
+}
+
+/* 토글 항목 전체 정렬 */
+.theme-toggle-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+}
+
+/* 스위치 트랙 */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 23px;
+}
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--switch-track-bg);
+  border-radius: 34px;
+  transition: background-color 0.3s;
+}
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 17px;
+  width: 17px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--switch-thumb-bg);
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+.theme-switch input:checked + .slider {
+  background-color: var(--switch-track-bg-checked);
+}
+.theme-switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+/* 아이콘 이미지에 대한 기본 필터 설정 (다크모드) */
+.item-thumbnail {
+  width: 24px;
+  height: 24px;
+  filter: invert(0); /* 다크모드에서는 항상 흰색으로 보이도록 */
+}
+
+/* 채널 썸네일은 제외 (실제 이미지이므로) */
+.channel-thumbnail {
+  width: 24px;
+  height: 24px;
+  filter: none;
+}
+
+/* 라이트모드일 때 다시 원래 색으로 */
+[data-theme="light"] .item-thumbnail {
+  filter: invert(1); /* 라이트모드에서는 원래 색상으로 */
 }

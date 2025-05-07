@@ -5,9 +5,9 @@
 }
 
 body {
-  background-color: #181818;
+  background-color: var(--bg-body);
   font-family: Arial, sans-serif;
-  color: white;
+  color: var(--text-primary);
 }
 .topbar {
   visibility: hidden;
@@ -51,7 +51,7 @@ body {
 .divider {
   width: 100%;
   height: 1px;
-  background-color: #303030;
+  background-color: var(--bg-divider);
   margin: 8px 0;
 }
 
@@ -78,7 +78,7 @@ body {
   /* max-height: 450px; 최대 높이 설정 (선택 사항) */
   object-fit: contain;
   border-radius: 8px;
-  background-color: black; /* 배경색 추가 */
+  background-color: var(--bg-voice-button); /* 배경색 추가 */
 }
 
 /* 비디오 정보 */
@@ -91,6 +91,7 @@ body {
 .video-title {
   font-size: 18px;
   font-weight: 400;
+  color: var(--text-primary);
 }
 .video-info .info {
   display: flex;
@@ -100,7 +101,7 @@ body {
 .video-info .video-stats {
   padding: 12px 0;
   font-size: 14px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
 }
 .video-info .video-buttons {
   display: flex;
@@ -119,6 +120,7 @@ body {
 .video-info .video-button span {
   padding: 10px 6px 10px 0;
   font-size: 14px;
+  color: var(--text-primary);
 }
 
 /* 채널 정보 */
@@ -153,16 +155,17 @@ body {
 .channel-title .channel-name {
   font-size: 14px;
   font-weight: 400;
+  color: var(--text-primary);
 }
 
 .channel-title .subscribers {
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
 }
 
 .subscribe-button {
-  background-color: #cc0000;
-  color: white;
+  background-color: var(--bg-subscribe-btn);
+  color: var(--text-primary);
   text-align: center;
   padding: 10px 16px;
   border: none;
@@ -174,16 +177,16 @@ body {
 }
 
 .subscribe-button:hover {
-  background-color: #b10000;
+  background-color: var(--bg-subscribe-btn-hover);
 }
 
 .subscribe-button.subscribed {
-  background-color: #313131; /* 구독 후 버튼 색상 */
+  background-color: var(--bg-subscribe-btn-subscribed); /* 구독 후 버튼 색상 */
 }
 
 .description-text {
   font-size: 14px;
-  color: white;
+  color: var(--text-primary);
   line-height: 100%;
   margin: 10px 0;
   letter-spacing: 0%;
@@ -192,7 +195,7 @@ body {
 
 .show-more {
   font-size: 14px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   cursor: pointer;
   margin-bottom: 16px;
   padding-left: 60px;
@@ -209,7 +212,7 @@ body {
 .comment-count {
   font-size: 16px;
   font-weight: 400;
-  color: white;
+  color: var(--text-primary);
 }
 
 .sort-by {
@@ -218,7 +221,7 @@ body {
   gap: 4px;
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -243,18 +246,18 @@ body {
 
 .comment-field input {
   flex: 1;
-  background-color: #181818;
+  background-color: var(--bg-body);
   border: none;
   border-radius: 5px;
-  border-bottom: 1px solid #303030;
+  border-bottom: 1px solid var(--bg-divider);
   padding: 5px 8px;
   font-size: 14px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   outline: none;
 }
 
 .comment-field input:focus {
-  color: white;
+  color: var(--text-primary);
 }
 
 .comment {
@@ -285,12 +288,12 @@ body {
 
 .comment-time {
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
 }
 
 .comment-text {
   font-size: 14px;
-  color: white;
+  color: var(--text-primary);
   line-height: 20px;
   letter-spacing: 0%;
   padding: 5px 0;
@@ -301,7 +304,7 @@ body {
   display: flex;
   gap: 24px;
   align-items: center;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 12px;
 }
@@ -325,15 +328,15 @@ body {
   min-height: 1.2em;
   overflow: hidden; /* 스크롤바 숨기기 */
   resize: none; /* 사용자가 드래그해서 크기 변경 못하게 */
-  background-color: #181818;
+  background-color: var(--bg-body);
   border: none;
   border-radius: 5px;
-  border-bottom: 1px solid #303030;
+  border-bottom: 1px solid var(--bg-divider);
   font: inherit; /* 부모 요소의 font-family, font-size, font-weight 등을 그대로 물려받음 */
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0%;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   outline: none;
   margin: 10px 0;
   padding: 5px 5px;
@@ -341,7 +344,21 @@ body {
 
 /* 엔터 치거나 블러 시 원래 텍스트로 돌아가기 때문에 포커스 스타일만 */
 .comment-edit-input:focus {
-  border-bottom-color: #555;
+  border-bottom-color: var(--volume-stop4);
+}
+
+.comment-like img,
+.comment-dislike img,
+.sort-by img,
+.video-button img {
+  filter: invert(0);
+}
+
+[data-theme="light"] .comment-like img,
+[data-theme="light"] .comment-dislike img,
+[data-theme="light"] .sort-by img,
+[data-theme="light"] .video-button img {
+  filter: invert(1);
 }
 
 /* 오른쪽 사이드바 */
@@ -361,8 +378,8 @@ body {
 
 .secondary-button {
   padding: 8px 16px;
-  background: #333;
-  color: white;
+  background: var(--border-filter-bar);
+  color: var(--text-primary);
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -371,12 +388,12 @@ body {
 }
 
 .secondary-button:hover {
-  background-color: #444;
+  background-color: var(--border-search-input);
 }
 
 .secondary-button.active {
-  background-color: white;
-  color: black;
+  background-color: var(--bg-filter-active);
+  color: var(--text-active-inverse);
   font-weight: bold;
 }
 
@@ -393,8 +410,8 @@ body {
 }
 .secondary-video:hover {
   transform: scale(1.02);
-  background-color: #202020;
-  border: 1px solid #303030;
+  background-color: var(--bg-secondary-video-hover);
+  border: 1px solid var(--border-secondary-video-hover);
 }
 
 .secondary-thumbnail {
@@ -416,8 +433,8 @@ body {
   padding: 3px 4px;
   font-size: 10px;
   line-height: 100%;
-  color: white;
-  background: black;
+  color: var(--text-primary);
+  background: var(--bg-card);
 }
 
 .secondary-video-text {
@@ -432,13 +449,13 @@ body {
 .secondary-video-title {
   font-size: 14px;
   line-height: 20px;
-  color: white;
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
 .secondary-video-channel,
 .secondary-video-info {
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   line-height: 18px;
 }
 
