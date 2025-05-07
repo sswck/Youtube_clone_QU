@@ -1,22 +1,41 @@
 import { getVideoListWithChannelInfo } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
+import { getSubscriptions } from "./subscription.js";
+import { getLikedVideos } from "./likedVideos.js";
 
 function queryFilter(videos) {
   const urlParams = new URLSearchParams(window.location.search);
-  const searchQuery = urlParams.get("search")?.toLowerCase() || "";
-  const searchInput = document.getElementById("search-bar-input");
-  searchInput.value = searchQuery;
 
-  // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
-  const filteredVideos = searchQuery
-    ? videos.filter(
-        (video) =>
-          video.title.toLowerCase().includes(searchQuery) ||
-          video.channelInfo?.channel_name.toLowerCase().includes(searchQuery) ||
-          video.tags.includes(searchQuery)
-      )
-    : videos;
-  return filteredVideos;
+  if (urlParams.get("search")) {
+    // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
+    const searchQuery = urlParams.get("search")?.toLowerCase() || "";
+    const searchInput = document.getElementById("search-bar-input");
+    searchInput.value = searchQuery;
+    console.log("검색어:", searchQuery); // 디버깅용 로그
+
+    const filteredVideos = searchQuery
+      ? videos.filter(
+          (video) =>
+            video.title.toLowerCase().includes(searchQuery) ||
+            video.channelInfo?.channel_name.toLowerCase().includes(searchQuery) ||
+            video.tags.includes(searchQuery)
+        )
+      : videos;
+    return filteredVideos;
+  } else if (urlParams.get("subscriptions")) {
+    // 구독한 채널의 비디오만 필터링
+    const subscriptions = getSubscriptions();
+    console.log("구독 목록:", subscriptions); // 디버깅용 로그
+    const subscriptionIds = subscriptions.map((sub) => sub.id);
+    return videos.filter((video) => subscriptionIds.includes(video.channel_id));
+  } else if (urlParams.get("liked")) {
+    // 좋아요한 비디오만 필터링
+    const likedVideos = getLikedVideos();
+    return videos.filter((video) => likedVideos.includes(video.id));
+  } else {
+    // 검색어가 없을 때는 전체 비디오 리스트를 반환
+    return videos;
+  }
 }
 
 function createVideoCardWithChannel(video) {
