@@ -491,77 +491,32 @@ body {
 }
 
 /*  반응형 미디어쿼리*/
-@media (max-width: 1200px) {
-  .video-page {
-    padding: 20px 5%;
-    gap: 20px;
-  }
-  
-  .video-container {
-    flex: 0 1 60%;
-  }
-  
-  .video-secondary {
-    flex: 0 1 40%;
-  }
-  
-  .video-info .info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .video-buttons {
-    width: 100%;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 992px) {
-  .video-page {
-    padding: 16px 4%;
-    gap: 16px;
-  }
-  
-  .video-title {
-    font-size: 16px;
-  }
-  
-  .video-stats {
-    font-size: 13px;
-  }
-  
-  .description-text {
-    font-size: 13px;
-    padding-left: 48px;
-  }
-}
 
 @media (max-width: 768px) {
   .video-page {
     flex-direction: column;
     padding: 12px;
   }
-  
+
   .video-container,
   .video-secondary {
     flex: 0 1 100%;
   }
-  
+
   .video-secondary {
     padding: 12px 0 0 0;
   }
-  
+
   .secondary-thumbnail {
     flex: 0 0 140px;
     width: 140px;
     height: 78px;
   }
-  
+
   .description-text {
     padding-left: 0;
   }
-  
+
   .show-more {
     padding-left: 0;
   }
@@ -571,29 +526,29 @@ body {
   .video-page {
     padding: 8px;
   }
-  
+
   .video-title {
     font-size: 14px;
   }
-  
+
   .video-stats {
     font-size: 12px;
   }
-  
+
   .video-button span {
     font-size: 12px;
   }
-  
+
   .secondary-thumbnail {
     flex: 0 0 120px;
     width: 120px;
     height: 68px;
   }
-  
+
   .secondary-video-title {
     font-size: 13px;
   }
-  
+
   .secondary-video-channel,
   .secondary-video-info {
     font-size: 11px;
