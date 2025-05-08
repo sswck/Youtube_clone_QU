@@ -15,10 +15,9 @@ body {
 .layout-wrapper {
   display: flex;
 }
-.sidebar {
-  /* visibility: hidden; */
+/* .sidebar {
   display: none;
-}
+} */
 .video-page {
   visibility: hidden;
   display: flex;

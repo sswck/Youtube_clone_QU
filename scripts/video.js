@@ -10,7 +10,7 @@ import { orderVideoList } from "./videoRecommend.js";
 async function initVideoPage() {
   await loadTopBar(); // 상단 바 로드
   await loadSideBar(); // 사이드 바 로드
-  document.querySelector("#side-bar-container").style.display = "none";
+  document.querySelector("aside").classList.add("closed"); // 사이드 바 닫기
 
   // video_id 쿼리 파라미터 가져오기 (기본 1)
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;

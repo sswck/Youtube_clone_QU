@@ -6,10 +6,12 @@ function initTopBar() {
 function initSidebarCloser() {
   const menuButton = document.querySelector(".menu-button");
   const sideBarContainer = document.getElementById("side-bar-container");
+  const aside = sideBarContainer.querySelector("aside");
 
   if (menuButton && sideBarContainer) {
     menuButton.addEventListener("click", () => {
-      sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
+      // sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
+      aside.classList.toggle("closed");
     });
   }
 }
