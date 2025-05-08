@@ -105,12 +105,11 @@ async function getVideoListWithChannelInfo() {
  * @description
  * fetch API를 사용하여 두 단어의 관계 정보를 비동기적으로 가져오는 함수.
  * 입력 받은 두 단어를 사용하여 POST 요청을 보내고,
- * 응답에서 관계 또는 유사도 수치를 추출하여 반환합니다.
+ * 응답에서 어휘 간 거리를 반환합니다.
  * @async
  * @param {string} firstWord - 첫 번째 단어.
  * @param {string} secondWord - 두 번째 단어.
- * @returns {Promise<Object|null>} A promise that resolves with the similarity analysis result (JSON object),
- * or null if an error occurs or the information is not found.
+ * @returns {Promise<number|null>}
  */
 
 async function getWordRelationship(firstWord, secondWord) {

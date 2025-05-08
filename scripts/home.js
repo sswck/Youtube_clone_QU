@@ -39,7 +39,7 @@ function queryFilter(videos) {
   }
 }
 
-function createVideoCardWithChannel(video) {
+async function createVideoCardWithChannel(video) {
   const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
   const thumbnailUrl = video.thumbnail || "/assets/images/thumbnail.png";
   const avatarUrl = video.channelInfo?.channel_profile || "https://randomuser.me/api/portraits/men/32.jpg";
@@ -108,10 +108,13 @@ function initFilterBar() {
   filterBarContainer.style.visibility = "visible"; // 로드 후 필터바 보이게
 }
 
-function renderVideos(videos, container) {
+async function renderVideos(videos, container) {
   if (videos && videos.length > 0 && container) {
-    const cardsHTML = videos.map(createVideoCardWithChannel).join("");
-    //container.innerHTML = cardsHTML;
+    const videoCardPromises = videos.map(async (video) => {
+      return await createVideoCardWithChannel(video);
+    });
+    const cardsHTMLArray = await Promise.all(videoCardPromises);
+    const cardsHTML = cardsHTMLArray.join("");
     container.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
 
     // 카드 클릭 이벤트 리스너
@@ -168,7 +171,7 @@ async function initHomePage() {
 
     // 초기 비디오 목록 렌더링 (기존 검색 쿼리 적용)
     const initialFilteredVideos = queryFilter(videos);
-    renderVideos(initialFilteredVideos, videoGridContainer);
+    await renderVideos(initialFilteredVideos, videoGridContainer);
 
     const allTags = []; // 모든 태그를 저장할 배열
 
