@@ -181,7 +181,7 @@ function displayChannelInfo(data) {
 }
 
 // ==================== 추천 동영상 리스트 표시 ====================
-function displayVideoList(data) {
+async function displayVideoList(data) {
   const list = document.querySelector(".secondary-list");
   list.innerHTML = "";
 
@@ -191,8 +191,8 @@ function displayVideoList(data) {
     return;
   }
 
-  data.forEach(async (video) => {
-    if (video.id === currentId) return;
+  for (const video of data) {
+    if (video.id === currentId) continue;
     const chName = (await getChannelInfo(video.channel_id)).channel_name || "Unknown";
     const item = document.createElement("div");
     item.className = "secondary-video";
@@ -211,7 +211,7 @@ function displayVideoList(data) {
     });
     cardHoverStyle(item);
     list.appendChild(item);
-  });
+  }
 }
 
 // ==================== 댓글 기능 ====================
