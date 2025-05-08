@@ -41,11 +41,15 @@ async function orderVideoList(currentVideoTags, data) {
       if (currentRemainingTags.length > 0 && otherVideoTags.length > 0) {
         for (const currentRemainingTag of currentRemainingTags) {
           for (const otherVideoTag of otherVideoTags) {
-            await delay(10);
-            const similarity = await getWordRelationship(currentRemainingTag, otherVideoTag);
-            if (typeof similarity === "number") {
-              totalSimilarity += similarity;
-              comparisonCount++;
+            try {
+              await delay(10);
+              const similarity = await getWordRelationship(currentRemainingTag, otherVideoTag);
+              if (typeof similarity === "number") {
+                totalSimilarity += similarity;
+                comparisonCount++;
+              }
+            } catch (error) {
+              console.error("Error fetching word relationship:", error);
             }
           }
         }
