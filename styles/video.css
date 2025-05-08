@@ -128,6 +128,11 @@ body {
   border-radius: 4px;
 }
 
+/* 좋아요 버튼 */
+#buttonLike.liked {
+  background-color: rgba(255, 0, 0, 0.5);
+  border-radius: 4px;
+}
 #buttonLike .button-icon {
   transition: transform 2s ease;
 }
@@ -138,6 +143,7 @@ body {
 
 #buttonLike.liked .button-icon {
   content: url("/assets/icons/video/yt-liked-fill.svg");
+  animation: like-clicked 0.5s ease-in-out;
 }
 
 #buttonLike:active .button-icon {
@@ -146,10 +152,81 @@ body {
 
 @keyframes icon-swap {
   0% {
-    transform: scale(1);
+    transform: scale(0.8);
   }
   100% {
     transform: scale(2) translateX(-10px) rotate(-45deg);
+  }
+}
+
+@keyframes like-clicked {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-5px) rotate(-10deg);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 싫어요 버튼 */
+#buttonDislike.disliked {
+  background-color: rgba(0, 0, 255, 0.5);
+  border-radius: 4px;
+}
+#buttonDislike .button-icon {
+  transition: transform 2s ease;
+}
+
+#buttonDislike::before .button-icon {
+  content: url("/assets/icons/video/DisLiked.svg");
+}
+
+#buttonDislike.disliked .button-icon {
+  content: url("/assets/icons/video/yt-disliked-fill.svg");
+  animation: dislike-clicked 0.5s ease-in-out;
+}
+
+#buttonDislike:active .button-icon {
+  animation: dis-icon-swap 4s ease-in-out;
+}
+
+@keyframes dis-icon-swap {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(2) translateX(10px) rotate(45deg);
+  }
+}
+
+@keyframes dislike-clicked {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-5px) translateY(5px) rotate(-10deg);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
