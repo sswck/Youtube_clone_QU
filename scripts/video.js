@@ -28,8 +28,9 @@ async function initVideoPage() {
     displayChannelInfo(channelData);
 
     const videoListData = await getVideoList();
+    const tempVideoListData = videoListData.filter((video) => video.id !== videoData.id);
     // 추천알고리즘으로 정렬후 orderedVideoListData 반환
-    const orderedVideoListData = await orderVideoList(videoData.tags, videoListData);
+    const orderedVideoListData = await orderVideoList(videoData.tags, tempVideoListData);
     displayVideoList(orderedVideoListData);
 
     // 비디오 플레이어 커스터마이징

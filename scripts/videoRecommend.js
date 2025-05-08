@@ -50,9 +50,9 @@ async function orderVideoList(currentVideoTags, data) {
   // 일치하는 태그 수를 기준으로 내림차순 정렬
   scoredVideos.sort((a, b) => b.matchingCount - a.matchingCount);
   // 가장 높은 일치 개수 찾기
-  const maxMatchingCount = scoredVideos.length > 0 ? --scoredVideos[0].matchingCount : 0;
+  const maxMatchingCount = scoredVideos.length > 0 ? scoredVideos[0].matchingCount : 0;
   // 가장 높은 일치 개수를 가진 비디오들만 필터링 (현재 자기 자신의 영상도 포함되기 때문에 --연산 후 >= 비교로 처리)
-  const topMatchingVideos = scoredVideos.filter((video) => video.matchingCount >= maxMatchingCount);
+  const topMatchingVideos = scoredVideos.filter((video) => video.matchingCount === maxMatchingCount);
 
   let finalOrderedList = [];
   // 2. 2차 정렬: 일치하는 태그 수가 같은 경우 API로 유사도 검사 (가장 높은 일치 개수를 가진 비디오가 1개보다 많은 상황에만)
