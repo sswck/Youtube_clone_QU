@@ -29,9 +29,8 @@ async function initVideoPage() {
 
     const videoListData = await getVideoList();
     // 추천알고리즘으로 정렬후 orderedVideoListData 반환
-    //const orderedVideoListData = await orderVideoList(videoData.tags, videoListData);
-    //displayVideoList(orderVideoList);
-    displayVideoList(videoListData);
+    const orderedVideoListData = await orderVideoList(videoData.tags, videoListData);
+    displayVideoList(orderedVideoListData);
 
     // 비디오 플레이어 커스터마이징
     const videoElement = document.querySelector(".video-player");
