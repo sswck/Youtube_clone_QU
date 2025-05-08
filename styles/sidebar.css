@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 aside {
-  width: 240px;
+  /* width: 240px; */
   height: calc(100vh - 56px);
   overflow-y: auto;
   background-color: var(--bg-topbar);
@@ -125,4 +125,28 @@ aside {
 /* 라이트모드일 때 다시 원래 색으로 */
 [data-theme="light"] .item-thumbnail {
   filter: invert(1); /* 라이트모드에서는 원래 색상으로 */
+}
+
+/* 사이드바 닫힌 상태  */
+aside.closed {
+  padding: 0 4px;
+}
+
+aside.closed .sidebar-item {
+  flex-direction: column;
+  justify-content: center;
+  width: 64px;
+  padding: 16px 0 14px 0;
+  gap: 4px;
+}
+
+aside.closed .item-title {
+  font-size: 10px;
+}
+
+aside.closed #sidebar-subscriptions {
+  display: none;
+}
+
+@media (max-width: 1200px) {
 }
