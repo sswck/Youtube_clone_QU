@@ -505,32 +505,6 @@ body {
   padding: 20px 20px 0 0;
 }
 
-.secondary-tags {
-  display: flex;
-  gap: 8px;
-}
-
-.secondary-button {
-  padding: 8px 16px;
-  background: var(--border-filter-bar);
-  color: var(--text-primary);
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: transform 0.2s ease;
-}
-
-.secondary-button:hover {
-  background-color: var(--border-search-input);
-}
-
-.secondary-button.active {
-  background-color: var(--bg-filter-active);
-  color: var(--text-active-inverse);
-  font-weight: bold;
-}
-
 .secondary-list {
   display: flex;
   flex-direction: column;
