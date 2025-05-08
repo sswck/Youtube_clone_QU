@@ -2,9 +2,8 @@ import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
-import { likeVideo, unlikeVideo, getLikedVideos } from "./likedVideos.js";
+import { likeVideo, unlikeVideo, getLikedVideos, dislikeVideo, undislikeVideo, getDislikedVideos } from "./likedVideos.js";
 import { cardHoverStyle } from "./cardHoverStyle.js";
-import { buttonClickAnimation } from "./buttonClickAnimation.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -77,7 +76,8 @@ function displayVideoInfo(data) {
   // 좋아요/싫어요 버튼 초기화
   const likeButton = document.querySelector("#buttonLike");
   const likeCount = document.querySelector("#buttonLike span");
-  buttonClickAnimation(likeButton);
+  const dislikeButton = document.querySelector("#buttonDislike");
+  const dislikeCount = document.querySelector("#buttonDislike span");
 
   if (likeButton) {
     const videoId = data.id;
@@ -99,6 +99,30 @@ function displayVideoInfo(data) {
         likeVideo(videoId);
         likeButton.classList.add("liked");
         likeCount.textContent = formatView(data.likes + 1);
+      }
+    });
+  }
+
+  if (dislikeButton) {
+    const videoId = data.id;
+
+    // 초기 싫어요 상태 확인
+    const dislikedVideos = getDislikedVideos();
+    if (dislikedVideos.includes(videoId)) {
+      dislikeButton.classList.add("disliked");
+      dislikeCount.textContent = formatView(data.dislikes + 1);
+    }
+
+    // 클릭 시 싫어요 추가/취소
+    dislikeButton.addEventListener("click", () => {
+      if (dislikeButton.classList.contains("disliked")) {
+        undislikeVideo(videoId);
+        dislikeButton.classList.remove("disliked");
+        dislikeCount.textContent = formatView(data.dislikes);
+      } else {
+        dislikeVideo(videoId);
+        dislikeButton.classList.add("disliked");
+        dislikeCount.textContent = formatView(data.dislikes + 1);
       }
     });
   }
