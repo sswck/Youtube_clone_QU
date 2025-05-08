@@ -223,7 +223,7 @@ body {
     opacity: 1;
   }
   75% {
-    transform: rotate(-10deg);
+    transform: translateX(-5px) translateY(5px) rotate(-10deg);
   }
   100% {
     transform: scale(1);
