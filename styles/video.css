@@ -83,7 +83,7 @@ body {
 
 /* 비디오 정보 */
 .video-info {
-  padding: 20px 0 8px 0;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
