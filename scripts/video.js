@@ -66,15 +66,15 @@ function displayVideoInfo(data) {
   description.textContent = data.description;
 
   // 태그 버튼
-  const tagsContainer = document.querySelector(".secondary-tags");
-  tagsContainer.innerHTML = `<button class="secondary-button">All</button>`;
+  const tagsContainer = document.querySelector(".video-tags");
+  tagsContainer.innerHTML = "";
   data.tags.forEach((tag) => {
     const btn = document.createElement("button");
-    btn.className = "secondary-button";
-    btn.textContent = tag;
+    btn.className = "tag-button";
+    btn.textContent = "# " + tag;
     tagsContainer.appendChild(btn);
   });
-  addTagFilterFunctionality();
+  addTagSearchFunctionality();
 
   // 좋아요/싫어요 버튼 초기화
   const likeButton = document.querySelector("#buttonLike");
@@ -131,23 +131,14 @@ function displayVideoInfo(data) {
   }
 }
 
-// ==================== 태그 필터링 기능 추가 ====================
-function addTagFilterFunctionality() {
-  const buttons = document.querySelectorAll(".secondary-button");
-  const allBtn = document.querySelector(".secondary-button:first-child");
-  allBtn?.classList.add("active");
+// ==================== 태그 검색 기능 추가 ====================
+function addTagSearchFunctionality() {
+  const buttons = document.querySelectorAll(".tag-button");
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const selected = btn.textContent;
-      document.querySelectorAll(".secondary-video").forEach((vid) => {
-        const tags = vid.getAttribute("data-tags")?.split(",") || [];
-        const show = selected === "All" || tags.includes(selected);
-        vid.style.visibility = show ? "visible" : "hidden";
-        vid.style.position = show ? "static" : "absolute";
-      });
+      const selected = btn.textContent.substring(2); // "# " 제거
+      window.location.href = `/index.html?search=${encodeURIComponent(selected)}`;
     });
   });
 }
