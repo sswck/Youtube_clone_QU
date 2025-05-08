@@ -19,3 +19,25 @@ export function unlikeVideo(videoId) {
 export function getLikedVideos() {
   return JSON.parse(localStorage.getItem("likedVideos")) || [];
 }
+
+// 💔 싫어요 추가
+export function dislikeVideo(videoId) {
+  let dislikedVideos = JSON.parse(localStorage.getItem("dislikedVideos")) || [];
+
+  if (!dislikedVideos.includes(videoId)) {
+    dislikedVideos.push(videoId);
+    localStorage.setItem("dislikedVideos", JSON.stringify(dislikedVideos));
+  }
+}
+
+// 💔 싫어요 취소
+export function undislikeVideo(videoId) {
+  let dislikedVideos = JSON.parse(localStorage.getItem("dislikedVideos")) || [];
+  dislikedVideos = dislikedVideos.filter((id) => id !== videoId);
+  localStorage.setItem("dislikedVideos", JSON.stringify(dislikedVideos));
+}
+
+// 💔 싫어요 목록 가져오기
+export function getDislikedVideos() {
+  return JSON.parse(localStorage.getItem("dislikedVideos")) || [];
+}
