@@ -71,7 +71,7 @@ body {
   border-radius: 4px;
 }
 
-/* 비디오 태그 스타일 */
+/* 비디오 스타일 */
 .video-player video {
   width: 100%;
   height: auto;
@@ -92,6 +92,32 @@ body {
   font-size: 18px;
   font-weight: 400;
   color: var(--text-primary);
+}
+.video-tags {
+  display: flex;
+  padding: 4px;
+  gap: 8px;
+}
+
+.tag-button {
+  padding: 8px 16px;
+  background: var(--border-filter-bar);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.tag-button:hover {
+  background-color: var(--border-search-input);
+}
+
+.tag-button.active {
+  background-color: var(--bg-filter-active);
+  color: var(--text-active-inverse);
+  font-weight: bold;
 }
 .video-info .info {
   display: flex;
