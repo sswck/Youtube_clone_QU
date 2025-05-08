@@ -5,9 +5,9 @@
 }
 
 body {
-  background-color: #181818;
+  background-color: var(--bg-body);
   font-family: Arial, sans-serif;
-  color: white;
+  color: var(--text-primary);
 }
 .topbar {
   visibility: hidden;
@@ -51,7 +51,7 @@ body {
 .divider {
   width: 100%;
   height: 1px;
-  background-color: #303030;
+  background-color: var(--bg-divider);
   margin: 8px 0;
 }
 
@@ -71,19 +71,19 @@ body {
   border-radius: 4px;
 }
 
-/* 비디오 태그 스타일 */
+/* 비디오 스타일 */
 .video-player video {
   width: 100%;
   height: auto;
   /* max-height: 450px; 최대 높이 설정 (선택 사항) */
   object-fit: contain;
   border-radius: 8px;
-  background-color: black; /* 배경색 추가 */
+  background-color: var(--bg-voice-button); /* 배경색 추가 */
 }
 
 /* 비디오 정보 */
 .video-info {
-  padding: 20px 0 8px 0;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -91,6 +91,33 @@ body {
 .video-title {
   font-size: 18px;
   font-weight: 400;
+  color: var(--text-primary);
+}
+.video-tags {
+  display: flex;
+  padding: 4px;
+  gap: 8px;
+}
+
+.tag-button {
+  padding: 8px 16px;
+  background: var(--border-filter-bar);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.tag-button:hover {
+  background-color: var(--border-search-input);
+}
+
+.tag-button.active {
+  background-color: var(--bg-filter-active);
+  color: var(--text-active-inverse);
+  font-weight: bold;
 }
 .video-info .info {
   display: flex;
@@ -100,7 +127,7 @@ body {
 .video-info .video-stats {
   padding: 12px 0;
   font-size: 14px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
 }
 .video-info .video-buttons {
   display: flex;
@@ -119,6 +146,114 @@ body {
 .video-info .video-button span {
   padding: 10px 6px 10px 0;
   font-size: 14px;
+  color: var(--text-primary);
+}
+
+.video-info .video-button:hover {
+  background-color: var(--bg-divider);
+  border-radius: 4px;
+}
+
+/* 좋아요 버튼 */
+#buttonLike.liked {
+  background-color: rgba(255, 0, 0, 0.5);
+  border-radius: 4px;
+}
+#buttonLike .button-icon {
+  transition: transform 2s ease;
+}
+
+#buttonLike::before .button-icon {
+  content: url("/assets/icons/video/Liked.svg");
+}
+
+#buttonLike.liked .button-icon {
+  content: url("/assets/icons/video/yt-liked-fill.svg");
+  animation: like-clicked 0.5s ease-in-out;
+}
+
+#buttonLike:active .button-icon {
+  animation: icon-swap 4s ease-in-out;
+}
+
+@keyframes icon-swap {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(2) translateX(-10px) rotate(-45deg);
+  }
+}
+
+@keyframes like-clicked {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-5px) rotate(-10deg);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 싫어요 버튼 */
+#buttonDislike.disliked {
+  background-color: rgba(0, 0, 255, 0.5);
+  border-radius: 4px;
+}
+#buttonDislike .button-icon {
+  transition: transform 2s ease;
+}
+
+#buttonDislike::before .button-icon {
+  content: url("/assets/icons/video/DisLiked.svg");
+}
+
+#buttonDislike.disliked .button-icon {
+  content: url("/assets/icons/video/yt-disliked-fill.svg");
+  animation: dislike-clicked 0.5s ease-in-out;
+}
+
+#buttonDislike:active .button-icon {
+  animation: dis-icon-swap 4s ease-in-out;
+}
+
+@keyframes dis-icon-swap {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(2) translateX(10px) rotate(45deg);
+  }
+}
+
+@keyframes dislike-clicked {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-5px) translateY(5px) rotate(-10deg);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(-5px) translateY(5px) rotate(-10deg);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* 채널 정보 */
@@ -153,16 +288,17 @@ body {
 .channel-title .channel-name {
   font-size: 14px;
   font-weight: 400;
+  color: var(--text-primary);
 }
 
 .channel-title .subscribers {
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
 }
 
 .subscribe-button {
-  background-color: #cc0000;
-  color: white;
+  background-color: var(--bg-subscribe-btn);
+  color: var(--text-primary);
   text-align: center;
   padding: 10px 16px;
   border: none;
@@ -174,16 +310,16 @@ body {
 }
 
 .subscribe-button:hover {
-  background-color: #b10000;
+  background-color: var(--bg-subscribe-btn-hover);
 }
 
 .subscribe-button.subscribed {
-  background-color: #313131; /* 구독 후 버튼 색상 */
+  background-color: var(--bg-subscribe-btn-subscribed); /* 구독 후 버튼 색상 */
 }
 
 .description-text {
   font-size: 14px;
-  color: white;
+  color: var(--text-primary);
   line-height: 100%;
   margin: 10px 0;
   letter-spacing: 0%;
@@ -192,7 +328,7 @@ body {
 
 .show-more {
   font-size: 14px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   cursor: pointer;
   margin-bottom: 16px;
   padding-left: 60px;
@@ -209,7 +345,7 @@ body {
 .comment-count {
   font-size: 16px;
   font-weight: 400;
-  color: white;
+  color: var(--text-primary);
 }
 
 .sort-by {
@@ -218,7 +354,7 @@ body {
   gap: 4px;
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -243,18 +379,18 @@ body {
 
 .comment-field input {
   flex: 1;
-  background-color: #181818;
+  background-color: var(--bg-body);
   border: none;
   border-radius: 5px;
-  border-bottom: 1px solid #303030;
+  border-bottom: 1px solid var(--bg-divider);
   padding: 5px 8px;
   font-size: 14px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   outline: none;
 }
 
 .comment-field input:focus {
-  color: white;
+  color: var(--text-primary);
 }
 
 .comment {
@@ -281,16 +417,17 @@ body {
 .comment-name {
   font-size: 13px;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 .comment-time {
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
 }
 
 .comment-text {
   font-size: 14px;
-  color: white;
+  color: var(--text-primary);
   line-height: 20px;
   letter-spacing: 0%;
   padding: 5px 0;
@@ -301,7 +438,7 @@ body {
   display: flex;
   gap: 24px;
   align-items: center;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 12px;
 }
@@ -325,15 +462,15 @@ body {
   min-height: 1.2em;
   overflow: hidden; /* 스크롤바 숨기기 */
   resize: none; /* 사용자가 드래그해서 크기 변경 못하게 */
-  background-color: #181818;
+  background-color: var(--bg-body);
   border: none;
   border-radius: 5px;
-  border-bottom: 1px solid #303030;
+  border-bottom: 1px solid var(--bg-divider);
   font: inherit; /* 부모 요소의 font-family, font-size, font-weight 등을 그대로 물려받음 */
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0%;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   outline: none;
   margin: 10px 0;
   padding: 5px 5px;
@@ -341,7 +478,21 @@ body {
 
 /* 엔터 치거나 블러 시 원래 텍스트로 돌아가기 때문에 포커스 스타일만 */
 .comment-edit-input:focus {
-  border-bottom-color: #555;
+  border-bottom-color: var(--volume-stop4);
+}
+
+.comment-like img,
+.comment-dislike img,
+.sort-by img,
+.video-button img {
+  filter: invert(0);
+}
+
+[data-theme="light"] .comment-like img,
+[data-theme="light"] .comment-dislike img,
+[data-theme="light"] .sort-by img,
+[data-theme="light"] .video-button img {
+  filter: invert(1);
 }
 
 /* 오른쪽 사이드바 */
@@ -352,32 +503,6 @@ body {
   gap: 10px;
   height: 100%;
   padding: 20px 20px 0 0;
-}
-
-.secondary-tags {
-  display: flex;
-  gap: 8px;
-}
-
-.secondary-button {
-  padding: 8px 16px;
-  background: #333;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: transform 0.2s ease;
-}
-
-.secondary-button:hover {
-  background-color: #444;
-}
-
-.secondary-button.active {
-  background-color: white;
-  color: black;
-  font-weight: bold;
 }
 
 .secondary-list {
@@ -393,8 +518,8 @@ body {
 }
 .secondary-video:hover {
   transform: scale(1.02);
-  background-color: #202020;
-  border: 1px solid #303030;
+  background-color: var(--bg-secondary-video-hover);
+  border: 1px solid var(--border-secondary-video-hover);
 }
 
 .secondary-thumbnail {
@@ -416,8 +541,8 @@ body {
   padding: 3px 4px;
   font-size: 10px;
   line-height: 100%;
-  color: white;
-  background: black;
+  color: var(--text-primary);
+  background: var(--bg-card);
 }
 
 .secondary-video-text {
@@ -432,38 +557,77 @@ body {
 .secondary-video-title {
   font-size: 14px;
   line-height: 20px;
-  color: white;
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
 .secondary-video-channel,
 .secondary-video-info {
   font-size: 12px;
-  color: #aaaaaa;
+  color: var(--text-secondary);
   line-height: 18px;
 }
 
 /*  반응형 미디어쿼리*/
-@media (max-width: 1200px) {
-  body {
-    padding: 0 5%;
-  }
-  .video-page {
-    padding: 12px;
-    gap: 12px;
-  }
-  .video-info .info {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-}
+
 @media (max-width: 768px) {
   .video-page {
     flex-direction: column;
     padding: 12px;
   }
+
   .video-container,
   .video-secondary {
     flex: 0 1 100%;
+  }
+
+  .video-secondary {
+    padding: 12px 0 0 0;
+  }
+
+  .secondary-thumbnail {
+    flex: 0 0 140px;
+    width: 140px;
+    height: 78px;
+  }
+
+  .description-text {
+    padding-left: 0;
+  }
+
+  .show-more {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-page {
+    padding: 8px;
+  }
+
+  .video-title {
+    font-size: 14px;
+  }
+
+  .video-stats {
+    font-size: 12px;
+  }
+
+  .video-button span {
+    font-size: 12px;
+  }
+
+  .secondary-thumbnail {
+    flex: 0 0 120px;
+    width: 120px;
+    height: 68px;
+  }
+
+  .secondary-video-title {
+    font-size: 13px;
+  }
+
+  .secondary-video-channel,
+  .secondary-video-info {
+    font-size: 11px;
   }
 }

@@ -1,27 +1,46 @@
 import { getVideoListWithChannelInfo } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
+import { getSubscriptions } from "./subscription.js";
+import { getLikedVideos } from "./likedVideos.js";
+import { cardHoverStyle } from "./cardHoverStyle.js";
 
 function queryFilter(videos) {
   const urlParams = new URLSearchParams(window.location.search);
-  const searchQuery = urlParams.get("search")?.toLowerCase() || "";
-  console.log("Search Query:", searchQuery);
-  const searchInput = document.getElementById("search-bar-input");
-  searchInput.value = searchQuery;
 
-  // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
-  const filteredVideos = searchQuery
-    ? videos.filter(
-        (video) =>
-          video.title.toLowerCase().includes(searchQuery) ||
-          video.channelInfo?.channel_name.toLowerCase().includes(searchQuery) ||
-          video.tags.includes(searchQuery)
-      )
-    : videos;
-  return filteredVideos;
+  if (urlParams.get("search")) {
+    // 비디오 제목, 채널 이름, 태그를 기준으로 필터링
+    const searchQuery = urlParams.get("search")?.toLowerCase() || "";
+    const searchInput = document.getElementById("search-bar-input");
+    searchInput.value = searchQuery;
+    console.log("검색어:", searchQuery); // 디버깅용 로그
+
+    const filteredVideos = searchQuery
+      ? videos.filter(
+          (video) =>
+            video.title.toLowerCase().includes(searchQuery) ||
+            video.channelInfo?.channel_name.toLowerCase().includes(searchQuery) ||
+            video.tags.includes(searchQuery)
+        )
+      : videos;
+    return filteredVideos;
+  } else if (urlParams.get("subscriptions")) {
+    // 구독한 채널의 비디오만 필터링
+    const subscriptions = getSubscriptions();
+    console.log("구독 목록:", subscriptions); // 디버깅용 로그
+    const subscriptionIds = subscriptions.map((sub) => sub.id);
+    return videos.filter((video) => subscriptionIds.includes(video.channel_id));
+  } else if (urlParams.get("liked")) {
+    // 좋아요한 비디오만 필터링
+    const likedVideos = getLikedVideos();
+    return videos.filter((video) => likedVideos.includes(video.id));
+  } else {
+    // 검색어가 없을 때는 전체 비디오 리스트를 반환
+    return videos;
+  }
 }
 
-function createVideoCardWithChannel(video) {
-  //const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
+async function createVideoCardWithChannel(video) {
+  const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
   const thumbnailUrl = video.thumbnail || "/assets/images/thumbnail.png";
   const avatarUrl = video.channelInfo?.channel_profile || "https://randomuser.me/api/portraits/men/32.jpg";
 
@@ -33,7 +52,11 @@ function createVideoCardWithChannel(video) {
 
   return `
       <article class="card" data-video-id="${vID}" data-channel-id="${chID}">
-        <img class="card-thumbnail" src="${thumbnailUrl}" alt="Video Thumbnail">
+        <div class="overlay"></div>
+        <div class="card-thumbnail-container">
+          <img class="card-thumbnail" data-imgid="${vID}" src="${thumbnailUrl}" alt="Video Thumbnail">
+          <video class="card-video" data-videoid="${vID}" src="${videoUrl}" muted loop preload="metadata" style="opacity: 0;"></video>
+        </div>
         <div class="card-details">
           <img class="card-avatar" src="${avatarUrl}" alt="Channel Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
           <div class="card-data">
@@ -85,14 +108,41 @@ function initFilterBar() {
   filterBarContainer.style.visibility = "visible"; // 로드 후 필터바 보이게
 }
 
-function renderVideos(videos, container) {
+async function renderVideos(videos, container) {
   if (videos && videos.length > 0 && container) {
-    const cardsHTML = videos.map(createVideoCardWithChannel).join("");
-    //container.innerHTML = cardsHTML;
+    const videoCardPromises = videos.map(async (video) => {
+      return await createVideoCardWithChannel(video);
+    });
+    const cardsHTMLArray = await Promise.all(videoCardPromises);
+    const cardsHTML = cardsHTMLArray.join("");
     container.innerHTML = `<div class="cards-container">${cardsHTML}</div>`;
 
     // 카드 클릭 이벤트 리스너
     container.querySelectorAll(".card").forEach((card) => {
+      const video = container.querySelector(`video[data-videoid="${card.dataset.videoId}" ]`);
+      //const video = container.querySelector(".card-video");
+      const thumbnail = container.querySelector(`img[data-imgid="${card.dataset.videoId}" ]`);
+      //const thumbnail = container.querySelector(".card-thumbnail");
+      let hoverTimeout;
+
+      cardHoverStyle(card, card.querySelector(".overlay")); // 카드 호버 스타일 적용
+
+      card.addEventListener("mouseenter", () => {
+        hoverTimeout = setTimeout(() => {
+          thumbnail.style.opacity = "0";
+          video.style.opacity = "1";
+          video.play();
+        }, 500);
+      });
+
+      card.addEventListener("mouseleave", () => {
+        clearTimeout(hoverTimeout);
+        video.pause();
+        video.currentTime = 0;
+        video.style.opacity = "0";
+        thumbnail.style.opacity = "1";
+      });
+
       card.addEventListener("click", () => {
         // 클릭된 요소가 card-avatar 클래스 영역이면 채널페이지로, 그 외 영역은 비디오페이지
         if (event.target.classList.contains("card-avatar")) {
@@ -158,7 +208,7 @@ async function initHomePage() {
 
     // 초기 비디오 목록 렌더링 (기존 검색 쿼리 적용)
     const initialFilteredVideos = queryFilter(videos);
-    renderVideos(initialFilteredVideos, videoGridContainer);
+    await renderVideos(initialFilteredVideos, videoGridContainer);
 
     const allTags = []; // 모든 태그를 저장할 배열
 

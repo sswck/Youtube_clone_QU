@@ -101,4 +101,60 @@ async function getVideoListWithChannelInfo() {
   }
 }
 
-export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList, getVideoListWithChannelInfo };
+/**
+ * @description
+ * XMLHttpRequest을 사용해서 두 단어의 관계 정보를 비동기적으로 가져오는 함수.
+ * 입력 받은 두 단어를 사용하여 POST 요청을 보내고,
+ * 어휘 간 거리를 응답으로 반환합니다.
+ * @param {string} firstWord - 첫 번째 단어.
+ * @param {string} secondWord - 두 번째 단어.
+ * @returns {Promise<number|null>}
+ */
+
+async function getWordRelationship(firstWord, secondWord) {
+  return new Promise((resolve, reject) => {
+    const openApiURL = "http://aiopen.etri.re.kr:8000/WiseWWN/WordRel";
+    const access_key = "3f699673-6330-4028-8aa9-01cf78a87fb8";
+
+    const argument = {
+      first_word: firstWord,
+      second_word: secondWord,
+    };
+
+    const requestJson = {
+      request_id: "reserved field",
+      argument: argument,
+    };
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", openApiURL);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", access_key);
+
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          const data = JSON.parse(xhr.responseText);
+          if (data && data.return_object) {
+            const distance = data.return_object["WWN WordRelInfo"].WordRelInfo.Distance;
+            resolve(distance);
+          } else {
+            resolve(null);
+          }
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        reject(new Error(`HTTP error! status: ${xhr.status}`));
+      }
+    };
+
+    xhr.onerror = function () {
+      reject(new Error("요청에 실패했습니다."));
+    };
+
+    xhr.send(JSON.stringify(requestJson));
+  });
+}
+
+export { getVideoInfo, getChannelInfo, getVideoList, getChannelVideoList, getVideoListWithChannelInfo, getWordRelationship };

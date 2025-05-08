@@ -1,5 +1,21 @@
-function customVideoPlayer(videoID) {
-  const videoUrl = `https://storage.googleapis.com/youtube-clone-video/${videoID}.mp4`;
+/**
+ * Initializes and customizes a video player with various control options.
+ *
+ * @param {string} videoID - The ID of the video to be loaded and played.
+ *
+ * This function sets up event listeners for:
+ * - Play/Pause button: Toggles video playback.
+ * - Volume button and slider: Mutes/unmutes and adjusts volume.
+ * - Speed button: Toggles playback speed options.
+ * - Picture-in-Picture (PIP) button: Enters/exits PIP mode.
+ * - Fullscreen button: Enters/exits fullscreen mode.
+ * - Progress bar: Updates based on video time and allows seeking.
+ *
+ * It also updates the time display to show the current and total duration of the video.
+ */
+
+function customVideoPlayer() {
+  const videoControls = document.getElementById("video-controls");
   const videoElement = document.getElementById("videoPlayer");
   const playPauseBtn = document.getElementById("playPauseBtn");
   const volumeBtn = document.getElementById("volumeBtn");
@@ -11,7 +27,6 @@ function customVideoPlayer(videoID) {
   const progressBar = document.getElementById("progressBar");
   const timeDisplay = document.getElementById("timeDisplay");
 
-  videoElement.src = videoUrl;
   // 🎥 ▶️ 재생 / 일시 정지
   playPauseBtn.addEventListener("click", () => {
     if (videoElement.paused) {
@@ -137,4 +152,11 @@ function customVideoPlayer(videoID) {
   });
 }
 
-export { customVideoPlayer };
+// 0.1초마다 비디오 플레이어 등장 여부 확인
+var intervalId = setInterval(function () {
+  if (document.querySelector("#videoPlayer")) {
+    clearInterval(intervalId);
+    customVideoPlayer();
+    document.querySelector(".video-controls").style.visibility = "visible";
+  }
+}, 100);

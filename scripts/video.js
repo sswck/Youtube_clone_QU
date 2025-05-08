@@ -2,7 +2,9 @@ import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
-import { customVideoPlayer } from "./videoPlayer.js";
+import { likeVideo, unlikeVideo, getLikedVideos, dislikeVideo, undislikeVideo, getDislikedVideos } from "./likedVideos.js";
+import { cardHoverStyle } from "./cardHoverStyle.js";
+import { orderVideoList } from "./videoRecommend.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -26,7 +28,15 @@ async function initVideoPage() {
     displayChannelInfo(channelData);
 
     const videoListData = await getVideoList();
-    displayVideoList(videoListData);
+    // 추천알고리즘으로 정렬후 orderedVideoListData 반환
+    const orderedVideoListData = await orderVideoList(videoData.tags, videoListData);
+    displayVideoList(orderedVideoListData);
+
+    // 비디오 플레이어 커스터마이징
+    const videoElement = document.querySelector(".video-player");
+    await loadCustomVideo(videoElement);
+    document.getElementById("videoPlayer").src = `https://storage.googleapis.com/youtube-clone-video/${videoData.id}.mp4`;
+    videoElement.style.visibility = "visible";
   } catch (error) {
     console.error("Error fetching API data:", error);
   }
@@ -37,11 +47,6 @@ async function initVideoPage() {
 
   // 댓글 기능 초기화
   initCommentFeature();
-
-  // 비디오 플레이어 커스터마이징
-  const videoPlayer = document.querySelector(".video-player");
-  await loadCustomVideo(videoPlayer);
-  customVideoPlayer(videoID);
 }
 
 // 동영상 정보 표시
@@ -61,34 +66,79 @@ function displayVideoInfo(data) {
   description.textContent = data.description;
 
   // 태그 버튼
-  const tagsContainer = document.querySelector(".secondary-tags");
-  tagsContainer.innerHTML = `<button class="secondary-button">All</button>`;
+  const tagsContainer = document.querySelector(".video-tags");
+  tagsContainer.innerHTML = "";
   data.tags.forEach((tag) => {
     const btn = document.createElement("button");
-    btn.className = "secondary-button";
-    btn.textContent = tag;
+    btn.className = "tag-button";
+    btn.textContent = "# " + tag;
     tagsContainer.appendChild(btn);
   });
-  addTagFilterFunctionality();
+  addTagSearchFunctionality();
+
+  // 좋아요/싫어요 버튼 초기화
+  const likeButton = document.querySelector("#buttonLike");
+  const likeCount = document.querySelector("#buttonLike span");
+  const dislikeButton = document.querySelector("#buttonDislike");
+  const dislikeCount = document.querySelector("#buttonDislike span");
+
+  if (likeButton) {
+    const videoId = data.id;
+
+    // 초기 좋아요 상태 확인
+    const likedVideos = getLikedVideos();
+    if (likedVideos.includes(videoId)) {
+      likeButton.classList.add("liked");
+      likeCount.textContent = formatView(data.likes + 1);
+    }
+
+    // 클릭 시 좋아요 추가/취소
+    likeButton.addEventListener("click", () => {
+      if (likeButton.classList.contains("liked")) {
+        unlikeVideo(videoId);
+        likeButton.classList.remove("liked");
+        likeCount.textContent = formatView(data.likes);
+      } else {
+        likeVideo(videoId);
+        likeButton.classList.add("liked");
+        likeCount.textContent = formatView(data.likes + 1);
+      }
+    });
+  }
+
+  if (dislikeButton) {
+    const videoId = data.id;
+
+    // 초기 싫어요 상태 확인
+    const dislikedVideos = getDislikedVideos();
+    if (dislikedVideos.includes(videoId)) {
+      dislikeButton.classList.add("disliked");
+      dislikeCount.textContent = formatView(data.dislikes + 1);
+    }
+
+    // 클릭 시 싫어요 추가/취소
+    dislikeButton.addEventListener("click", () => {
+      if (dislikeButton.classList.contains("disliked")) {
+        undislikeVideo(videoId);
+        dislikeButton.classList.remove("disliked");
+        dislikeCount.textContent = formatView(data.dislikes);
+      } else {
+        dislikeVideo(videoId);
+        dislikeButton.classList.add("disliked");
+        dislikeCount.textContent = formatView(data.dislikes + 1);
+      }
+    });
+  }
 }
 
-// ==================== 태그 필터링 기능 추가 ====================
-function addTagFilterFunctionality() {
-  const buttons = document.querySelectorAll(".secondary-button");
-  const allBtn = document.querySelector(".secondary-button:first-child");
-  allBtn?.classList.add("active");
+// ==================== 태그 검색 기능 추가 ====================
+function addTagSearchFunctionality() {
+  const buttons = document.querySelectorAll(".tag-button");
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const selected = btn.textContent;
-      document.querySelectorAll(".secondary-video").forEach((vid) => {
-        const tags = vid.getAttribute("data-tags")?.split(",") || [];
-        const show = selected === "All" || tags.includes(selected);
-        vid.style.visibility = show ? "visible" : "hidden";
-        vid.style.position = show ? "static" : "absolute";
-      });
+      const selected = btn.textContent.substring(2); // "# " 제거
+      window.location.href = `/index.html?search=${encodeURIComponent(selected)}`;
     });
   });
 }
@@ -131,7 +181,7 @@ function displayChannelInfo(data) {
 }
 
 // ==================== 추천 동영상 리스트 표시 ====================
-function displayVideoList(data) {
+async function displayVideoList(data) {
   const list = document.querySelector(".secondary-list");
   list.innerHTML = "";
 
@@ -141,8 +191,8 @@ function displayVideoList(data) {
     return;
   }
 
-  data.forEach(async (video) => {
-    if (video.id === currentId) return;
+  for (const video of data) {
+    if (video.id === currentId) continue;
     const chName = (await getChannelInfo(video.channel_id)).channel_name || "Unknown";
     const item = document.createElement("div");
     item.className = "secondary-video";
@@ -159,14 +209,12 @@ function displayVideoList(data) {
     item.addEventListener("click", () => {
       window.location.href = `/components/video.html?video_id=${video.id}`;
     });
+    cardHoverStyle(item);
     list.appendChild(item);
-  });
+  }
 }
 
-/**
- * 댓글 입력창에서 Enter 키를 누르면
- * 새 댓글을 화면에 추가하고 좋아요·싫어요·삭제 기능을 위임으로 처리하는 함수
- */
+// ==================== 댓글 기능 ====================
 function initCommentFeature() {
   const commentInput = document.querySelector(".comment-field input");
   const commentsList = document.querySelector(".comments-list");
