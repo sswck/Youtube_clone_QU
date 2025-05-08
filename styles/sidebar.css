@@ -137,16 +137,16 @@ aside.closed .sidebar-item {
   justify-content: center;
   width: 64px;
   padding: 16px 0 14px 0;
-  gap: 0;
+  gap: 4px;
 }
 
 aside.closed .item-title {
-  display: none;
+  font-size: 10px;
 }
 
 aside.closed #sidebar-subscriptions {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
 }
