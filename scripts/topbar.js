@@ -1,5 +1,17 @@
 function initTopBar() {
+  initSidebarCloser();
   initSearch();
+}
+
+function initSidebarCloser() {
+  const menuButton = document.querySelector(".menu-button");
+  const sideBarContainer = document.getElementById("side-bar-container");
+
+  if (menuButton && sideBarContainer) {
+    menuButton.addEventListener("click", () => {
+      sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
+    });
+  }
 }
 
 function initSearch() {

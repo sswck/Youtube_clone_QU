@@ -23,26 +23,26 @@ async function loadTopBar() {
     topBarContainer.style.display = "block";
 
     // DOM 업데이트 후 이벤트 리스너 추가
-    setTimeout(() => {
-      const menuButton = topBarContainer.querySelector(".menu-button");
+    // setTimeout(() => {
+    //   const menuButton = topBarContainer.querySelector(".menu-button");
 
-      // 로드 완료 후 탑바를 보이게 설정
-      topBarContainer.style.visibility = "visible";
+    //   // 로드 완료 후 탑바를 보이게 설정
+    //   topBarContainer.style.visibility = "visible";
 
-      if (menuButton && sideBarContainer) {
-        menuButton.addEventListener("click", () => {
-          sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
-        });
-      }
-      function handleResize() {
-        if (window.matchMedia("(max-width: 768px)").matches) {
-          sideBarContainer.style.display = "none";
-        }
-      }
-      window.addEventListener("resize", handleResize);
-      // 초기 실행
-      handleResize();
-    }, 100); // 100ms 지연
+    //   if (menuButton && sideBarContainer) {
+    //     menuButton.addEventListener("click", () => {
+    //       sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
+    //     });
+    //   }
+    //   function handleResize() {
+    //     if (window.matchMedia("(max-width: 768px)").matches) {
+    //       sideBarContainer.style.display = "none";
+    //     }
+    //   }
+    //   // window.addEventListener("resize", handleResize);
+    //   // 초기 실행
+    //   // handleResize();
+    // }, 100); // 100ms 지연
   } catch (error) {
     console.error("탑바를 로드하는 동안 오류가 발생했습니다:", error);
   }
