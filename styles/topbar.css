@@ -150,3 +150,47 @@ header.top-bar {
 [data-theme="light"] .notifications-button img {
   filter: invert(1);
 }
+
+@media (max-width: 768px) {
+  .top-bar .right-section {
+    gap: 8px;
+  }
+  .top-bar .right-section .upload-button,
+  .top-bar .right-section .apps-button {
+    display: none;
+  }
+
+  .search-bar {
+    width: 100%;
+    max-width: none;
+  }
+  .search-bar input {
+    width: calc(80% - 40px - 8px);
+  }
+  .search-bar .search-button {
+    width: 20%;
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  header.top-bar {
+    padding: 0 8px;
+    gap: 0;
+  }
+  .top-bar .left-section {
+    gap: 0;
+  }
+  .top-bar .left-section .youtube-logo {
+    padding: 0;
+  }
+  .top-bar .left-section .youtube-logo .youtube {
+    display: none;
+  }
+  .top-bar .left-section .menu-button {
+    padding: 0;
+  }
+  .top-bar .right-section {
+    display: none;
+  }
+}
