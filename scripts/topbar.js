@@ -1,3 +1,7 @@
+function initTopBar() {
+  initSearch();
+}
+
 function initSearch() {
   const searchInput = document.querySelector(".search-bar input");
   const searchButton = document.querySelector(".search-button");
@@ -11,7 +15,6 @@ function initSearch() {
 
   searchInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
-      event.preventDefault();
       triggerSearch();
     }
   });
@@ -24,7 +27,7 @@ function initSearch() {
 var intervalId = setInterval(function () {
   if (document.querySelector("#top-bar-container")) {
     clearInterval(intervalId);
-    initSearch();
+    initTopBar();
     document.querySelector("header").style.visibility = "visible";
   }
 }, 100);
