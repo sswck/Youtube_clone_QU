@@ -4,6 +4,7 @@ import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
 import { likeVideo, unlikeVideo, getLikedVideos } from "./likedVideos.js";
 import { cardHoverStyle } from "./cardHoverStyle.js";
+import { orderVideoList } from "./videoRecommend.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
@@ -27,6 +28,9 @@ async function initVideoPage() {
     displayChannelInfo(channelData);
 
     const videoListData = await getVideoList();
+    // 추천알고리즘으로 정렬후 orderedVideoListData 반환
+    //const orderedVideoListData = await orderVideoList(videoData.tags, videoListData);
+    //displayVideoList(orderVideoList);
     displayVideoList(videoListData);
 
     // 비디오 플레이어 커스터마이징
