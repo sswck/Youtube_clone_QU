@@ -2,7 +2,11 @@
 .filter-popup-container {
   position: relative; /* 팝업 위치의 기준점 */
   display: inline-block; /* 버튼과 팝업을 inline-block으로 배치 */
-  margin-bottom: 10px; /* 필요에 따라 간격 조절 */
+}
+
+.filter-popup-container img {
+  width: 25px;
+  height: 25px;
 }
 
 /* 필터 버튼 스타일 */

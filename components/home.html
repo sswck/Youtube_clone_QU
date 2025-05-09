@@ -2,21 +2,21 @@
 
 <div class="filter-bar-container" style="visibility: hidden">
   <div class="filter-popup-container">
-    <button class="filter-button">정렬 필터</button>
+    <button class="filter-button"><img src="/assets/icons/index/filter.svg" alt="정렬필터" /></button>
     <div class="filter-popup">
       <div class="filter-option">
-        <label for="length-filter">길이:</label>
+        <label for="length-filter">좋아요 갯수:</label>
         <select id="length-filter">
-          <option value="">모든 길이</option>
-          <option value="short">짧은 동영상</option>
-          <option value="medium">중간 길이 동영상</option>
-          <option value="long">긴 동영상</option>
+          <option value="">모두</option>
+          <option value="short">125이하</option>
+          <option value="medium">125~2500</option>
+          <option value="long">2500초과</option>
         </select>
       </div>
       <div class="filter-option">
         <label for="sort-by">정렬 기준:</label>
         <select id="sort-by">
-          <option value="relevance">관련성</option>
+          <option value="relevance">기본값</option>
           <option value="uploadDate">업로드 날짜</option>
           <option value="viewCount">조회수</option>
         </select>

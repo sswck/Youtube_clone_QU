@@ -167,13 +167,13 @@ function filterByTag(videos, activeTag) {
 function applyVideoFilters(videos, length, sortBy) {
   let filteredVideos = [...videos]; // 복사본 생성
 
-  // 길이 필터 적용
+  // 길이 필터 적용 -> 좋아요 필터 적용
   if (length === "short") {
-    filteredVideos = filteredVideos.filter((video) => video.duration <= 300); // 예: 5분 이하 (단위: 초)
+    filteredVideos = filteredVideos.filter((video) => video.likes <= 125);
   } else if (length === "medium") {
-    filteredVideos = filteredVideos.filter((video) => video.duration > 300 && video.duration <= 900); // 예: 5분 초과 15분 이하
+    filteredVideos = filteredVideos.filter((video) => video.likes > 125 && video.likes <= 2500);
   } else if (length === "long") {
-    filteredVideos = filteredVideos.filter((video) => video.duration > 900); // 예: 15분 초과
+    filteredVideos = filteredVideos.filter((video) => video.likes > 2500);
   }
 
   // 정렬 기준 적용
