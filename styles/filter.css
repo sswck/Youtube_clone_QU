@@ -7,11 +7,16 @@
 .filter-popup-container img {
   width: 25px;
   height: 25px;
+  filter: invert(1);
+}
+
+[data-theme="light"] .filter-popup-container img {
+  filter: invert(0);
 }
 
 /* 필터 버튼 스타일 */
 .filter-button {
-  background-color: #333; /* 어두운 배경색 */
+  background-color: var(--border-filter-bar);
   color: white;
   border: none;
   padding: 8px 15px;
@@ -21,7 +26,7 @@
 }
 
 .filter-button:hover {
-  background-color: #555;
+  background-color: #777;
 }
 
 /* 필터 팝업 스타일 (초기 숨김) */
