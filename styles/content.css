@@ -268,12 +268,12 @@ body {
   display: flex;
   flex-direction: column;
   width: calc(100% - 72px);
+  gap: 2px;
 }
 .card-title {
   color: var(--text-primary);
   font-size: 12px;
   font-weight: 600;
-  margin: 0 0 6px 0;
 
   text-overflow: ellipsis;
   overflow: hidden;
