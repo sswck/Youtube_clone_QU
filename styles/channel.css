@@ -58,6 +58,11 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.channel-profile-info {
+  display: flex;
+  align-items: center;
+}
+
 .channel-avatar {
   width: 72px; /* 이미지 아바타 크기에 맞춰 조절 */
   height: 72px;
@@ -283,20 +288,17 @@ body {
   object-fit: cover;
 }
 
-.card-data {
-  padding: 12px;
-}
-
 .card-title {
+  margin: 8px 0 8px 0;
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 8px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .card-channel {
+  display: none;
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 4px;
@@ -351,31 +353,29 @@ body {
 
   .video-player {
     width: 100%;
-    max-width: 600px;
+    align-self: center;
   }
 }
 
 @media (max-width: 768px) {
-  .channel-header {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-  }
-  .channel-avatar {
-    margin: 16px;
-  }
-  .channel-details {
-    margin: 0 16px 16px;
-  }
-
   .channel-nav {
     overflow-x: auto;
   }
   .nav-list {
     padding-left: 16px;
+    font-size: 8px;
+    overflow-x: auto;
   }
   .nav-item {
     margin-right: 12px;
+  }
+  .nav-item a {
+    font-size: 0.7rem;
+  }
+
+  .video-description {
+    -webkit-line-clamp: 2; /* 최대 줄 수 */
+    line-clamp: 2;
   }
 
   .video-grid {
@@ -389,27 +389,22 @@ body {
     padding: 0;
   }
 
-  /* 채널 헤더 세로 정렬 */
-  .channel-header {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-  }
   .channel-banner {
     height: 150px;
   }
-  .channel-avatar {
-    width: 48px;
-    height: 48px;
-    margin: 12px;
+  .channel-profile {
+    flex-direction: column;
+    align-items: flex-start;
   }
+
   .channel-details {
     margin: 0 12px 12px;
   }
   .subscribe-btn {
-    margin: 12px;
+    margin: 8px 12px;
     padding: 8px 12px;
     font-size: 13px;
+    width: calc(100% - 24px);
   }
 
   /* 내비게이션 항목 간격 줄이기 */
@@ -447,9 +442,7 @@ body {
     margin-bottom: 12px;
   }
 
-  /* 비디오 그리드 1열, 간격 축소 */
   .video-grid {
-    grid-template-columns: 1fr;
     gap: 12px;
   }
 

@@ -1,44 +1,39 @@
 <link rel="stylesheet" href="/styles/sidebar.css" />
-<div class="aside-container">
-  <aside style="visibility: hidden">
-    <div class="sidebar-box" id="sidebar-home">
-      <div class="sidebar-item" id="button-home" data-target-page="/index.html">
-        <img src="/assets/icons/sidebar/yt-home.svg" alt="Item Thumbnail" class="item-thumbnail" />
-        <span class="item-title">Home</span>
-      </div>
-      <div class="sidebar-item" id="button-subscriptions" data-target-page="/index.html?subscriptions=true">
-        <img src="/assets/icons/sidebar/subscriptions.svg" alt="Item Thumbnail" class="item-thumbnail" />
-        <span class="item-title">Subscriptions</span>
-      </div>
+<!-- <div class="aside-backdrop"></div> -->
+<aside style="visibility: hidden">
+  <div class="sidebar-box" id="sidebar-home">
+    <div class="sidebar-item" id="button-home" data-target-page="/index.html">
+      <img src="/assets/icons/sidebar/yt-home.svg" alt="Item Thumbnail" class="item-thumbnail" />
+      <span class="item-title">Home</span>
     </div>
-    <div class="divider"></div>
+    <div class="sidebar-item" id="button-subscriptions" data-target-page="/index.html?subscriptions=true">
+      <img src="/assets/icons/sidebar/subscriptions.svg" alt="Item Thumbnail" class="item-thumbnail" />
+      <span class="item-title">Subscriptions</span>
+    </div>
+    <div class="sidebar-item" id="button-liked" data-target-page="/index.html?liked=true">
+      <img src="/assets/icons/sidebar/liked.svg" alt="Item Thumbnail" class="item-thumbnail" />
+      <span class="item-title">Liked Videos</span>
+    </div>
+  </div>
+  <div class="divider"></div>
 
-    <div class="sidebar-box" id="sidebar-library">
-      <div class="sidebar-item" id="button-liked" data-target-page="/index.html?liked=true">
-        <img src="/assets/icons/sidebar/liked.svg" alt="Item Thumbnail" class="item-thumbnail" />
-        <span class="item-title">Liked Videos</span>
-      </div>
-    </div>
-    <div class="divider"></div>
+  <div class="sidebar-box" id="sidebar-subscriptions">
+    <div class="sidebar-title">SUBSCRIPTIONS</div>
+    <!-- 구독 채널 목록 -->
+  </div>
+  <div class="divider"></div>
 
-    <div class="sidebar-box" id="sidebar-subscriptions">
-      <div class="sidebar-title">SUBSCRIPTIONS</div>
-      <!-- 구독 채널 목록 -->
+  <div class="sidebar-box" id="sidebar-settings">
+    <div class="sidebar-item theme-toggle-item">
+      <!-- 스위치 -->
+      <label class="theme-switch">
+        <input type="checkbox" id="theme-toggle-switch" />
+        <span class="slider"></span>
+      </label>
+      <!-- 레이블 -->
+      <span class="item-title">Dark / Light Mode</span>
     </div>
-    <div class="divider"></div>
-
-    <div class="sidebar-box" id="sidebar-settings">
-      <div class="sidebar-item theme-toggle-item">
-        <!-- 스위치 -->
-        <label class="theme-switch">
-          <input type="checkbox" id="theme-toggle-switch" />
-          <span class="slider"></span>
-        </label>
-        <!-- 레이블 -->
-        <span class="item-title">Dark / Light Mode</span>
-      </div>
-    </div>
-    <div class="divider"></div>
-  </aside>
-</div>
+  </div>
+  <div class="divider"></div>
+</aside>
 <script type="module" src="/scripts/sidebar.js"></script>

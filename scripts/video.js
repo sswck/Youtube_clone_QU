@@ -10,7 +10,6 @@ import { orderVideoList } from "./videoRecommend.js";
 async function initVideoPage() {
   await loadTopBar(); // 상단 바 로드
   await loadSideBar(); // 사이드 바 로드
-  document.querySelector("aside").classList.add("closed"); // 사이드 바 닫기
 
   // video_id 쿼리 파라미터 가져오기 (기본 1)
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
@@ -48,9 +47,11 @@ async function initVideoPage() {
 
   // 댓글 기능 초기화
   initCommentFeature();
+
+  document.querySelector("aside").classList.add("closed");
 }
 
-// 동영상 정보 표시
+// ==================== 동영상 정보 표시 ====================
 function displayVideoInfo(data) {
   const title = document.querySelector(".video-title");
   const views = document.querySelector("#view-count");

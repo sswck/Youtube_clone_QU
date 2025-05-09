@@ -15,6 +15,7 @@ aside {
 }
 .sidebar-item,
 .subscribed-channel {
+  width: 212px;
   display: flex;
   align-items: center;
   padding: 8px 24px;
@@ -148,5 +149,16 @@ aside.closed #sidebar-subscriptions {
   display: none;
 }
 
-@media (max-width: 1200px) {
+aside.closed #sidebar-settings {
+  display: none;
+}
+
+aside.closed .divider {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  aside.closed {
+    display: none;
+  }
 }

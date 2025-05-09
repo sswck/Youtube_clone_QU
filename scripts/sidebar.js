@@ -3,6 +3,7 @@ import { renderSubscriptions } from "./subscription.js";
 function initSidebar() {
   renderSubscriptions(); // 구독 목록 렌더링
   initButtons();
+  closeByWindowSize();
 }
 
 function initButtons() {
@@ -28,6 +29,23 @@ function initButtons() {
       }
     });
   });
+}
+
+function closeByWindowSize() {
+  if (new URLSearchParams(window.location.search).get("video_id") !== null) return; // 비디오 페이지에서는 사이드바 닫기 기능을 사용하지 않음
+  const aside = document.querySelector("aside");
+  const mediaQuery = window.matchMedia("(max-width: 1200px)");
+
+  function handleMediaQueryChange(event) {
+    if (event.matches) {
+      aside.classList.add("closed");
+    } else {
+      aside.classList.remove("closed");
+    }
+  }
+
+  mediaQuery.addEventListener("change", handleMediaQueryChange);
+  handleMediaQueryChange(mediaQuery); // 초기 상태 설정
 }
 
 // 0.1초마다 sidebar 등장 여부 확인

@@ -18,6 +18,9 @@ body {
 /* .sidebar {
   display: none;
 } */
+aside.closed {
+  display: none;
+}
 .video-page {
   visibility: hidden;
   display: flex;
@@ -47,7 +50,7 @@ body {
 }
 
 /* 구분선 */
-.divider {
+.video-page .divider {
   width: 100%;
   height: 1px;
   background-color: var(--bg-divider);
