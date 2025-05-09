@@ -32,6 +32,7 @@ function initButtons() {
 }
 
 function closeByWindowSize() {
+  if (new URLSearchParams(window.location.search).get("video_id") !== null) return; // 비디오 페이지에서는 사이드바 닫기 기능을 사용하지 않음
   const aside = document.querySelector("aside");
   const mediaQuery = window.matchMedia("(max-width: 1200px)");
 

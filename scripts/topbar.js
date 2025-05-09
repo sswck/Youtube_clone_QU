@@ -10,7 +10,6 @@ function initSidebarCloser() {
 
   if (menuButton && sideBarContainer) {
     menuButton.addEventListener("click", () => {
-      // sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
       aside.classList.toggle("closed");
     });
   }
