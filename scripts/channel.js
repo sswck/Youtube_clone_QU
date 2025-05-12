@@ -108,6 +108,9 @@ async function initChannelPage() {
   // 전부 로딩 후 페이지 표시
   const channelPage = document.querySelector(".channel-page");
   channelPage.style.visibility = "visible";
+  document.querySelector("header").style.visibility = "visible";
+  document.querySelector("aside").style.visibility = "visible";
+  console.log("채널 페이지 초기화 완료");
 }
 
 document.addEventListener("DOMContentLoaded", initChannelPage);

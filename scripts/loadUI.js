@@ -16,7 +16,6 @@ async function loadTopBar() {
     }
 
     topBarContainer.innerHTML = html;
-    topBarContainer.style.display = "block";
 
     console.log("loadUI.js: 탑바 로드 완료");
   } catch (error) {
@@ -47,9 +46,6 @@ async function loadSideBar() {
     // 테마 상태 복원
     const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
-
-    // 사이드바 표시
-    sideBarContainer.style.visibility = "visible";
 
     console.log("loadUI.js: 사이드바 로드 완료");
   } catch (error) {

@@ -53,7 +53,7 @@ var intervalId = setInterval(function () {
   if (document.querySelector("#sideBar")) {
     clearInterval(intervalId);
     initSidebar();
-    document.querySelector("aside").style.visibility = "visible";
+    // document.querySelector("aside").style.visibility = "visible";
     console.log("sidebar.js: 사이드바 초기화 완료");
   }
 }, 100);
