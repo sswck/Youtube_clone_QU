@@ -113,7 +113,7 @@ async function getVideoListWithChannelInfo() {
 
 async function getWordRelationship(firstWord, secondWord) {
   return new Promise((resolve, reject) => {
-    const openApiURL = "http://aiopen.etri.re.kr:8000/WiseWWN/WordRel";
+    const openApiURL = "https://www.techfree-oreumi-api.ai.kr/WiseWWN/WordRel";
     const access_key = "3f699673-6330-4028-8aa9-01cf78a87fb8";
 
     const argument = {
