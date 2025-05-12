@@ -18,27 +18,7 @@ async function loadTopBar() {
     topBarContainer.innerHTML = html;
     topBarContainer.style.display = "block";
 
-    // DOM 업데이트 후 이벤트 리스너 추가
-    // setTimeout(() => {
-    //   const menuButton = topBarContainer.querySelector(".menu-button");
-
-    //   // 로드 완료 후 탑바를 보이게 설정
-    //   topBarContainer.style.visibility = "visible";
-
-    //   if (menuButton && sideBarContainer) {
-    //     menuButton.addEventListener("click", () => {
-    //       sideBarContainer.style.display = sideBarContainer.style.display === "none" ? "block" : "none";
-    //     });
-    //   }
-    //   function handleResize() {
-    //     if (window.matchMedia("(max-width: 768px)").matches) {
-    //       sideBarContainer.style.display = "none";
-    //     }
-    //   }
-    //   // window.addEventListener("resize", handleResize);
-    //   // 초기 실행
-    //   // handleResize();
-    // }, 100); // 100ms 지연
+    console.log("loadUI.js: 탑바 로드 완료");
   } catch (error) {
     console.error("탑바를 로드하는 동안 오류가 발생했습니다:", error);
   }
@@ -70,6 +50,8 @@ async function loadSideBar() {
 
     // 사이드바 표시
     sideBarContainer.style.visibility = "visible";
+
+    console.log("loadUI.js: 사이드바 로드 완료");
   } catch (error) {
     console.error("사이드바를 로드하는 동안 오류가 발생했습니다:", error);
   }
@@ -80,6 +62,7 @@ async function loadCustomVideo(videoElement) {
     const response = await fetch("/components/videoPlayer.html");
     const html = await response.text();
 
+    console.log("loadUI.js: 비디오 플레이어 로드 완료");
     videoElement.innerHTML = html;
   } catch (error) {
     console.error("비디오 플레이어를 로드하는 동안 오류가 발생했습니다:", error);
