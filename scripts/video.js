@@ -8,8 +8,8 @@ import { orderVideoList } from "./videoRecommend.js";
 
 // 최초 동영상 페이지 로드 함수
 async function initVideoPage() {
-  await loadTopBar(); // 상단 바 로드
   await loadSideBar(); // 사이드 바 로드
+  await loadTopBar(); // 상단 바 로드
 
   // video_id 쿼리 파라미터 가져오기 (기본 1)
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;

@@ -6,8 +6,8 @@ import { cardHoverStyle } from "./cardHoverStyle.js";
 
 async function initChannelPage() {
   // 0) 공통 UI 로드
-  await loadTopBar();
   await loadSideBar();
+  await loadTopBar();
   await loadCustomVideo(document.querySelector(".video-player"));
 
   const videoElement = document.querySelector(".video-player video");
