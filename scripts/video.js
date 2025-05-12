@@ -10,6 +10,8 @@ import { orderVideoList } from "./videoRecommend.js";
 async function initVideoPage() {
   await loadSideBar(); // 사이드 바 로드
   await loadTopBar(); // 상단 바 로드
+  const videoElement = document.querySelector(".video-player");
+  await loadCustomVideo(videoElement); // 커스텀 비디오 플레이어 로드
 
   // video_id 쿼리 파라미터 가져오기 (기본 1)
   const videoID = new URLSearchParams(window.location.search).get("video_id") || 1;
@@ -33,8 +35,6 @@ async function initVideoPage() {
     displayVideoList(orderedVideoListData);
 
     // 비디오 플레이어 커스터마이징
-    const videoElement = document.querySelector(".video-player");
-    await loadCustomVideo(videoElement);
     document.getElementById("videoPlayer").src = `https://storage.googleapis.com/youtube-clone-video/${videoData.id}.mp4`;
     videoElement.style.visibility = "visible";
   } catch (error) {
