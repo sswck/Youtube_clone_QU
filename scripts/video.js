@@ -51,6 +51,7 @@ async function initVideoPage() {
   videoPage.style.visibility = "visible";
   document.querySelector("header").style.visibility = "visible";
   document.querySelector("aside").style.visibility = "visible";
+  document.querySelector(".video-controls").style.visibility = "visible";
 }
 
 // ==================== 동영상 정보 표시 ====================
