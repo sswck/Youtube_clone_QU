@@ -17,7 +17,7 @@ async function loadTopBar() {
 
     topBarContainer.innerHTML = html;
 
-    console.log("loadUI.js: 탑바 로드 완료");
+    // console.log("loadUI.js: 탑바 로드 완료");
   } catch (error) {
     console.error("탑바를 로드하는 동안 오류가 발생했습니다:", error);
   }
@@ -47,7 +47,7 @@ async function loadSideBar() {
     const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
-    console.log("loadUI.js: 사이드바 로드 완료");
+    // console.log("loadUI.js: 사이드바 로드 완료");
   } catch (error) {
     console.error("사이드바를 로드하는 동안 오류가 발생했습니다:", error);
   }
@@ -58,7 +58,7 @@ async function loadCustomVideo(videoElement) {
     const response = await fetch("/components/videoPlayer.html");
     const html = await response.text();
 
-    console.log("loadUI.js: 비디오 플레이어 로드 완료");
+    // console.log("loadUI.js: 비디오 플레이어 로드 완료");
     videoElement.innerHTML = html;
   } catch (error) {
     console.error("비디오 플레이어를 로드하는 동안 오류가 발생했습니다:", error);

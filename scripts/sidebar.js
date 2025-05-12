@@ -54,6 +54,6 @@ var intervalId = setInterval(function () {
     clearInterval(intervalId);
     initSidebar();
     // document.querySelector("aside").style.visibility = "visible";
-    console.log("sidebar.js: 사이드바 초기화 완료");
+    // console.log("sidebar.js: 사이드바 초기화 완료");
   }
 }, 100);
