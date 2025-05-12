@@ -11,7 +11,7 @@
 
 function fetchData(endpoint, params) {
   return new Promise((resolve, reject) => {
-    const url = `http://techfree-oreumi-api.kro.kr:5000/${endpoint}?${new URLSearchParams(params).toString()}`;
+    const url = `https://www.techfree-oreumi-api.ai.kr/${endpoint}?${new URLSearchParams(params).toString()}`;
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
 
