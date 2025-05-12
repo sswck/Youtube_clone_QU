@@ -50,7 +50,7 @@ function closeByWindowSize() {
 
 // 0.1초마다 sidebar 등장 여부 확인
 var intervalId = setInterval(function () {
-  if (document.querySelector("#side-bar-container")) {
+  if (document.querySelector("#sideBar")) {
     clearInterval(intervalId);
     initSidebar();
     document.querySelector("aside").style.visibility = "visible";

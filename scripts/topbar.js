@@ -38,7 +38,7 @@ function initSearch() {
 
 // 0.1초마다 topbar 등장 여부 확인
 var intervalId = setInterval(function () {
-  if (document.querySelector("#top-bar-container")) {
+  if (document.querySelector("#topBar")) {
     clearInterval(intervalId);
     initTopBar();
     document.querySelector("header").style.visibility = "visible";
