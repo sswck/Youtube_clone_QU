@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.setAttribute("data-theme", savedTheme);
 
   // 초기 콘텐츠 로드 (Home)
-  function loadInitialContent() {
-    loadSideBar();
-    loadTopBar();
+  async function loadInitialContent() {
+    await loadSideBar();
+    await loadTopBar();
 
     fetch("/components/home.html")
       .then((res) => {
@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
         loadScript("/scripts/home.js", "home-script");
         // content 로드 후 표시
         contentDiv.style.visibility = "visible";
+
+        document.querySelector("header").style.visibility = "visible";
+        document.querySelector("aside").style.visibility = "visible";
       })
       .catch((e) => {
         console.error("초기 콘텐츠 로딩 오류:", e);

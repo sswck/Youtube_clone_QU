@@ -157,6 +157,5 @@ var intervalId = setInterval(function () {
   if (document.querySelector("#videoPlayer")) {
     clearInterval(intervalId);
     customVideoPlayer();
-    document.querySelector(".video-controls").style.visibility = "visible";
   }
 }, 100);
