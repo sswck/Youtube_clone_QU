@@ -1,138 +1,116 @@
-# Youtube 클론 페이지 만들기
+# 📺<span style="color: #359;">EST</span>ube 프로젝트를 소개합니다.
 
-## [오르미 백엔드 11기] 4팀: Query Union
+ESTube는 YouTube 웹사이트의 주요 기능을 클론 코딩하여 학습 목적으로 개발된 프로젝트입니다. 사용자들은 비디오를 시청하고, 검색하고, 필터링하고, 채널을 구독하고, 좋아요/싫어요를 표시하고, 댓글을 작성하는 등의 기본적인 기능을 경험할 수 있습니다.
 
-> 쿼리 유니온 (Query Union): 팀장님 성함 '조권호'의 '권'과 팀원 '권정연'님의 '권', 그리고 '유동혁', '이문영' 님의 성에서 느껴지는 연결고리를 활용하여 데이터베이스 쿼리처럼 합쳐진다는 의미를 담았습니다. 프론트엔드에서 데이터를 다루는 작업을 연상시키기도 합니다.
+## [오르미 백엔드 <span style="color: skyblue;">11</span>기] 4팀: <span style="color: #919;">Query Union</span>
+
+Query란 데이터베이스에서 정보를 검색하기 위해 요청하는 것을 의미합니다. 쿼리와 연합을 뜻하는 Union을 이어서 팀원간 서로 정보를 요청하고 협력하는 의미로 팀명을 Query Union으로 정했습니다.
 
 ---
 
 ### 팀 구성
 
-- **팀장:** 조권호
-- **팀원:** 권정연
-- **팀원:** 유동혁
-- **팀원:** 이문영
+<table border= 1px solid>
+  <tr align="center">
+    <td><b>팀장</b> 조권호</td>
+    <td><b>팀원</b> 권정연</td>
+    <td><b>팀원</b> 유동혁</td>
+  </tr>
+
+  <tr>
+    <td><a href=https://github.com/sswck><img object-fit=fill src=https://avatars.githubusercontent.com/u/19251044?v=4 width="300" height="200" alt="깃허브 페이지 바로가기"></a></td>
+    <td><a href=https://github.com/yeoni-2><img object-fit=fill src=https://avatars.githubusercontent.com/u/206670771?v=4 width="300" height="200" alt="깃허브 페이지 바로가기"></a></td>
+    <td><a href=https://github.com/eastdh><img  object-fit=fill src=https://avatars.githubusercontent.com/u/39060720?v=4 width="300" height="200" alt="깃허브 페이지 바로가기"></a></td>
+  </tr>
+</table>
 
 ---
 
-### Github Repository
+### 🚩Github Repository / 배포 사이트 / 시연 영상
 
 - [https://github.com/sswck/Youtube_clone_QU](https://github.com/sswck/Youtube_clone_QU)
+- [배포 사이트 바로가기](https://youtube-clone-qu-giie.onrender.com/)
+- [시연 영상 바로가기](https://youtube-clone-qu-giie.onrender.com/)
 
 ---
 
-# ESTube
+## ✨ 주요 기능
 
-ESTube는 YouTube 웹사이트의 주요 기능을 클론 코딩하여 학습 목적으로 개발된 프로젝트입니다. 사용자들은 비디오를 시청하고, 검색하고, 채널을 구독하고, 좋아요/싫어요를 표시하고, 댓글을 작성하는 등의 기본적인 YouTube 기능을 경험할 수 있습니다. (추후 수정)
+ESTube 프로젝트는 다음과 같은 주요 기능들을 제공합니다.
 
-## 2. 설치 방법
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-play-circle"></i> 비디오 시청</h4>
+<p>다양한 영상 콘텐츠를 끊김 없이 감상하세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-search"></i> 비디오 검색</h4>
+<p>원하는 키워드를 입력하여 빠르게 비디오를 찾아보세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-rss"></i> 채널 구독</h4>
+<p>관심 있는 채널을 구독하고 새로운 소식을 받아보세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-thumbs-up"></i> 좋아요/싫어요 표시</h4>
+<p>비디오에 대한 여러분의 의견을 표현해주세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-comment-dots"></i> 댓글 기능</h4>
+<p>다른 사용자와 소통하며 비디오에 대한 생각을 공유하세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-list-alt"></i> 추천 비디오</h4>
+<p>현재 시청 중인 비디오와 관련된 흥미로운 영상을 만나보세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-tags"></i> 태그 검색</h4>
+<p>관심 있는 태그를 클릭하여 연관된 비디오를 쉽게 찾으세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-filter"></i> 필터 및 정렬</h4>
+<p>좋아요, 조회수, 업로드 날짜별로 비디오 목록을 정렬하고 필터링하세요.</p>
+</div>
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; width: 45%; min-width: 300px;">
+<h4 style="color: #359;"><i class="fas fa-adjust"></i> 다크/라이트 모드</h4>
+<p>선호하는 테마를 선택하여 더욱 편안하게 이용하세요.</p>
+</div>
+</div>
 
-본 프로젝트를 로컬 환경에서 실행하기 위해서는 다음의 단계를 따르세요. (추후 수정)
+---
 
-1. **Node.js 및 npm (또는 yarn) 설치:**
+## 🧪 테스트 결과 및 특이사항
 
-   - 아직 Node.js가 설치되어 있지 않다면, [Node.js 공식 웹사이트](https://nodejs.org/)에서 LTS 버전을 다운로드하여 설치하세요. npm은 Node.js 설치 시 함께 설치됩니다.
-   - yarn을 사용하고 싶다면, 다음 명령어를 사용하여 설치하세요:
-     ```bash
-     npm install --global yarn
-     ```
+프로젝트의 기능 테스트 결과와 사용 시 참고해야 할 특이사항을 안내해 드립니다.
 
-2. **프로젝트 저장소 복제:**
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+<h3 style="color: #359;"><i class="fas fa-check-circle"></i>✅ 주요 테스트 결과</h3>
+<ul>
+<li>초기 페이지 로딩, 상단 바 기능 (로고 클릭, 검색), 사이드바 탐색, 비디오 목록 표시 및 미리보기, 필터링 기능, 비디오 페이지 이동 기능이 성공적으로 작동했습니다.</li>
+<li>비디오 페이지 및 채널 페이지의 기본적인 기능 (UI 표시, 정보 표시, 비디오 재생, 좋아요/싫어요, 추천 비디오, 댓글 기능 등)이 정상적으로 작동하는 것을 확인했습니다.</li>
+</ul>
+</div>
 
-   - GitHub 또는 다른 저장소에서 프로젝트 코드를 복제합니다. (실제 저장소 URL이 있다면 여기에 넣어주세요)
-     ```bash
-     git clone [프로젝트 저장소 URL]
-     cd ESTube
-     ```
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+<h3 style="color: #e74c3c;"><i class="fas fa-exclamation-triangle"></i> ⚠️특이사항</h3>
+<ul>
+<li><strong>구독 기능 (사이드바 갱신):</strong> 채널 또는 비디오 페이지에서 구독 시, 구독 상태는 변경되나 사이드바의 구독 목록은 페이지 새로고침 후에 반영됩니다. 이 점 이용에 참고 부탁드립니다.</li>
+</ul>
+</div>
 
-3. **의존성 설치:**
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+<h3 style="color: #27ae60;"><i class="fas fa-lightbulb"></i>💡 향후 개선 가능성</h3>
+<ul>
+<li> 시청 기록 기능: 사용자가 시청한 비디오 목록을 제공하여 편의성을 향상시킬 수 있습니다.</li>
+<li>알림 기능: 새로운 비디오, 댓글, 구독 등의 알림을 제공하여 사용자 참여를 유도할 수 있습니다.</li>
+<li>소셜 공유 기능: SNS 연동을 통해 비디오를 쉽게 공유하고 신규 사용자를 유입시킬 수 있습니다.</li>
+<li>더보기 기능: 구독 목록, 댓글 목록 등 많은 데이터를 효율적으로 관리할 수 있도록 개선할 수 있습니다.</li>
+<li>로그인 기능: 개인화된 추천, 구독, 댓글 관리 등 사용자 경험을 향상시키는 데 필수적입니다.</li>
+<li>무한 스크롤 기능: 방대한 양의 비디오를 효율적으로 탐색할 수 있도록 지원할 수 있습니다.</li>
+<li>이어보기 기능: 사용자가 중단했던 시점부터 비디오를 다시 시청할 수 있도록 편의성을 높일 수 있습니다.</li>
+</ul>
+</div>
 
-   - 프로젝트 루트 디렉토리로 이동한 후, 다음 명령어를 실행하여 필요한 의존성 패키지들을 설치합니다.
-     ```bash
-     npm install
-     # 또는
-     yarn install
-     ```
+---
 
-4. **(선택 사항) 환경 변수 설정:**
-   - API 키 또는 다른 환경 변수가 필요한 경우, `.env` 파일을 생성하고 필요한 값을 설정합니다. (해당 사항이 있다면 자세한 내용 추가)
-     ```
-     API_KEY=YOUR_API_KEY
-     ```
-
-## 3. 실행 방법
-
-프로젝트를 실행하기 위해서는 다음의 단계를 따르세요. (추후 수정)
-
-1. **개발 서버 실행:**
-
-   - 프로젝트 루트 디렉토리에서 다음 명령어를 실행하여 개발 서버를 시작합니다.
-     ```bash
-     npm run dev
-     # 또는
-     yarn dev
-     ```
-   - 또는 HTML 파일을 직접 여는 방식으로 실행할 수도 있습니다.
-     ```bash
-     open index.html
-     ```
-   - (실제 실행 명령어 또는 방식에 맞춰서 수정해 주세요.)
-
-2. **브라우저에서 접근:**
-
-   - 웹 브라우저를 열고 다음 주소로 접속하여 프로젝트를 확인합니다.
-     ```
-     http://localhost:[포트 번호]
-     # 예시: http://localhost:5500
-     ```
-   - (`index.html` 파일을 직접 열었다면 해당 파일 경로로 접근합니다.)
-
-3. **(선택 사항) 백엔드 서버 실행:**
-   - 백엔드 API 서버가 필요한 경우, 해당 서버를 별도의 명령어로 실행해야 할 수 있습니다. (해당 사항이 있다면 자세한 내용 추가)
-     ```bash
-     # 백엔드 서버 실행 명령어 예시
-     cd backend
-     npm run start
-     # 또는
-     yarn start
-     ```
-
-## 4. 주요 기능
-
-ESTube 프로젝트는 다음과 같은 주요 기능들을 제공합니다. (추후 수정)
-
-- **비디오 시청:** 사용자는 다양한 비디오 콘텐츠를 스트리밍 방식으로 시청할 수 있습니다.
-- **비디오 검색:** 키워드를 입력하여 원하는 비디오를 검색할 수 있습니다.
-- **채널 구독:** 관심 있는 채널을 구독하여 새로운 비디오 소식을 받아볼 수 있습니다.
-- **좋아요/싫어요 표시:** 비디오에 대한 긍정적 또는 부정적 반응을 표현할 수 있습니다.
-- **댓글 기능:** 비디오에 대한 의견을 댓글로 작성하고 다른 사용자와 소통할 수 있습니다.
-- **추천 비디오:** 현재 시청 중인 비디오와 관련된 추천 비디오 목록을 확인할 수 있습니다.
-- **태그 검색:** 비디오 태그를 클릭하여 관련 비디오를 검색할 수 있습니다.
-- **필터 및 정렬:** 좋아요 수 또는 업로드 날짜, 조회수 등을 기준으로 비디오 목록을 필터링하고 정렬할 수 있습니다.
-- **다크/라이트 모드:** 사용자의 선호에 따라 웹사이트의 테마를 변경할 수 있습니다.
-
-## 5. 테스트 결과 및 특이사항
-
-본 프로젝트에 대한 기본적인 기능 테스트를 완료했으며, 주요 기능들이 전반적으로 정상적으로 작동하는 것을 확인했습니다.
-
-**주요 테스트 결과:**
-
-- 초기 페이지 로딩, 상단 바 기능 (로고 클릭, 검색), 사이드바 탐색, 비디오 목록 표시 및 미리보기, 필터링 기능, 비디오 페이지 이동 기능이 성공적으로 작동했습니다.
-- 비디오 페이지 및 채널 페이지의 기본적인 기능 (UI 표시, 정보 표시, 비디오 재생, 좋아요/싫어요, 추천 비디오, 댓글 기능 등)이 정상적으로 작동하는 것을 확인했습니다.
-
-**특이사항:**
-
-- **구독 기능 (사이드바 갱신):** 채널 페이지 또는 비디오 페이지에서 구독 버튼을 클릭했을 때, 구독 상태는 정상적으로 변경되지만 사이드바의 구독 채널 목록은 즉시 갱신되지 않고 페이지를 새로고침해야 업데이트되는 문제가 있습니다. 이는 현재 구현상의 제약으로 인해 개선이 보류된 사항입니다. 사용 시 이 점을 참고해 주시기 바랍니다.
-
-**향후 개선 계획:**
-
-- (선택 사항) 향후 개선할 계획이 있는 부분을 간략하게 언급할 수 있습니다. 예: 사이드바 구독 목록 실시간 갱신, 다양한 브라우저 호환성 테스트 등
-
-## 6. 배포 및 시연 영상
-
-본 프로젝트는 현재 [배포된 웹사이트 URL]에서 직접 확인해 볼 수 있습니다.
-
-또한, 프로젝트의 주요 기능을 시연하는 영상은 다음 링크에서 확인할 수 있습니다.
-
-- [시연 영상 링크 1]
-- [시연 영상 링크 2]
+**Query Union** 팀의 ESTube 프로젝트를 방문해주셔서 감사합니다\!
