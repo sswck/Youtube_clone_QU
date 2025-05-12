@@ -42,5 +42,6 @@ var intervalId = setInterval(function () {
     clearInterval(intervalId);
     initTopBar();
     document.querySelector("header").style.visibility = "visible";
+    console.log("topbar.js: 탑바 초기화 완료");
   }
 }, 100);
