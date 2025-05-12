@@ -41,14 +41,16 @@ async function initVideoPage() {
     console.error("Error fetching API data:", error);
   }
 
-  // 전부 로딩 완료 된 후에 비디오 페이지를 보이게 합니다.
-  const videoPage = document.querySelector(".video-page");
-  videoPage.style.visibility = "visible";
-
   // 댓글 기능 초기화
   initCommentFeature();
 
   document.querySelector("aside").classList.add("closed");
+
+  // 전부 로딩 완료 된 후에 비디오 페이지를 보이게 합니다.
+  const videoPage = document.querySelector(".video-page");
+  videoPage.style.visibility = "visible";
+  document.querySelector("header").style.visibility = "visible";
+  document.querySelector("aside").style.visibility = "visible";
 }
 
 // ==================== 동영상 정보 표시 ====================
