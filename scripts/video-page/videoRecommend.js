@@ -1,4 +1,4 @@
-import { getWordRelationship } from "./getAPI.js";
+import { getWordRelationship } from "../utils/getAPI.js";
 
 const similarityCache = {};
 

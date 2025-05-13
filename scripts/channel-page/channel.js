@@ -2,7 +2,7 @@ import { loadTopBar, loadSideBar, loadCustomVideo } from "../utils/loadUI.js";
 import { getChannelInfo, getChannelVideoList } from "../utils/getAPI.js";
 import { subscribe, unsubscribe, getSubscriptions } from "../common/subscription.js";
 import { timeAgo } from "../utils/utils.js";
-import { cardHoverStyle } from "./cardHoverStyle.js";
+import { cardHoverStyle } from "../utils/cardHoverStyle.js";
 
 async function initChannelPage() {
   // 0) 공통 UI 로드

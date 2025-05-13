@@ -39,7 +39,7 @@ function renderSubscriptions() {
       <img src="${channel.thumbnail}" alt="Channel Thumbnail" class="channel-thumbnail" />
       <span class="side-channel-name">${channel.name}</span>
     `;
-    channelElement.onclick = () => (window.location.href = `/components/Channel_Page.html?channel_id=${channel.id}`);
+    channelElement.onclick = () => (window.location.href = `/components/channel.html?channel_id=${channel.id}`);
     if (parseInt(new URLSearchParams(window.location.search).get("channel_id")) === channel.id) channelElement.classList.add("selected"); // 현재 페이지와 일치하는 경우 강조 표시
     sidebarContainer.appendChild(channelElement);
   });
@@ -69,7 +69,7 @@ function showAllSubscriptions(container) {
             <img src="${channel.thumbnail}" alt="Channel Thumbnail" class="channel-thumbnail" />
             <span class="side-channel-name">${channel.name}</span>
         `;
-    channelElement.onclick = () => (window.location.href = `/components/Channel_Page.html/?channel_id=${channel.id}`);
+    channelElement.onclick = () => (window.location.href = `/components/channel.html/?channel_id=${channel.id}`);
     container.appendChild(channelElement);
   });
 }

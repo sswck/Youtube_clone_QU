@@ -1,8 +1,7 @@
 // script.js
 // SPA 라우팅 및 레이아웃 로딩 담당
 
-import { loadTopBar, loadSideBar } from "/scripts/loadUI.js";
-
+import { loadTopBar, loadSideBar } from "/scripts/utils/loadUI.js";
 document.addEventListener("DOMContentLoaded", () => {
   const contentDiv = document.querySelector(".content");
 
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((html) => {
         contentDiv.innerHTML = html;
         // home.js 등 스크립트 실행
-        loadScript("/scripts/home.js", "home-script");
+        loadScript("/scripts/home-page/home.js", "home-script");
         // content 로드 후 표시
         contentDiv.style.visibility = "visible";
 
@@ -59,12 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
         contentDiv.innerHTML = html;
         // 콘텐츠별 스크립트 실행
         if (path.includes("home.html")) {
-          loadScript("/scripts/home.js", "home-script");
-        } else if (path.includes("Channel_Page.html")) {
-          loadScript("/scripts/channel.js", "channel-script");
-        } else if (path.includes("video.html")) {
-          loadScript("/scripts/video.js", "video-script");
+          loadScript("/scripts/home-page/home.js", "home-script");
         }
+        // else if (path.includes("Channel_Page.html")) {
+        //   loadScript("/scripts/channel.js", "channel-script");
+        // } else if (path.includes("video.html")) {
+        //   loadScript("/scripts/video.js", "video-script");
+        // }
       })
       .catch((e) => {
         console.error("콘텐츠 로딩 오류:", e);

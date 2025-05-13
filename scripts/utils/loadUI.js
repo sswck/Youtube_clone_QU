@@ -5,7 +5,7 @@
  */
 async function loadTopBar() {
   try {
-    const response = await fetch("/components/top-bar.html");
+    const response = await fetch("/components/topbar.html");
     const html = await response.text();
     const topBarContainer = document.getElementById("top-bar-container");
     const sideBarContainer = document.getElementById("side-bar-container");
@@ -28,7 +28,7 @@ async function loadTopBar() {
  */
 async function loadSideBar() {
   try {
-    const response = await fetch("/components/side-bar.html");
+    const response = await fetch("/components/sidebar.html");
     const html = await response.text();
     const sideBarContainer = document.getElementById("side-bar-container");
 

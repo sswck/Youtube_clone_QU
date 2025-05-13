@@ -1,9 +1,9 @@
-import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
-import { timeAgo, formatView } from "./utils.js";
+import { getVideoInfo, getChannelInfo, getVideoList } from "../utils/getAPI.js";
+import { timeAgo, formatView } from "../utils/utils.js";
 import { subscribe, unsubscribe, getSubscriptions } from "../common/subscription.js";
-import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
-import { likeVideo, unlikeVideo, getLikedVideos, dislikeVideo, undislikeVideo, getDislikedVideos } from "./likedVideos.js";
-import { cardHoverStyle } from "./cardHoverStyle.js";
+import { loadTopBar, loadSideBar, loadCustomVideo } from "../utils/loadUI.js";
+import { likeVideo, unlikeVideo, getLikedVideos, dislikeVideo, undislikeVideo, getDislikedVideos } from "../common/likedVideos.js";
+import { cardHoverStyle } from "../utils/cardHoverStyle.js";
 import { orderVideoList } from "./videoRecommend.js";
 
 // 최초 동영상 페이지 로드 함수
@@ -157,7 +157,7 @@ function displayChannelInfo(data) {
   // 채널 프로필 클릭 시 이동
   document.querySelector(".channel-profile")?.addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.href = `Channel_Page.html?channel_id=${data.id}`;
+    window.location.href = `channel.html?channel_id=${data.id}`;
   });
 
   // 구독 버튼
