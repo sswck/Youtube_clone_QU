@@ -1,7 +1,7 @@
-import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
-import { getChannelInfo, getChannelVideoList } from "./getAPI.js";
-import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
-import { timeAgo } from "./utils.js";
+import { loadTopBar, loadSideBar, loadCustomVideo } from "../utils/loadUI.js";
+import { getChannelInfo, getChannelVideoList } from "../utils/getAPI.js";
+import { subscribe, unsubscribe, getSubscriptions } from "../common/subscription.js";
+import { timeAgo } from "../utils/utils.js";
 import { cardHoverStyle } from "./cardHoverStyle.js";
 
 async function initChannelPage() {

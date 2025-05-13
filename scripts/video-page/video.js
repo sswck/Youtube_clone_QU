@@ -1,6 +1,6 @@
 import { getVideoInfo, getChannelInfo, getVideoList } from "./getAPI.js";
 import { timeAgo, formatView } from "./utils.js";
-import { subscribe, unsubscribe, getSubscriptions } from "./subscription.js";
+import { subscribe, unsubscribe, getSubscriptions } from "../common/subscription.js";
 import { loadTopBar, loadSideBar, loadCustomVideo } from "./loadUI.js";
 import { likeVideo, unlikeVideo, getLikedVideos, dislikeVideo, undislikeVideo, getDislikedVideos } from "./likedVideos.js";
 import { cardHoverStyle } from "./cardHoverStyle.js";

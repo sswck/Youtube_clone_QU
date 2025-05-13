@@ -1,7 +1,7 @@
-import { getVideoListWithChannelInfo } from "./getAPI.js";
-import { timeAgo, formatView } from "./utils.js";
-import { getSubscriptions } from "./subscription.js";
-import { getLikedVideos } from "./likedVideos.js";
+import { getVideoListWithChannelInfo } from "../utils/getAPI.js";
+import { timeAgo, formatView } from "../utils/utils.js";
+import { getSubscriptions } from "../utils/subscription.js";
+import { getLikedVideos } from "../utils/likedVideos.js";
 import { cardHoverStyle } from "./cardHoverStyle.js";
 
 function queryFilter(videos) {
