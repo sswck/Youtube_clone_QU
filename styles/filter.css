@@ -17,7 +17,7 @@
 /* 필터 버튼 스타일 */
 .filter-button {
   background-color: var(--border-filter-bar);
-  color: white;
+  color: var(--text-primary);
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
@@ -26,15 +26,15 @@
 }
 
 .filter-button:hover {
-  background-color: #777;
+  background-color: var(--border-search-input);
 }
 
 /* 필터 팝업 스타일 (초기 숨김) */
 .filter-popup {
   display: none; /* 초기 숨김 */
   position: absolute; /* 필터 컨테이너 기준으로 위치 */
-  background-color: #444;
-  color: white;
+  background-color: var(--bg-filter-popup);
+  color: var(--text-primary);
   border: 1px solid #666;
   padding: 15px;
   border-radius: 5px;
@@ -57,7 +57,7 @@
   display: block;
   margin-bottom: 5px;
   font-size: 12px;
-  color: #ccc;
+  color: var(--text-secondary);
 }
 
 .filter-option select {
@@ -65,8 +65,8 @@
   padding: 8px;
   border: 1px solid #666;
   border-radius: 3px;
-  background-color: #333;
-  color: white;
+  background-color: var(--border-channel-nav);
+  color: var(--text-primary);
   font-size: 14px;
 }
 

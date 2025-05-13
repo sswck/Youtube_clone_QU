@@ -22,6 +22,7 @@
   --bg-subscribe-btn-hover: #b10000; /* .subscribe-btn:hover */
   --bg-subscribe-btn-subscribed: #313131; /* .subscribe-btn.subscribed */
   --bg-progressBar: #555555;
+  --bg-filter-popup: #444;
 
   /* ── Text ── */
   --text-primary: #ffffff; /* 기본 텍스트색 */
@@ -92,6 +93,7 @@
   --bg-subscribe-btn: #cc0000;
   --bg-subscribe-btn-hover: #b10000;
   --bg-subscribe-btn-subscribed: #d3d3d3;
+  --bg-filter-popup: #dddddd;
 
   /* ── Text ── */
   --text-primary: #000000;
