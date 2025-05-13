@@ -1,45 +1,42 @@
-/* /styles/theme.css */
-
 /* ── 다크모드 ── */
 :root {
   /* ── Backgrounds ── */
-  --bg-body: #181818; /* body, 각 페이지 배경 */
-  --bg-filter-bar: #1a1a1a; /* content.css .filter-bar-container */
-  --bg-channel-page: #0f0f0f; /* channel.css .channel-page */
-  --bg-card: #000000; /* .video-card, .card */
-  --bg-card-hover: #404040; /* .card:hover */
-  --bg-secondary-video-hover: #202020; /* .secondary-video:hover */
-  --bg-divider: #303030; /* .divider */
-  --bg-topbar: #212121; /* header.top-bar */
-  --bg-menu-button: #212121; /* .menu-button */
-  --bg-search-input: #121212; /* .search-bar input */
-  --bg-search-button: #303030; /* .search-button */
-  --bg-voice-button: #000000; /* .voice-search-button */
-  --bg-filter-active: white; /* filter-bar button.active 배경 */
-  /* --bg-right-button: #212121; .right-section button */
-  --bg-filter-bar-channel: #272727; /* channel-content .filter-bar */
-  --bg-subscribe-btn: #cc0000; /* .subscribe-btn */
-  --bg-subscribe-btn-hover: #b10000; /* .subscribe-btn:hover */
-  --bg-subscribe-btn-subscribed: #313131; /* .subscribe-btn.subscribed */
+  --bg-body: #181818;
+  --bg-filter-bar: #1a1a1a;
+  --bg-channel-page: #0f0f0f;
+  --bg-card: #000000;
+  --bg-card-hover: #404040;
+  --bg-secondary-video-hover: #202020;
+  --bg-divider: #303030;
+  --bg-topbar: #212121;
+  --bg-menu-button: #212121;
+  --bg-search-input: #121212;
+  --bg-search-button: #303030;
+  --bg-voice-button: #000000;
+  --bg-filter-active: white;
+  --bg-filter-bar-channel: #272727;
+  --bg-subscribe-btn: #cc0000;
+  --bg-subscribe-btn-hover: #b10000;
+  --bg-subscribe-btn-subscribed: #313131;
   --bg-progressBar: #555555;
   --bg-filter-popup: #444;
 
   /* ── Text ── */
-  --text-primary: #ffffff; /* 기본 텍스트색 */
-  --text-secondary: #aaaaaa; /* 부제목·보조 텍스트 */
-  --text-active-inverse: #000000; /* active 상태 반전 텍스트 */
-  --text-nav: #aaaaaa; /* nav-item 비활성 텍스트 */
-  --text-nav-active: #ffffff; /* nav-item 활성 텍스트 */
-  --text-filter-active: #000000; /* filter-bar button.active 텍스트 */
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  --text-active-inverse: #000000;
+  --text-nav: #aaaaaa;
+  --text-nav-active: #ffffff;
+  --text-filter-active: #000000;
 
   /* ── Borders & Outlines ── */
-  --border-filter-bar: #333333; /* .filter-bar button border */
-  --border-search-input: #444444; /* search input border */
-  --border-secondary-video-hover: #303030; /* secondary-video border */
-  --border-thumb-main: #0000ff; /* 슬라이더 thumb 기본(blue) */
-  --border-thumb-alert: #ff0000; /* 슬라이더 thumb alert(red) */
-  --border-avatar-hover: #1e90ff; /* avatar hover outline(dodgerblue) */
-  --border-channel-nav: #333333; /* 채널 nav 하단선 */
+  --border-filter-bar: #333333;
+  --border-search-input: #444444;
+  --border-secondary-video-hover: #303030;
+  --border-thumb-main: #0000ff;
+  --border-thumb-alert: #ff0000;
+  --border-avatar-hover: #1e90ff;
+  --border-channel-nav: #333333;
 
   /* ── Shadows ── */
   --shadow-card: rgba(0, 0, 0, 0.3);
@@ -64,10 +61,10 @@
 
   /* 비디오 컨트롤 배경 */
   --video-control-bg: rgba(0, 0, 0, 0.7);
-  --video-gradient-start: rgba(0, 0, 0, 0); /* 비디오 오버레이 그라데이션 */
+  --video-gradient-start: rgba(0, 0, 0, 0);
   --video-gradient-end: rgba(0, 0, 0, 0.8);
-  --progress-bg: #555555; /* 프로그레스 바 배경 */
-  --thumb-bg: #ffffff; /* 썸(thumb) */
+  --progress-bg: #555555;
+  --thumb-bg: #ffffff;
   --thumb-border: red;
   --speed-options-btn: rgba(255, 255, 255, 0.3);
 }
