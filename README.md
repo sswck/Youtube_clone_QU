@@ -2,13 +2,13 @@
 
 ESTube는 YouTube 웹사이트의 주요 기능을 클론 코딩하여 학습 목적으로 개발된 프로젝트입니다. 사용자들은 비디오를 시청하고, 검색하고, 필터링하고, 채널을 구독하고, 좋아요/싫어요를 표시하고, 댓글을 작성하는 등의 기본적인 기능을 경험할 수 있습니다.
 
-## [오르미 백엔드 $\textcolor{skyblue}{11}$기] 4팀: $\textcolor{#919}{Query Union}$
+## [오르미 백엔드 $\textcolor{skyblue}{11}$기] 4팀: 👨‍💻 $\textcolor{#919}{Query Union}$
 
 Query란 데이터베이스에서 정보를 검색하기 위해 요청하는 것을 의미합니다. 쿼리와 연합을 뜻하는 Union을 이어서 팀원간 서로 정보를 요청하고 협력하는 의미로 팀명을 Query Union으로 정했습니다.
 
 ---
 
-### 팀 구성
+### 💬 팀 구성
 
 <table border= "1">
   <tr align="center">
@@ -25,11 +25,11 @@ Query란 데이터베이스에서 정보를 검색하기 위해 요청하는 것
 
 ---
 
-### 🚩Github Repository / 배포 사이트 / 시연 영상
+### 🚩 Github Repository / 배포 사이트 / 시연 영상
 
 - [https://github.com/sswck/Youtube_clone_QU](https://github.com/sswck/Youtube_clone_QU)
 - [배포 사이트 바로가기](https://youtube-clone-qu-giie.onrender.com/)
-- [시연 영상 바로가기](https://youtube-clone-qu-giie.onrender.com/)
+- [시연 영상 바로가기](https://youtu.be/uAr8PTU4Qag)
 
 ---
 
