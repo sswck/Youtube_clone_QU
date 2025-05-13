@@ -104,7 +104,7 @@ body {
 }
 
 .subscribe-btn:hover {
-  background-color: var(--bg-subscribe-btn-hove);
+  background-color: var(--bg-subscribe-btn-hover);
 }
 
 .subscribe-btn.subscribed {
