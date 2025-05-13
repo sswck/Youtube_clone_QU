@@ -1,4 +1,0 @@
-25까지 한 작업들 report정리
-
-index, script 재작업 이후 팀원들과 loadtopbar loadsidebar 재사용상의
-home에서 영상 및 채널 이동 구현
